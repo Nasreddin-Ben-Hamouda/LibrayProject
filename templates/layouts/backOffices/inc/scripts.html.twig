@@ -1,0 +1,18 @@
+<script src="{{ asset('plugins/select2/select2.js') }}" type="text/javascript"></script>
+
+<script src="{{ asset('js/backOffices/script.js') }}"></script>
+<script src="{{ asset('plugins/validator/jquery.validate.js') }}"></script>
+<script src="{{ asset('plugins/validator/additional-methods.js') }}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmeQ3jH8F7FySU-38sBG7osSXdqXyTY3Y&amp;libraries=places&amp;"></script>
+
+<script src="{{ asset('js/backOffices/es5.js') }}"></script>
+
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+</script>
+
+

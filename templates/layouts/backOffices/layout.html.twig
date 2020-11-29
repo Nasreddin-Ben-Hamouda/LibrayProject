@@ -1,0 +1,18 @@
+<html lang="en">
+{% block head %}{% endblock %}
+<body>
+<div class="app-admin-wrap">
+    {% block header %}{% endblock%}
+    {% block sidebar %}{% endblock %}
+    <div class="main-content-wrap sidenav-open d-flex flex-column">
+        {% block content %}{% endblock%}
+        {% block footer %}
+        {% include 'layouts/backOffices/inc/footer.html.twig'%}
+        {% endblock %}
+    </div>
+</div>
+{% block scripts %}
+{% include 'layouts/backOffices/inc/scripts.html.twig' %}
+{% endblock %}
+</body>
+</html>
