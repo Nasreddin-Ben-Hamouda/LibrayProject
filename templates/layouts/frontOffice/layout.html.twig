@@ -1,0 +1,30 @@
+<html lang="en">
+{% block head %}
+    {% include 'layouts/frontOffice/inc/head.html.twig'%}
+{% endblock %}
+<body>
+    <!-- Page preloader-->
+    <div class="page-loader">
+        <div class="page-loader-body">
+            <div class="cube-loader">
+                <div class="cube loader-1"></div>
+                <div class="cube loader-2"></div>
+                <div class="cube loader-4"></div>
+                <div class="cube loader-3"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Page-->
+    <div class="page">
+        {% block header %}{% endblock%}
+        {% block content %}{% endblock%}
+        {% block footer %}
+        {% include 'layouts/frontOffice/inc/footer.html.twig'%}
+        {% endblock %}
+    </div>
+    <div class="snackbars" id="form-output-global"></div>
+{% block scripts %}
+{% include 'layouts/frontOffice/inc/scripts.html.twig' %}
+{% endblock %}
+</body>
+</html>

@@ -33,8 +33,8 @@ class UserFixture extends Fixture
         $admin->setRoles(array('ROLE_ADMIN'));
         $manager->persist($admin);
         $user=new User();
-        $user->setName("user");
-        $user->setEmail("user@library.com");
+        $user->setName("home");
+        $user->setEmail("home@library.com");
         $user->setPassword($this->hash->encodePassword($user,'user123'));
         $user->setAddress("Al alia bizerte");
         $user->setPhone(54808062);

@@ -1,0 +1,396 @@
+{% extends 'layouts/frontOffice/layout.html.twig' %}
+{% block header %}
+    {% include 'layouts/frontOffice/inc/header.html.twig' %}
+{% endblock  %}
+
+{% block content %}
+    <!-- Swiper-->
+    <!-- Swiper-->
+    <section class="section swiper-container swiper-slider swiper-type-1" data-loop="true" data-autoplay="5500" data-simulate-touch="false" data-slide-effect="fade">
+        <div class="swiper-wrapper bg-gray-darker">
+            <div class="swiper-slide" data-slide-bg="{{ asset('images/frontOffice/home-slide-1-1920x750.jpg') }}">
+                <div class="swiper-slide-caption">
+                    <div class="section-xl">
+                        <div class="container container-wide">
+                            <div class="row row-fix">
+                                <div class="col-md-8 col-lg-7 col-xl-6 col-xxl-5 offset-xl-1">
+                                    <p class="big">Welcome to Booker</p>
+                                    <h3>Rent New and Used Textbooks</h3>
+                                    <p class="big">We provide huge discounts on all kinds of textbooks. On our website you can find lots of books for study and self-development.</p><a class="button button-primary button-nina" href="shop-4-columns-layout.html">View catalog</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" data-slide-bg="{{ asset('images/frontOffice/home-slide-2-1920x750.jpg') }}">
+                <div class="swiper-slide-caption">
+                    <div class="section-xl">
+                        <div class="container container-wide">
+                            <div class="row row-fix">
+                                <div class="col-md-8 col-lg-7 col-xl-6 col-xxl-5 offset-xl-1">
+                                    <p class="big">Diverse Book Collection</p>
+                                    <h3>Find your Favorite books here</h3>
+                                    <p class="big">From applied literature to educational resources, we have a lot of textbooks to offer you. We provide only the best books for rent.</p><a class="button button-primary button-nina" href="#">View catalog</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" data-slide-bg="{{ asset('images/frontOffice/home-slide-3-1920x750.jpg') }}">
+                <div class="swiper-slide-caption">
+                    <div class="section-xl">
+                        <div class="container container-wide">
+                            <div class="row row-fix">
+                                <div class="col-md-8 col-lg-7 col-xl-6 col-xxl-5 offset-xl-1">
+                                    <p class="big">Only for Our Website Visitors</p>
+                                    <h3>Exclusive Book Offers</h3>
+                                    <p class="big">We regularly update our catalog with exclusive book offers from international authors and publishing houses.</p><a class="button button-primary button-nina" href="#">View catalog</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Swiper controls-->
+        <div class="swiper-buttons">
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </section>
+
+    <!-- Button isotope-->
+    <section class="section section-variant-2 bg-default novi-background bg-cover text-center">
+        <div class="container container-wide">
+            <div class="isotope-wrap row row-fix row-50">
+                <!-- Isotope Filters-->
+                <div class="col-xl-12">
+                    <ul class="isotope-filters isotope-filters-horizontal">
+                        <li class="block-top-level">
+                            <p class="big">Choose your category:</p>
+                            <!-- Isotope Filters-->
+                            <button class="isotope-filters-toggle button button-xs button-primary" data-custom-toggle="#isotope-filters-list-1" data-custom-toggle-hide-on-blur="true">Filter<span class="caret"></span></button>
+                            <ul class="isotope-filters-list isotope-filters-list-buttons" id="isotope-filters-list-1">
+                                <li><a class="button-xs active" data-isotope-filter="*" data-isotope-group="movies" href="#">All Categories</a></li>
+                                <li><a class="button-xs" data-isotope-filter="type 1" data-isotope-group="movies" href="#">Business & Economics</a></li>
+                                <li><a class="button-xs" data-isotope-filter="type 2" data-isotope-group="movies" href="#">Web Design</a></li>
+                                <li><a class="button-xs" data-isotope-filter="type 3" data-isotope-group="movies" href="#">Marketing</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Isotope Content-->
+                <div class="col-xl-12">
+                    <div class="isotope isotope-md row row-30" data-isotope-layout="fitRows" data-isotope-group="movies" data-lightgallery="group">
+                        <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="type 3">
+                            <div class="product">
+                                <div class="product-image"><a href="product-page.html"><img src="images/book-01-188x246.jpg" alt="" width="188" height="246"/></a></div>
+                                <div class="product-title">
+                                    <h5><a href="product-page.html">Immutable Laws<br class="d-none d-xxl-block">&nbsp;of Marketing</a></h5>
+                                </div>
+                                <div class="product-price">
+                                    <h6>$27.00</h6>
+                                </div>
+                                <div class="product-button"><a class="button button-primary button-nina" href="shopping-cart.html">add to cart</a></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="type 2">
+                            <div class="product">
+                                <div class="product-image"><a href="product-page.html"><img src="images/book-02-188x246.jpg" alt="" width="188" height="246"/></a></div>
+                                <div class="product-title">
+                                    <h5><a href="product-page.html">The Art of<br class="d-none d-xxl-block">&nbsp;Leadership</a></h5>
+                                </div>
+                                <div class="product-price">
+                                    <h6>$25.00</h6>
+                                </div>
+                                <div class="product-button"><a class="button button-primary button-nina" href="shopping-cart.html">add to cart</a></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="type 1">
+                            <div class="product">
+                                <div class="product-image"><a href="product-page.html"><img src="images/book-03-188x246.jpg" alt="" width="188" height="246"/></a></div>
+                                <div class="product-title">
+                                    <h5><a href="product-page.html">The Basics of<br class="d-none d-xxl-block">&nbsp;Web Design</a></h5>
+                                </div>
+                                <div class="product-price">
+                                    <h6>$21.00</h6>
+                                </div>
+                                <div class="product-button"><a class="button button-primary button-nina" href="shopping-cart.html">add to cart</a></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="type 3">
+                            <div class="product">
+                                <div class="product-image"><a href="product-page.html"><img src="images/book-04-188x246.jpg" alt="" width="188" height="246"/></a></div>
+                                <div class="product-title">
+                                    <h5><a href="product-page.html">Grid Systems in<br class="d-none d-xxl-block">&nbsp;Web Design</a></h5>
+                                </div>
+                                <div class="product-price">
+                                    <h6>$29.00</h6>
+                                </div>
+                                <div class="product-button"><a class="button button-primary button-nina" href="shopping-cart.html">add to cart</a></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="type 2">
+                            <div class="product">
+                                <div class="product-image"><a href="product-page.html"><img src="images/book-05-188x246.jpg" alt="" width="188" height="246"/></a></div>
+                                <div class="product-title">
+                                    <h5><a href="product-page.html">Tools That Reveal Why Your Users Abandon Your Website</a></h5>
+                                </div>
+                                <div class="product-price">
+                                    <h6>$25.00</h6>
+                                </div>
+                                <div class="product-button"><a class="button button-primary button-nina" href="shopping-cart.html">add to cart</a></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="type 1">
+                            <div class="product">
+                                <div class="product-image"><a href="product-page.html"><img src="images/book-06-188x246.jpg" alt="" width="188" height="246"/></a></div>
+                                <div class="product-title">
+                                    <h5><a href="product-page.html">Dangerous Side Effects<br class="d-none d-xxl-block">&nbsp;
+                                            of Bad Customer Service</a></h5>
+                                </div>
+                                <div class="product-price">
+                                    <h6>$21.00</h6>
+                                </div>
+                                <div class="product-button"><a class="button button-primary button-nina" href="shopping-cart.html">add to cart</a></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="type 3">
+                            <div class="product">
+                                <div class="product-image"><a href="product-page.html"><img src="images/book-07-188x246.jpg" alt="" width="188" height="246"/></a></div>
+                                <div class="product-title">
+                                    <h5><a href="product-page.html">Intro Guide to UX Reviews<br class="d-none d-xxl-block">&nbsp;
+                                            for Web Designers</a></h5>
+                                </div>
+                                <div class="product-price">
+                                    <h6>$29.00</h6>
+                                </div>
+                                <div class="product-button"><a class="button button-primary button-nina" href="shopping-cart.html">add to cart</a></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="type 2">
+                            <div class="product">
+                                <div class="product-image"><a href="product-page.html"><img src="images/book-08-188x246.jpg" alt="" width="188" height="246"/></a></div>
+                                <div class="product-title">
+                                    <h5><a href="product-page.html">How to Create a Web Design<br class="d-none d-xxl-block">&nbsp;
+                                            Style Guide</a></h5>
+                                </div>
+                                <div class="product-price">
+                                    <h6>$29.00</h6>
+                                </div>
+                                <div class="product-button"><a class="button button-primary button-nina" href="shopping-cart.html">add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><a class="button button-primary button-nina" href="shop-3-columns-layout.html">view more books</a>
+        </div>
+    </section>
+
+    <!-- Small Features-->
+    <section class="section section-variant-2 bg-gray-100 novi-background bg-cover">
+        <div class="container container-wide">
+            <div class="row row-50 justify-content-sm-center text-gray-light">
+                <div class="col-sm-10 col-md-6 col-xl-3">
+                    <article class="box-minimal">
+                        <div class="box-minimal-header">
+                            <div class="box-minimal-icon novi-icon fl-bigmug-line-favourites5"></div>
+                            <h6 class="box-minimal-title">Free Shipping</h6>
+                        </div>
+                        <p>Booker offers free shipping worldwide, which makes it possible for you to rent a book from us even if you live far away from our head office. Shipping process is fast and secure.</p>
+                    </article>
+                </div>
+                <div class="col-sm-10 col-md-6 col-xl-3">
+                    <article class="box-minimal">
+                        <div class="box-minimal-header">
+                            <div class="box-minimal-icon novi-icon fl-bigmug-line-two316"></div>
+                            <h6 class="box-minimal-title">Easy Returns</h6>
+                        </div>
+                        <p>You can always return a book after you’ve read it. Just use a unique link that can be found inside our every textbook. Then fill out a special form and send the book to one of our offices.</p>
+                    </article>
+                </div>
+                <div class="col-sm-10 col-md-6 col-xl-3">
+                    <article class="box-minimal">
+                        <div class="box-minimal-header">
+                            <div class="box-minimal-icon novi-icon fl-bigmug-line-note35"></div>
+                            <h6 class="box-minimal-title">Take Notes</h6>
+                        </div>
+                        <p>Textbooks rented at Booker have a special section where you can take notes. However, we ask all our customers to limit your writing and highlighting to a minimal amount.</p>
+                    </article>
+                </div>
+                <div class="col-sm-10 col-md-6 col-xl-3">
+                    <article class="box-minimal">
+                        <div class="box-minimal-header">
+                            <div class="box-minimal-icon novi-icon fl-bigmug-line-circular220"></div>
+                            <h6 class="box-minimal-title">satisfaction guaranteed</h6>
+                        </div>
+                        <p>We hope that you will like our book rental service. Our team makes every effort to offer you an easy and enjoyable experience of renting a textbook at any time of the year.</p>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Twitter form-->
+    <section class="section section-variant-2 bg-image-11 novi-background custom-bg-image context-dark">
+        <div class="container container-bigger">
+            <div class="row row-fix row-50 justify-content-lg-between">
+                <div class="col-sm-12 col-md-6 col-lg-5">
+                    <h3>get the latest news from the team of Booker</h3>
+                    <hr class="divider divider-left divider-default">
+                    <p class="big">Keep up with our always upcoming news, updates, and publications. Enter your e-mail and subscribe to our newsletter.</p>
+                    <!-- Subscribe form-->
+                    <form class="rd-mailform" data-form-output="form-output-global" action="../../external.html?link=https://livedemo00.template-help.com/wt_prod-19592/bat/rd-mailform.php" method="post" data-form-type="subscribe">
+                        <div class="form-wrap">
+                            <input class="form-input" type="email" name="email" data-constraints="@Email @Required" id="form-email-twitter">
+                            <label class="form-label" for="form-email-twitter">Enter your e-mail</label>
+                        </div>
+                        <button class="button form-button button-primary button-nina" type="submit">Subscribe</button>
+                    </form>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-5">
+                    <h3>follow us for news</h3>
+                    <hr class="divider divider-left divider-default">
+                    <!-- RD Twitter Feed-->
+                    <div class="twitter" data-twitter-username="templatemonster" data-twitter-date-hours=" hours ago" data-twitter-date-minutes=" minutes ago">
+                        <div class="twitter-sm" data-twitter-type="tweet">
+                            <div class="twitter-box-icon">
+                                <div class="twitter-date text-dark small"></div>
+                            </div>
+                            <div class="twitter-box-text">
+                                <div class="twitter-text" data-tweet="text"></div><span class="text-middle" data-date="text"></span>
+                            </div>
+                        </div>
+                        <div class="twitter-sm" data-twitter-type="tweet">
+                            <div class="twitter-box-icon">
+                                <div class="twitter-date text-dark small"></div>
+                            </div>
+                            <div class="twitter-box-text">
+                                <div class="twitter-text" data-tweet="text"></div><span class="text-middle" data-date="text"></span>
+                            </div>
+                        </div>
+                        <div class="twitter-sm" data-twitter-type="tweet">
+                            <div class="twitter-box-icon">
+                                <div class="twitter-date text-dark small"></div>
+                            </div>
+                            <div class="twitter-box-text">
+                                <div class="twitter-text" data-tweet="text"></div><span class="text-middle" data-date="text"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Icon carousel-->
+    <section class="section bg-default novi-background novi-section">
+        <div class="container-custom">
+            <div class="row justify-content-md-center justify-content-xl-start row-0">
+                <div class="col-md-10 col-lg-6">
+                    <div class="section-variant-2">
+                        <div class="container-custom-inner">
+                            <h3>What people say</h3>
+                            <hr class="divider divider-default">
+                            <!-- Slick Carousel-->
+                            <div class="slider-widget">
+                                <!-- Owl Carousel-->
+                                <div class="owl-carousel-widget owl-carousel" data-custom-nav="true" data-items="1" data-dots="false" data-nav="false" data-stage-padding="15" data-loop="true" data-margin="0" data-mouse-drag="false">
+                                    <div class="item">
+                                        <article class="quote-classic">
+                                            <div class="quote-classic-header"><img class="quote-classic-image" src="images/quote-user-1-210x210.jpg" alt="" width="210" height="210"/>
+                                                <div class="quote-classic-meta">
+                                                    <p class="quote-classic-cite">James Smith</p>
+                                                    <p class="quote-classic-small">Regular Client</p>
+                                                </div>
+                                            </div>
+                                            <div class="quote-classic-text">
+                                                <p>The books I rent here always arrive on time, which is of primary importance to me as I like to read a lot. I am especially interested in books about business and science and you have a diverse collection of them. Thank you for your service!</p>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="item">
+                                        <article class="quote-classic">
+                                            <div class="quote-classic-header"><img class="quote-classic-image" src="images/quote-user-2-210x210.jpg" alt="" width="210" height="210"/>
+                                                <div class="quote-classic-meta">
+                                                    <p class="quote-classic-cite">Mary McMillan</p>
+                                                    <p class="quote-classic-small">Regular Client</p>
+                                                </div>
+                                            </div>
+                                            <div class="quote-classic-text">
+                                                <p>As an avid reader and web developer, I always use your website to find and rent new books. Sometimes I even rent exclusives that are not available at bookstores. I especially like your collection of JavaScript and PHP guides, they are very helpful.</p>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="item">
+                                        <article class="quote-classic">
+                                            <div class="quote-classic-header"><img class="quote-classic-image" src="images/quote-user-3-210x210.jpg" alt="" width="210" height="210"/>
+                                                <div class="quote-classic-meta">
+                                                    <p class="quote-classic-cite">Samuel Contreras</p>
+                                                    <p class="quote-classic-small">Regular Client</p>
+                                                </div>
+                                            </div>
+                                            <div class="quote-classic-text">
+                                                <p>Thanks to Booker, I saved over $140 just on one book! The customer service was top-notch and everyone there was very friendly. I will be back for next semester and I will definitely tell my friends about your website. Thanks a lot for your great customer service!</p>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+                                <div class="slider-widget-aside">
+                                    <div class="icon icon-lg-smaller mdi mdi-format-quote"></div>
+                                    <div class="owl-carousel-widget-nav">
+                                        <button class="slick-prev mdi mdi-arrow-left-bold-circle" type="button" data-slick="slick-1"></button>
+                                        <button class="slick-next mdi mdi-arrow-right-bold-circle" type="button" data-slick="slick-1"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 bg-image custom-bg-image" style="background-image: url(images/landing-maritime-8-1132x832.jpg);">
+                    <div class="section-lg">
+                        <div class="container-custom-inner container-custom-inner-1 text-center">
+                            <div class="row row-50 row-xl-120">
+                                <div class="col-sm-6 col-md-3 col-lg-6">
+                                    <div class="counter-wrap"><span class="icon novi-icon icon-secondary mdi mdi-television-guide"></span>
+                                        <div class="heading-3"><span class="counter" data-speed="2500">62000</span><span class="counter-preffix">+</span></div>
+                                        <p>Textbooks</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3 col-lg-6">
+                                    <div class="counter-wrap"><span class="icon novi-icon icon-secondary mdi mdi-account-multiple-outline"></span>
+                                        <div class="heading-3"><span class="counter" data-step="2500">2466</span></div>
+                                        <p>Active Readers</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3 col-lg-6">
+                                    <div class="counter-wrap"><span class="icon novi-icon icon-secondary mdi mdi-clock"></span>
+                                        <div class="heading-3"><span class="counter" data-speed="2500">12</span><span class="counter-preffix">+</span></div>
+                                        <p>Awards</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3 col-lg-6">
+                                    <div class="counter-wrap"><span class="icon novi-icon icon-secondary mdi mdi-code-tags"></span>
+                                        <div class="heading-3"><span class="counter" data-step="2500">520</span></div>
+                                        <p>Authors</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA-->
+    <section class="section section-xs text-center bg-gray-700 novi-background bg-cover">
+        <div class="container container-wide">
+            <div class="box-cta-thin">
+                <p class="big"><span class="label-cta label-cta-primary">Hot!</span><span>Rent New and Used Textbooks and.&nbsp;</span><strong>Save Huge on Our Books.</strong>&nbsp;<a class="link-bold" href="#">Rent now!</a></p>
+            </div>
+        </div>
+    </section>
+{% endblock %}
