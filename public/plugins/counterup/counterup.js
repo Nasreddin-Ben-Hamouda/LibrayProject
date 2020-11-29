@@ -10,7 +10,7 @@
 /**
  * hoverIntent is similar to jQuery's built-in "hover" method except that
  * instead of firing the handlerIn function immediately, hoverIntent checks
- * to see if the user's mouse has slowed down (beneath the sensitivity
+ * to see if the home's mouse has slowed down (beneath the sensitivity
  * threshold) before firing the event. The handlerOut function is only
  * called after a matching handlerIn.
  *

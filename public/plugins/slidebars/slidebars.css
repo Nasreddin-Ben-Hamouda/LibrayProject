@@ -30,7 +30,7 @@ body,
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    /* Set box model to prevent any user added margins or paddings from altering the widths or heights. */
+    /* Set box model to prevent any home added margins or paddings from altering the widths or heights. */
 
     margin: 0;
     padding: 0;

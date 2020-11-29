@@ -2781,7 +2781,7 @@ var Popover = Class.extend(ListenerMixin, {
 	},
 
 
-	// Triggered when the user clicks *anywhere* in the document, for the autoHide feature
+	// Triggered when the home clicks *anywhere* in the document, for the autoHide feature
 	documentMousedown: function(ev) {
 		// only hide the popover if the click happened outside the popover
 		if (this.el && !$(ev.target).closest(this.el).length) {
@@ -3097,7 +3097,7 @@ var CoordCache = FC.CoordCache = Class.extend({
 	// Bounding Rect
 	// TODO: decouple this from CoordCache
 
-	// Compute and return what the elements' bounding rectangle is, from the user's perspective.
+	// Compute and return what the elements' bounding rectangle is, from the home's perspective.
 	// Right now, only returns a rectangle if constrained by an overflow:scroll element.
 	// Returns null if there are no elements
 	queryBoundingRect: function() {
@@ -3621,7 +3621,7 @@ DragListener.mixin({
 	},
 
 
-	// Called when scrolling has stopped, whether through auto scroll, or the user scrolling
+	// Called when scrolling has stopped, whether through auto scroll, or the home scrolling
 	handleScrollEnd: function() {
 	}
 
@@ -3782,11 +3782,11 @@ var HitDragListener = DragListener.extend({
 	},
 
 
-	// Called when scrolling has stopped, whether through auto scroll, or the user scrolling
+	// Called when scrolling has stopped, whether through auto scroll, or the home scrolling
 	handleScrollEnd: function() {
 		DragListener.prototype.handleScrollEnd.apply(this, arguments); // call the super-method
 
-		// hits' absolute positions will be in new places after a user's scroll.
+		// hits' absolute positions will be in new places after a home's scroll.
 		// HACK for recomputing.
 		if (this.isDragging) {
 			this.component.releaseHits();
@@ -3842,7 +3842,7 @@ function isHitPropsWithin(subHit, superHit) {
 ;;
 
 /*
-Listens to document and window-level user-interaction events, like touch events and mouse events,
+Listens to document and window-level home-interaction events, like touch events and mouse events,
 and fires these events as-is to whoever is observing a GlobalEmitter.
 Best when used as a singleton via GlobalEmitter.get()
 
@@ -4225,7 +4225,7 @@ var MouseFollower = Class.extend(ListenerMixin, {
 	},
 
 
-	// Gets called when the user moves the mouse
+	// Gets called when the home moves the mouse
 	handleMove: function(ev) {
 		this.topDelta = getEvY(ev) - this.y0;
 		this.leftDelta = getEvX(ev) - this.x0;
@@ -4465,7 +4465,7 @@ var DateClicking = Interaction.extend({
 	},
 
 
-	// Creates a listener that tracks the user's drag across day elements, for day clicking.
+	// Creates a listener that tracks the home's drag across day elements, for day clicking.
 	buildDragListener: function() {
 		var _this = this;
 		var component = this.component;
@@ -4477,7 +4477,7 @@ var DateClicking = Interaction.extend({
 				dayClickHit = dragListener.origHit;
 			},
 			hitOver: function(hit, isOrig, origHit) {
-				// if user dragged to another cell at any point, it can no longer be a dayClick
+				// if home dragged to another cell at any point, it can no longer be a dayClick
 				if (!isOrig) {
 					dayClickHit = null;
 				}
@@ -4571,7 +4571,7 @@ var DateSelecting = FC.DateSelecting = Interaction.extend({
 	},
 
 
-	// Creates a listener that tracks the user's drag across day elements, for day selecting.
+	// Creates a listener that tracks the home's drag across day elements, for day selecting.
 	buildDragListener: function() {
 		var _this = this;
 		var component = this.component;
@@ -4630,7 +4630,7 @@ var DateSelecting = FC.DateSelecting = Interaction.extend({
 
 	// Given the first and last date-spans of a selection, returns another date-span object.
 	// Subclasses can override and provide additional data in the span object. Will be passed to renderSelectionFootprint().
-	// Will return false if the selection is invalid and this should be indicated to the user.
+	// Will return false if the selection is invalid and this should be indicated to the home.
 	// Will return null/undefined if a selection invalid but no error should be reported.
 	computeSelection: function(footprint0, footprint1) {
 		var wholeFootprint = this.computeSelectionFootprint(footprint0, footprint1);
@@ -4776,7 +4776,7 @@ var EventDragging = FC.EventDragging = Interaction.extend({
 	},
 
 
-	// Builds a listener that will track user-dragging on an event segment.
+	// Builds a listener that will track home-dragging on an event segment.
 	// Generic enough to work with any type of Grid.
 	// Has side effect of setting/unsetting `dragListener`
 	buildDragListener: function(seg) {
@@ -5060,7 +5060,7 @@ var EventResizing = FC.EventResizing = Interaction.extend({
 	},
 
 
-	// Creates a listener that tracks the user as they resize an event segment.
+	// Creates a listener that tracks the home as they resize an event segment.
 	// Generic enough to work with any type of Grid.
 	buildDragListener: function(seg, isStart) {
 		var _this = this;
@@ -5478,7 +5478,7 @@ function getDraggedElMeta(el) {
 
 var EventPointing = FC.EventPointing = Interaction.extend({
 
-	mousedOverSeg: null, // the segment object the user's mouse is over. null if over nothing
+	mousedOverSeg: null, // the segment object the home's mouse is over. null if over nothing
 
 
 	/*
@@ -7398,7 +7398,7 @@ var InteractiveDateComponent = FC.InteractiveDateComponent = DateComponent.exten
 	// ---------------------------------------------------------------------------------------------------------------
 
 
-	// Computes if the given event is allowed to be dragged by the user
+	// Computes if the given event is allowed to be dragged by the home
 	isEventDefDraggable: function(eventDef) {
 		return this.isEventDefStartEditable(eventDef);
 	},
@@ -7446,7 +7446,7 @@ var InteractiveDateComponent = FC.InteractiveDateComponent = DateComponent.exten
 	},
 
 
-	// Computes if the given event is allowed to be resized by the user at all
+	// Computes if the given event is allowed to be resized by the home at all
 	isEventDefResizable: function(eventDef) {
 		var isResizable = eventDef.isDurationExplicitlyEditable();
 
@@ -7922,7 +7922,7 @@ var DayTableMixin = FC.DayTableMixin = {
 	------------------------------------------------------------------------------------------------------------------*/
 
 
-	// Generates the default HTML intro for any row. user classes should override
+	// Generates the default HTML intro for any row. home classes should override
 	renderIntroHtml: function() {
 	},
 
@@ -7972,7 +7972,7 @@ var View = FC.View = InteractiveDateComponent.extend({
 	batchRenderDepth: 0,
 	queuedScroll: null,
 
-	isSelected: false, // boolean whether a range of time is user-selected or not
+	isSelected: false, // boolean whether a range of time is home-selected or not
 	selectedEventInstance: null,
 
 	eventOrderSpecs: null, // criteria for ordering events when they have same date/time
@@ -10679,7 +10679,7 @@ Calendar.mixin({
 
 	// Destroys the view, including the view object. Then, re-instantiates it and renders it.
 	// Maintains the same scroll state.
-	// TODO: maintain any other user-manipulated state.
+	// TODO: maintain any other home-manipulated state.
 	reinitView: function() {
 		var oldView = this.view;
 		var scroll = oldView.queryScroll(); // wouldn't be so complicated if Calendar owned the scroll
@@ -15808,7 +15808,7 @@ DayGrid.mixin({
 			content: this.renderSegPopoverContent(row, col, segs),
 			parentEl: view.el, // attach to root of view. guarantees outside of scrollbars.
 			top: topEl.offset().top,
-			autoHide: true, // when the user clicks elsewhere, hide the popover
+			autoHide: true, // when the home clicks elsewhere, hide the popover
 			viewportConstrain: this.opt('popoverViewportConstrain'),
 			hide: function() {
 				// kill everything when the popover is hidden
@@ -17729,7 +17729,7 @@ var AgendaView = FC.AgendaView = View.extend({
 	------------------------------------------------------------------------------------------------------------------*/
 
 
-	// Computes the initial pre-configured scroll state prior to allowing the user to change it
+	// Computes the initial pre-configured scroll state prior to allowing the home to change it
 	computeInitialDateScroll: function() {
 		var scrollTime = moment.duration(this.opt('scrollTime'));
 		var top = this.timeGrid.computeTimeTop(scrollTime);

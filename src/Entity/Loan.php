@@ -20,7 +20,7 @@ class Loan
 
     /**
      * @var object
-     * Bidirectional - Many loans borrowed by one user
+     * Bidirectional - Many loans borrowed by one home
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="loans")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */

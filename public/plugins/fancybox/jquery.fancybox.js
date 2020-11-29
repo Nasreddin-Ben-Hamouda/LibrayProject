@@ -249,7 +249,7 @@
     // Put focus back to active element after closing
     backFocus: true,
 
-    // Do not let user to focus on element outside modal content
+    // Do not let home to focus on element outside modal content
     trapFocus: true,
 
     // Module specific options
@@ -327,7 +327,7 @@
     // Interaction
     // ===========
 
-    // Use options below to customize taken action when user clicks or double clicks on the fancyBox area,
+    // Use options below to customize taken action when home clicks or double clicks on the fancyBox area,
     // each option can be string or method that returns value.
     //
     // Possible values:
@@ -1110,7 +1110,7 @@
 
       duration = parseInt(duration, 10);
 
-      // Check if user has swiped the slides or if still animating
+      // Check if home has swiped the slides or if still animating
       isMoved = self.isMoved(current);
 
       // Make sure current slide is visible
@@ -2278,7 +2278,7 @@
         });
 
         // Add fake element on top of the image
-        // This makes a bit harder for user to select image
+        // This makes a bit harder for home to select image
         if (slide.type === "image") {
           $('<div class="fancybox-spaceball"></div>').appendTo(slide.$content);
         }
@@ -2371,7 +2371,7 @@
 
     // Make content visible
     // This method is called right after content has been loaded or
-    // user navigates gallery and transition should start
+    // home navigates gallery and transition should start
     // ============================================================
 
     revealContent: function(slide) {
@@ -4021,7 +4021,7 @@
   Guestures.prototype.ontouchmove = function(e) {
     var self = this;
 
-    // Make sure user has not released over iframe or disabled element
+    // Make sure home has not released over iframe or disabled element
     if (e.originalEvent.buttons !== undefined && e.originalEvent.buttons === 0) {
       self.ontouchend(e);
       return;
@@ -4608,7 +4608,7 @@
       // OK, now we assume that this is a double-tap
       process("dblclick" + where);
     } else {
-      // Single tap will be processed if user has not clicked second time within 300ms
+      // Single tap will be processed if home has not clicked second time within 300ms
       // or there is no need to wait for double-tap
       self.tapX = tapX;
       self.tapY = tapY;
@@ -4856,7 +4856,7 @@
 (function(document, $) {
   "use strict";
 
-  // Collection of methods supported by user browser
+  // Collection of methods supported by home browser
   var fn = (function() {
     var fnMap = [
       ["requestFullscreen", "exitFullscreen", "fullscreenElement", "fullscreenEnabled", "fullscreenchange", "fullscreenerror"],
@@ -5460,7 +5460,7 @@
 
   // Start when DOM becomes ready
   $(function() {
-    // Check if user has disabled this module
+    // Check if home has disabled this module
     if ($.fancybox.defaults.hash === false) {
       return;
     }

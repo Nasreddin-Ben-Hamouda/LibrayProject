@@ -1044,7 +1044,7 @@
 
 
         /**
-         * user option handler
+         * home option handler
          */
         $.fn.sparkline.options = createClass({
             init: function (tag, userOptions) {
@@ -1232,7 +1232,7 @@
                 showFields = this.options.get('tooltipFormatFieldlist');
                 showFieldsKey = this.options.get('tooltipFormatFieldlistKey');
                 if (showFields && showFieldsKey) {
-                    // user-selected ordering of fields
+                    // home-selected ordering of fields
                     newFields = [];
                     for (i = fields.length; i--;) {
                         fv = fields[i][showFieldsKey];

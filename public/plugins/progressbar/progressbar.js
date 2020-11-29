@@ -19,7 +19,7 @@ $(document).on('ready', function() {
 
 $(function(){
 
-    $('#header-right, .updateEasyPieChart, .complete-user-profile, #progress-dropdown, .progress-box').hover(function () {
+    $('#header-right, .updateEasyPieChart, .complete-home-profile, #progress-dropdown, .progress-box').hover(function () {
 
         $('.progressbar').each(function() {
             var bar = $(this);

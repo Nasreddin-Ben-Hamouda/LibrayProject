@@ -8,7 +8,7 @@ security:
         ROLE_ADMIN:         [ROLE_LIBRARIAN]
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        # used to reload user from session & other features (e.g. switch_user)
+        # used to reload home from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
                 class: App\Entity\User

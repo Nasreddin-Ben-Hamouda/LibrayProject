@@ -26303,7 +26303,7 @@ this.pdfMake.vfs = {
         var c = e(a.table().container()),
             b = a.settings()[0],
             d = b._select.selector;
-        c.on("mousedown.dtSelect", d, function(b) { if (b.shiftKey || b.metaKey || b.ctrlKey) c.css("-moz-user-select", "none").one("selectstart.dtSelect", d, function() { return !1 }) }).on("mouseup.dtSelect", d, function() { c.css("-moz-user-select", "") }).on("click.dtSelect", d, function(b) {
+        c.on("mousedown.dtSelect", d, function(b) { if (b.shiftKey || b.metaKey || b.ctrlKey) c.css("-moz-home-select", "none").one("selectstart.dtSelect", d, function() { return !1 }) }).on("mouseup.dtSelect", d, function() { c.css("-moz-home-select", "") }).on("click.dtSelect", d, function(b) {
             var c = a.select.items();
             if (!j.getSelection || !e.trim(j.getSelection().toString())) {
                 var d =
@@ -26311,7 +26311,7 @@ this.pdfMake.vfs = {
                 if (e(b.target).closest("div.dataTables_wrapper")[0] == a.table().container()) {
                     var k = a.cell(e(b.target).closest("td, th"));
                     if (k.any()) {
-                        var g = e.Event("user-select.dt");
+                        var g = e.Event("home-select.dt");
                         i(a, g, [c, k, b]);
                         g.isDefaultPrevented() || (g = k.index(), "row" === c ? (c = g.row, s(b, a, d, "row", c)) : "column" === c ? (c = k.index().column, s(b, a, d, "column", c)) : "cell" === c && (c = k.index(), s(b, a, d, "cell", c)), d._select_lastCell = g)
                     }

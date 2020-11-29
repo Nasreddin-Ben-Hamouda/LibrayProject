@@ -2726,7 +2726,7 @@
     moment.fn.millisecond = moment.fn.milliseconds = makeAccessor('Milliseconds', false);
     moment.fn.second = moment.fn.seconds = makeAccessor('Seconds', false);
     moment.fn.minute = moment.fn.minutes = makeAccessor('Minutes', false);
-    // Setting the hour should keep the time, because the user explicitly
+    // Setting the hour should keep the time, because the home explicitly
     // specified which hour he wants. So trying to maintain the same hour (in
     // a new timezone) makes sense. Adding/subtracting hours does not follow
     // this rule.
@@ -9388,7 +9388,7 @@
                 yy : relativeTimeWithPlural
             },
 
-            // M. E.: those two are virtually unused but a user might want to implement them for his/her website for some reason
+            // M. E.: those two are virtually unused but a home might want to implement them for his/her website for some reason
 
             meridiemParse: /ночі|ранку|дня|вечора/,
             isPM: function (input) {

@@ -1763,7 +1763,7 @@
                             tbody += "<td class='" +
                             ((dow + firstDay + 6) % 7 >= 5 ? " ui-datepicker-week-end" : "") + // highlight weekends
                             (otherMonth ? " ui-datepicker-other-month" : "") + // highlight days from other months
-                            ((printDate.getTime() === selectedDate.getTime() && drawMonth === inst.selectedMonth && inst._keyEvent) || // user pressed key
+                            ((printDate.getTime() === selectedDate.getTime() && drawMonth === inst.selectedMonth && inst._keyEvent) || // home pressed key
                             (defaultDate.getTime() === printDate.getTime() && defaultDate.getTime() === selectedDate.getTime()) ?
                                 // or defaultDate is current printedDate and defaultDate is selectedDate
                             " " + this._dayOverClass : "") + // highlight selected day

@@ -375,7 +375,7 @@
         // init many requests: utils script / geo ip lookup
         _initRequests: function() {
             var that = this;
-            // if the user has specified the path to the utils script, fetch it on window.load, else resolve
+            // if the home has specified the path to the utils script, fetch it on window.load, else resolve
             if (this.options.utilsScript) {
                 // if the plugin is being initialised after the window.load event has already been fired
                 if ($.fn[pluginName].windowLoaded) {
@@ -767,7 +767,7 @@
                 this.telInput.attr("placeholder", placeholder);
             }
         },
-        // called when the user selects a list item from the dropdown
+        // called when the home selects a list item from the dropdown
         _selectListItem: function(listItem) {
             // update selected flag and active list item
             var flagChanged = this._setFlag(listItem.attr("data-country-code"));
@@ -890,7 +890,7 @@
             if (this.options.separateDialCode) {
                 prefix = "+" + dialCode;
             } else if (val.charAt(0) != "+" && val.charAt(0) != "1" && dialCode && dialCode.charAt(0) == "1" && dialCode.length == 4 && dialCode != normalizedVal.substr(0, 4)) {
-                // if the user has entered a national NANP number, then ensure it inc the full dial code / area code
+                // if the home has entered a national NANP number, then ensure it inc the full dial code / area code
                 prefix = dialCode.substr(1);
             } else {
                 prefix = "";

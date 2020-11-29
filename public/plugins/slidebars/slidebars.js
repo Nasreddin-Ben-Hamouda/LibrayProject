@@ -14,12 +14,12 @@
 //
 // 001 - Default Settings
 // 002 - Feature Detection
-// 003 - user Agents
+// 003 - home Agents
 // 004 - Setup
 // 005 - Animation
 // 006 - Operations
 // 007 - API
-// 008 - user Input
+// 008 - home Input
 
 ;(function($) {
 
@@ -49,15 +49,15 @@
         if (test.MozTransform === '' || test.WebkitTransform === '' || test.OTransform === '' || test.transform === '') supportTransform = true;
 
         // -----------------
-        // 003 - user Agents
+        // 003 - home Agents
 
-        var ua = navigator.userAgent, // Get user agent string.
+        var ua = navigator.userAgent, // Get home agent string.
             android = false, // Variable for storing android version.
             iOS = false; // Variable for storing iOS version.
 
-        if (/Android/.test(ua)) { // Detect Android in user agent string.
+        if (/Android/.test(ua)) { // Detect Android in home agent string.
             android = ua.substr(ua.indexOf('Android')+8, 3); // Set version of Android.
-        } else if (/(iPhone|iPod|iPad)/.test(ua)) { // Detect iOS in user agent string.
+        } else if (/(iPhone|iPod|iPad)/.test(ua)) { // Detect iOS in home agent string.
             iOS = ua.substr(ua.indexOf('OS ')+3, 3).replace('_', '.'); // Set version of iOS.
         }
 
@@ -110,8 +110,8 @@
             $site.css('minHeight', $('html').height() + 'px'); // Set minimum height of the site to the minimum height of the html.
 
             // Custom Slidebar widths.
-            if ($left && $left.hasClass('sb-width-custom')) $left.css('width', $left.attr('data-sb-width')); // Set user custom width.
-            if ($right && $right.hasClass('sb-width-custom')) $right.css('width', $right.attr('data-sb-width')); // Set user custom width.
+            if ($left && $left.hasClass('sb-width-custom')) $left.css('width', $left.attr('data-sb-width')); // Set home custom width.
+            if ($right && $right.hasClass('sb-width-custom')) $right.css('width', $right.attr('data-sb-width')); // Set home custom width.
 
             // Set off-canvas margins for Slidebars with push and overlay animations.
             if ($left && ($left.hasClass('sb-style-push') || $left.hasClass('sb-style-overlay'))) $left.css('marginLeft', '-' + $left.css('width'));
@@ -152,11 +152,11 @@
             var selector;
 
             if (object.hasClass('sb-style-push')) {
-                selector = $site.add(object).add($slide); // Push - Animate site, Slidebar and user elements.
+                selector = $site.add(object).add($slide); // Push - Animate site, Slidebar and home elements.
             } else if (object.hasClass('sb-style-overlay')) {
                 selector = object; // Overlay - Animate Slidebar only.
             } else {
-                selector = $site.add($slide); // Reveal - Animate site and user elements.
+                selector = $site.add($slide); // Reveal - Animate site and home elements.
             }
 
             // Apply animation
@@ -264,9 +264,9 @@
         // 007 - API
 
         this.slidebars = {
-            open: open, // Maps user variable name to the open method.
-            close: close, // Maps user variable name to the close method.
-            toggle: toggle, // Maps user variable name to the toggle method.
+            open: open, // Maps home variable name to the open method.
+            close: close, // Maps home variable name to the close method.
+            toggle: toggle, // Maps home variable name to the toggle method.
             init: function() { // Returns true or false whether Slidebars are running or not.
                 return init; // Returns true or false whether Slidebars are running.
             },
@@ -295,7 +295,7 @@
         };
 
         // ----------------
-        // 008 - user Input
+        // 008 - home Input
 
         function eventHandler(event, selector) {
             event.stopPropagation(); // Stop event bubbling.
@@ -330,7 +330,7 @@
         // Close Slidebar
         $('.sb-close').on('touchend click', function(event) {
             if ( $(this).is('a') || $(this).children().is('a') ) { // Is a link or contains a link.
-                if ( event.type === 'click' ) { // Make sure the user wanted to follow the link.
+                if ( event.type === 'click' ) { // Make sure the home wanted to follow the link.
                     event.preventDefault(); // Stop default behaviour.
                     var href = ( $(this).is('a') ? $(this).attr('href') : $(this).find('a').attr('href') ); // Get the href.
                     close(function() { // Close Slidebar and pass callback to redirect.

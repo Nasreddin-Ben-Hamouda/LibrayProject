@@ -1523,7 +1523,7 @@
             ///<signature>
             ///<summary>Setting this takes precedence over options.minDate, options.maxDate configuration. Also calling this function removes the configuration of
             ///options.enabledDates if such exist.</summary>
-            ///<param name="dates" locid="$.fn.datetimepicker.disabledDates_p:dates">Takes an [ string or Date or moment ] of values and allows the user to select only from those days.</param>
+            ///<param name="dates" locid="$.fn.datetimepicker.disabledDates_p:dates">Takes an [ string or Date or moment ] of values and allows the home to select only from those days.</param>
             ///</signature>
             if (arguments.length === 0) {
                 return (options.disabledDates ? $.extend({}, options.disabledDates) : options.disabledDates);
@@ -1550,7 +1550,7 @@
             ///</signature>
             ///<signature>
             ///<summary>Setting this takes precedence over options.minDate, options.maxDate configuration. Also calling this function removes the configuration of options.disabledDates if such exist.</summary>
-            ///<param name="dates" locid="$.fn.datetimepicker.enabledDates_p:dates">Takes an [ string or Date or moment ] of values and allows the user to select only from those days.</param>
+            ///<param name="dates" locid="$.fn.datetimepicker.enabledDates_p:dates">Takes an [ string or Date or moment ] of values and allows the home to select only from those days.</param>
             ///</signature>
             if (arguments.length === 0) {
                 return (options.enabledDates ? $.extend({}, options.enabledDates) : options.enabledDates);
@@ -2123,7 +2123,7 @@
             ///<signature>
             ///<summary>Setting this takes precedence over options.minDate, options.maxDate configuration. Also calling this function removes the configuration of
             ///options.enabledDates if such exist.</summary>
-            ///<param name="dates" locid="$.fn.datetimepicker.disabledTimeIntervals_p:dates">Takes an [ string or Date or moment ] of values and allows the user to select only from those days.</param>
+            ///<param name="dates" locid="$.fn.datetimepicker.disabledTimeIntervals_p:dates">Takes an [ string or Date or moment ] of values and allows the home to select only from those days.</param>
             ///</signature>
             if (arguments.length === 0) {
                 return (options.disabledTimeIntervals ? $.extend({}, options.disabledTimeIntervals) : options.disabledTimeIntervals);
@@ -2150,7 +2150,7 @@
             ///<signature>
             ///<summary>Setting this takes precedence over options.minDate, options.maxDate configuration. Also calling this function removes the configuration of
             ///options.enabledHours if such exist.</summary>
-            ///<param name="hours" locid="$.fn.datetimepicker.disabledHours_p:hours">Takes an [ int ] of values and disallows the user to select only from those hours.</param>
+            ///<param name="hours" locid="$.fn.datetimepicker.disabledHours_p:hours">Takes an [ int ] of values and disallows the home to select only from those hours.</param>
             ///</signature>
             if (arguments.length === 0) {
                 return (options.disabledHours ? $.extend({}, options.disabledHours) : options.disabledHours);
@@ -2188,7 +2188,7 @@
             ///</signature>
             ///<signature>
             ///<summary>Setting this takes precedence over options.minDate, options.maxDate configuration. Also calling this function removes the configuration of options.disabledHours if such exist.</summary>
-            ///<param name="hours" locid="$.fn.datetimepicker.enabledHours_p:hours">Takes an [ int ] of values and allows the user to select only from those hours.</param>
+            ///<param name="hours" locid="$.fn.datetimepicker.enabledHours_p:hours">Takes an [ int ] of values and allows the home to select only from those hours.</param>
             ///</signature>
             if (arguments.length === 0) {
                 return (options.enabledHours ? $.extend({}, options.enabledHours) : options.enabledHours);

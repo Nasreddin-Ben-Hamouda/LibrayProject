@@ -73,14 +73,14 @@ class User implements UserInterface
     private $salary=0;
 
     /**
-     * user can have many roles (ROLE_ADMIN,ROLE_LIBRARIAN,ROLE_STUDENT) this roles used to guarantee access control
+     * home can have many roles (ROLE_ADMIN,ROLE_LIBRARIAN,ROLE_STUDENT) this roles used to guarantee access control
      * @ORM\Column(type="json")
      */
     private $roles = [];
 
     /**
-     * bidirectional - One user make many loans
-     * @ORM\OneToMany(targetEntity=Loan::class, mappedBy="user",cascade={"persist", "remove"})
+     * bidirectional - One home make many loans
+     * @ORM\OneToMany(targetEntity=Loan::class, mappedBy="home",cascade={"persist", "remove"})
      */
     private $loans;
 
@@ -228,7 +228,7 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_STUDENT
+        // guarantee every home at least has ROLE_STUDENT
         $roles[] = 'ROLE_STUDENT';
 
         return array_unique($roles);
@@ -249,7 +249,7 @@ class User implements UserInterface
     }
 
     /**
-     * A visual identifier that represents this user.
+     * A visual identifier that represents this home.
      *
      * @see UserInterface
      */
@@ -263,7 +263,7 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     {
-        // If you store any temporary, sensitive data on the user, clear it here
+        // If you store any temporary, sensitive data on the home, clear it here
         // $this->plainPassword = null;
     }
 
