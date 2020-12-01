@@ -135,7 +135,26 @@
                     </div>
                 </div>
                 <div class="rd-navbar-aside-right">
-                    <div class="rd-navbar-shop rd-navbar-login"><a class="rd-navbar-shop-icon mdi mdi-login" href="#"><span class="d-none d-xl-inline">Login</span></a></div>
+                    {% if not app.user %}
+                        <div class="rd-navbar-shop rd-navbar-login"><a class="rd-navbar-shop-icon mdi mdi-login" href="{{ path('studentLogin') }}"><span class="d-none d-xl-inline">Login</span></a></div>
+                    {% else %}
+                        <div class="rd-navbar-shop rd-navbar-login">
+                        <div class="rd-navbar-nav-wrap">
+                            <!-- RD Navbar Nav-->
+                            <ul class="rd-navbar-nav">
+                                <li><a href="#" style="color: black">{{app.user.name}}</a>
+                                    <!-- RD Navbar Dropdown-->
+                                    <ul class="rd-navbar-dropdown" >
+                                        <li><a href="#">Profile</a>
+                                        </li>
+                                        <li><a href="{{ path('studentLogout') }}">Se déconnecter</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </nav>

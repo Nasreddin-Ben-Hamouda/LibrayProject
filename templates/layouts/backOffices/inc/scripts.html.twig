@@ -13,6 +13,15 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    {% for message in app.flashes('error') %}
+        toastr.error('{{ message }}');
+    {% endfor %}
+    {% for message in app.flashes('success') %}
+    toastr.success('{{ message }}');
+    {% endfor %}
+    {% for message in app.flashes('warning') %}
+    toastr.warning('{{ message }}');
+    {% endfor %}
 </script>
 
 

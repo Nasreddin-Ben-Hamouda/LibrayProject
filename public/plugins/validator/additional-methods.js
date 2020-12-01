@@ -1231,7 +1231,7 @@ $.validator.addMethod( "phoneUK", function( phone_number, element ) {
  *
  * where the area code may not start with 1 and the prefix may not start with 1
  * allows '-' or ' ' as a separator and allows parens around area code
- * some people may want to put a '1' in front of their number
+ * some people may want to put a '1' in home of their number
  *
  * 1(212)-999-2345 or
  * 212 999 2344 or

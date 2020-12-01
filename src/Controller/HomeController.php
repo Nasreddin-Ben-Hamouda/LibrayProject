@@ -6,14 +6,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class BookController extends AbstractController
+class HomeController extends AbstractController
 {
+
     /**
-     * @Route("/librarian/books", name="showBooks",methods={"GET"})
+     * @Route("/", name="home",methods={"GET"})
      */
-    public function showBooks()
+    public function showHome()
     {
-        return $this->render('book/librarianOffice/books.html.twig',[]);
+        return $this->render('home/home.html.twig',[]);
     }
+
 
 }

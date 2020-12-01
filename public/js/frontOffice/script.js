@@ -572,19 +572,19 @@ $(function () {
 		var regularConstraintsMessages = [
 			{
 				type: regula.Constraint.Required,
-				newMessage: "The text field is required."
+				newMessage: "Le champ est obligatoire."
 			},
 			{
 				type: regula.Constraint.Email,
-				newMessage: "The email is not a valid email."
+				newMessage: "L'e-mail n'est pas valide ."
 			},
 			{
 				type: regula.Constraint.Numeric,
-				newMessage: "Only numbers are required"
+				newMessage: "Seuls les chiffres sont requis"
 			},
 			{
 				type: regula.Constraint.Selected,
-				newMessage: "Please choose an option."
+				newMessage: "Veuillez choisir une option."
 			}
 		];
 

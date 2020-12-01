@@ -148,7 +148,7 @@
             this.element
                 .removeAttr( "aria-activedescendant" )
                 .find( ".ui-menu" ).addBack()
-                .removeClass( "ui-menu ui-widget ui-widget-content ui-menu-icons ui-front" )
+                .removeClass( "ui-menu ui-widget ui-widget-content ui-menu-icons ui-home" )
                 .removeAttr( "role" )
                 .removeAttr( "tabIndex" )
                 .removeAttr( "aria-labelledby" )
@@ -293,7 +293,7 @@
 
             // Initialize nested menus
             submenus.filter( ":not(.ui-menu)" )
-                .addClass( "ui-menu ui-widget ui-widget-content ui-front" )
+                .addClass( "ui-menu ui-widget ui-widget-content ui-home" )
                 .hide()
                 .attr({
                     role: this.options.role,
