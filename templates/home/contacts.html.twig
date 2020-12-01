@@ -1,0 +1,107 @@
+{% extends 'layouts/frontOffice/layout.html.twig' %}
+{% block header %}
+    {% include 'layouts/frontOffice/inc/header.html.twig' %}
+{% endblock  %}
+
+{% block content %}
+    <section class="breadcrumbs-custom custom-bg-image context-dark" style="background-image: url({{ asset('images/frontOffice/bg-fullwidth.jpg') }});">
+        <div class="container">
+            <p class="breadcrumbs-custom-subtitle">Get in Touch with Us</p>
+            <p class="heading-1 breadcrumbs-custom-title">Contacts</p>
+            <ul class="breadcrumbs-custom-path">
+                <li><a href="index-2.html">Home</a></li>
+                <li class="active">Contacts</li>
+            </ul>
+        </div>
+    </section>
+
+
+    <!-- Contact information-->
+    <section class="section section-lg bg-default">
+        <div class="container container-bigger">
+            <div class="row row-50 justify-content-md-center justify-content-xl-between">
+                <div class="col-md-10 col-lg-7">
+                    <h3>Contact us</h3>
+                    <hr class="divider divider-left divider-default">
+                    <p class="big">You can contact us any way that is convenient for you. We are available 24/7 via fax or email. You can also use a quick contact form below or visit our office personally.</p>
+                    <!-- RD Mailform-->
+                    <form class="rd-mailform" data-form-output="form-output-global" data-form-type="contact" method="post" action="../../external.html?link=https://livedemo00.template-help.com/wt_prod-19592/bat/rd-mailform.php">
+                        <div class="row row-fix row-20">
+                            <div class="col-md-6">
+                                <div class="form-wrap form-wrap-validation">
+                                    <label class="form-label-outside" for="form-1-name">First name</label>
+                                    <input class="form-input" id="form-1-name" type="text" name="name" data-constraints="@Required"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-wrap form-wrap-validation">
+                                    <label class="form-label-outside" for="form-1-last-name">Last name</label>
+                                    <input class="form-input" id="form-1-last-name" type="text" name="last-name" data-constraints="@Required"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-wrap form-wrap-validation">
+                                    <label class="form-label-outside" for="form-1-email">E-mail</label>
+                                    <input class="form-input" id="form-1-email" type="email" name="email" data-constraints="@Email @Required"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-wrap form-wrap-validation">
+                                    <label class="form-label-outside" for="form-1-phone">Phone</label>
+                                    <input class="form-input" id="form-1-phone" type="text" name="phone" data-constraints="@Numeric @Required"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-wrap form-wrap-validation">
+                                    <label class="form-label-outside" for="form-1-message">Message</label>
+                                    <textarea class="form-input" id="form-1-message" name="message" data-constraints="@Required"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 offset-custom-1">
+                                <div class="form-button">
+                                    <button class="button button-primary button-nina" type="submit">send message</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-10 col-lg-5 col-xl-4">
+                    <div class="column-aside">
+                        <div class="row">
+                            <div class="col-sm-10 col-md-6 col-lg-12">
+                                <h6>Address</h6>
+                                <hr class="divider-thin">
+                                <article class="box-inline"><span class="icon novi-icon icon-md-smaller icon-primary mdi mdi-map-marker"></span><span><a href="#">2130 Fulton Street, Chicago, IL 94117-1080 USA</a></span></article>
+                            </div>
+                            <div class="col-sm-10 col-md-6 col-lg-12">
+                                <h6>Phones</h6>
+                                <hr class="divider-thin">
+                                <article class="box-inline"><span class="icon novi-icon icon-md-smaller icon-primary mdi mdi-phone"></span>
+                                    <ul class="list-comma">
+                                        <li><a href="tel:#">1-800-6543-765</a></li>
+                                        <li><a href="tel:#">1-800-3434-876</a></li>
+                                    </ul>
+                                </article>
+                            </div>
+                            <div class="col-sm-10 col-md-6 col-lg-12">
+                                <h6>E-mail</h6>
+                                <hr class="divider-thin">
+                                <article class="box-inline"><span class="icon novi-icon icon-md-smaller icon-primary mdi mdi-email-open"></span><span><a href="mailto:#">mail@demolink.org</a></span></article>
+                            </div>
+                            <div class="col-sm-10 col-md-6 col-lg-12">
+                                <h6>Opening hours</h6>
+                                <hr class="divider-thin">
+                                <article class="box-inline"><span class="icon novi-icon icon-md-smaller icon-primary mdi mdi-calendar-clock"></span>
+                                    <ul class="list-0">
+                                        <li>Mon–Fri: 9:00 am–6:00 pm</li>
+                                        <li>Sat–Sun: 11:00 am–4:00 pm</li>
+                                    </ul>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

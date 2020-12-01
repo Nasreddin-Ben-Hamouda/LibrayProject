@@ -29,7 +29,7 @@ class SecurityController extends AbstractController
             $this->addFlash('error',$error->getMessageKey());
         }
 
-        return $this->render('security/frontOffice/login.html.twig', ['last_username' => $lastUsername]);
+        return $this->render('security/student/login.html.twig', ['last_username' => $lastUsername]);
     }
 
     /**
