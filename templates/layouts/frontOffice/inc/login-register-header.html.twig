@@ -39,7 +39,11 @@
                     </div>
                 </div>
                 <div class="rd-navbar-aside-right">
-                    <div class="rd-navbar-shop rd-navbar-login"><a class="rd-navbar-shop-icon mdi mdi-login" href="{{ path('studentLogin') }}"><span class="d-none d-xl-inline">Login</span></a></div>
+                    {% if title=="login" %}
+                    <div class="rd-navbar-shop rd-navbar-login"><a class="rd-navbar-shop-icon mdi mdi-login" href="{{ path('studentRegister') }}"><span class="d-none d-xl-inline">S'inscrire</span></a></div>
+                    {% else %}
+                    <div class="rd-navbar-shop rd-navbar-login"><a class="rd-navbar-shop-icon mdi mdi-login" href="{{ path('studentLogin') }}"><span class="d-none d-xl-inline">S'identifier</span></a></div>
+                    {% endif %}
                 </div>
             </div>
         </nav>

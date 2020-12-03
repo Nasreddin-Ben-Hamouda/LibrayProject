@@ -2,14 +2,22 @@
 
 namespace App\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
 
+    private $manager;
+
+    public function __construct(EntityManagerInterface $manager)
+    {
+        $this->manager=$manager;
+    }
     /**
      * @Route("/", name="home",methods={"GET"})
      */
@@ -39,6 +47,5 @@ class HomeController extends AbstractController
     {
         return $this->render('home/profile.html.twig',[]);
     }
-
 
 }

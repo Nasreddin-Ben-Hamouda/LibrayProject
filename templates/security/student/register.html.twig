@@ -1,0 +1,129 @@
+{% extends 'layouts/frontOffice/layout.html.twig' %}
+{% block header %}
+    {% include 'layouts/frontOffice/inc/login-register-header.html.twig' with {'title':'register'} %}
+{% endblock  %}
+
+{% block content %}
+    <style>
+        .error{
+            color: #FB8282;
+            font-size: 12px;
+        }
+    </style>
+    <section class="fullwidth-page novi-background bg-cover bg-image custom-bg-image" style="background-image: url({{ asset('images/frontOffice/bg-registration.jpg') }});">
+        <div class="fullwidth-page-inner">
+            <div class="section-lg text-center">
+                <div class="container">
+                    <h3>inscription</h3>
+                    <div class="row row-fix justify-content-sm-center">
+                        <div class="col-md-8 col-lg-6 col-xl-4">
+                            <!-- RD Mailform-->
+                            <form class="form-fix full-color" method="post" novalidate="novalidate" id="registerForm">
+                                <div class="form-wrap form-wrap-validation" >
+                                    {{ form_row(registrationForm.email) }}
+                                    <label class="form-label" for="registration_form_email">E-mail</label>
+                                </div>
+                                <div class="form-wrap form-wrap-validation">
+                                    {{ form_row(registrationForm.password) }}
+                                    <label class="form-label" for="registration_form_password">Password</label>
+                                </div>
+                                <div class="form-wrap form-wrap-validation">
+                                    {{ form_row(registrationForm.name) }}
+                                    <label class="form-label" for="registration_form_name">Nom et Prénom</label>
+                                </div>
+                                <div class="form-wrap form-wrap-validation">
+                                    {{ form_row(registrationForm.studentNumber) }}
+                                    <label class="form-label" for="registration_form_studentNumber">Numéro carte étudiant</label>
+                                </div>
+                                <div class="form-wrap form-wrap-validation">
+                                    {{ form_row(registrationForm.address) }}
+                                    <label class="form-label" for="registration_form_address">Adresse</label>
+                                </div>
+                                <div class="form-wrap form-wrap-validation">
+                                    {{ form_row(registrationForm.phone) }}
+                                    <label class="form-label" for="registration_form_phone">Numéro de téléphone</label>
+                                </div>
+                                <div class="form-button">
+                                    <button class="button button-block button-primary button-nina" type="submit">S'inscrire</button>
+                                </div>
+                            </form><br><br>
+                            <div class="box-minimal-icon fa-sign-in"style="color: white"> <a href="{{ path('studentLogin') }}" style="color: white">S'identifier</a> </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-xs page-footer text-center">
+                <div class="container">
+                    <p class="right">&#169; <span class="copyright-year"></span> Tous les droits sont réservés
+                        &nbsp;<a href="#">Conditions d'utilisation</a>&nbsp;<span>and</span>&nbsp;<a href="#">
+                            Politique de confidentialité</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        $(function () {
+            $("#registerForm").validate({
+                errorClass: "error",
+                validClass: "success is-valid",
+                rules: {
+                    "registration_form[email]": {
+                        required: true,
+                        email: true,
+                    },
+                    "registration_form[password]": {
+                        required: true,
+
+                    },
+                    "registration_form[name]": {
+                        required: true,
+
+                    },
+                    "registration_form[address]": {
+                        required: false,
+
+                    },
+                    "registration_form[studentNumber]": {
+                        required: true,
+                        number:true,
+
+                    },
+                    "registration_form[phone]": {
+                        required:false,
+                        number:true,
+                        maxlength:8,
+                        minlength:8
+
+                    },
+                },
+                messages: {
+
+                    "registration_form[email]": {
+                        required: "Veuillez entrer votre email",
+                        email: "Veuillez entrer email valide"
+                    },
+                    "registration_form[password]": {
+                        required: "Veuillez entrer un mot de passe"
+                    },
+                    "registration_form[name]": {
+                        required: "Veuillez entrer votre nom et prénom",
+                    },
+                    "registration_form[phone]": {
+                        number: "Le numéro de téléphone doit être numérique",
+                        maxlength: "Le numéro de téléphone doit être de 8 chiffres",
+                        minlength: "Le numéro de téléphone doit être de 8 chiffres"
+                    },
+                    "registration_form[studentNumber]": {
+                        required:"Veuillez entrer le numéro de la carte etudiant",
+                        number: "Le numéro de téléphone doit être numérique",
+                    },
+                }
+            });
+        });
+    </script>
+{% endblock %}
+{% block footer %}
+{% endblock %}

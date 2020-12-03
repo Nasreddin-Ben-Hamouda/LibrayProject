@@ -3,14 +3,16 @@
 <script src="{{ asset('plugins/validator/jquery.validate.js') }}"></script>
 <script src="{{ asset('plugins/validator/additional-methods.js') }}"></script>
 <script>
-    {% for message in app.flashes('error') %}
-        toastr.error('{{ message }}');
-    {% endfor %}
-    {% for message in app.flashes('success') %}
-        toastr.success('{{ message }}');
-    {% endfor %}
-    {% for message in app.flashes('warning') %}
-        toastr.warning('{{ message }}');
-    {% endfor %}
+
+        {% for message in app.flashes('error') %}
+            toastr.error('{{ message }}');
+        {% endfor %}
+        {% for message in app.flashes('success') %}
+            toastr.success('{{ message }}');
+        {% endfor %}
+        {% for message in app.flashes('warning') %}
+            toastr.warning('{{ message }}');
+        {% endfor %}
+
 </script>
 

@@ -38,12 +38,22 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVerified = false;
+
+    /**
+     * @ORM\Column(type="string", length=255,nullable=true)
+     */
+    private $confirmationToken;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $photo;
 
     /**
-     * @ORM\Column(name="student_number",type="string", length=255, nullable=true)
+     * @ORM\Column(name="student_number",type="bigint", nullable=true)
      */
     private $studentNumber;
 
@@ -56,16 +66,6 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $address;
-
-    /**
-     * @ORM\Column(name="email_status",type="integer",options={"default" :0})
-     */
-    private $emailStatus=0;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $validation;
 
     /**
      * @ORM\Column(type="float",options={"default" :0})
@@ -83,6 +83,8 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Loan::class, mappedBy="home",cascade={"persist", "remove"})
      */
     private $loans;
+
+
 
     public function __construct()
     {
@@ -127,6 +129,30 @@ class User implements UserInterface
 
         return $this;
     }
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+
+    public function getConfirmationToken():string
+    {
+        return $this->confirmationToken;
+    }
+
+    public function setConfirmationToken(string $confirmationToken): self
+    {
+        $this->confirmationToken = $confirmationToken;
+        return $this;
+    }
+
 
     public function getPhoto(): ?string
     {
@@ -173,30 +199,6 @@ class User implements UserInterface
     public function setStudentNumber(int $studentNumber): self
     {
         $this->studentNumber=$studentNumber;
-
-        return $this;
-    }
-
-    public function getEmailStatus(): ?int
-    {
-        return $this->emailStatus;
-    }
-
-    public function setEmailStatus(int $emailStatus): self
-    {
-        $this->emailStatus = $emailStatus;
-
-        return $this;
-    }
-
-    public function getValidation(): ?string
-    {
-        return $this->validation;
-    }
-
-    public function setValidation(?string $validation): self
-    {
-        $this->validation = $validation;
 
         return $this;
     }
@@ -281,6 +283,8 @@ class User implements UserInterface
         }
         return $this;
     }
+
+
 
 
 }

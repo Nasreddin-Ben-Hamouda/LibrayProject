@@ -2,14 +2,28 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Service\validationErrorsHandler;
+use App\Form\RegistrationFormType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 
 class SecurityController extends AbstractController
 {
+    private $manager;
+
+    public function __construct(EntityManagerInterface $manager)
+    {
+        $this->manager=$manager;
+    }
     /**
      * @Route("/login", name="studentLogin")
      */
@@ -31,6 +45,93 @@ class SecurityController extends AbstractController
 
         return $this->render('security/student/login.html.twig', ['last_username' => $lastUsername]);
     }
+    /**
+     * @Route("/register", name="studentRegister")
+     */
+    public function studentRegister(Request $request, UserPasswordEncoderInterface $passwordEncoder,MailerInterface $mailer,validationErrorsHandler $validationErrorsHandler): Response
+    {
+        $user = new User();
+        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            if( !$form->isValid()){
+                $errors = $validationErrorsHandler->getErrorsFromForm($form);
+               foreach ($errors as $error){
+                   $this->addFlash('error',$error[0]);
+               }
+                $form->clearErrors(true);
+            }else{
+                $userCheck = $this->manager->getRepository(User::class)->findOneBy(['email' =>$form->get('email')->getData()]);
+                if($userCheck){
+                    $this->addFlash('error',"L'email existe dèja");
+                    return $this->redirectToRoute('studentLogin');
+                }
+                $user->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $user,
+                        $form->get('password')->getData()
+                    )
+                );
+                $user->setRoles(array('ROLE_STUDENT'));
+                $random = random_bytes(32);
+                $user->setConfirmationToken(base64_encode($random));
+                $this->manager->persist($user);
+                $this->manager->flush();
+                $email=base64_encode(base64_encode(base64_encode(base64_encode($user->getEmail()))));
+                $confirmationToken=base64_encode(base64_encode(base64_encode(base64_encode($user->getConfirmationToken()))));
+                $email = (new TemplatedEmail())
+                    ->from('admin@library.com')
+                    ->to($user->getEmail())
+                    ->subject('Vérifcation email')
+                    ->htmlTemplate('security/student/mail/confirmation_email.html.twig')
+                    ->context([
+                        'encodedEmail' =>$email,
+                        'confirmationToken'=>$confirmationToken
+                    ]);
+                $mailer->send($email);
+
+                // do anything else you need here, like send an email
+                $this->addFlash('warning',"Inscription avec succès, SVP Confirmer votre email !");
+
+                return $this->redirectToRoute('studentLogin');
+            }
+
+        }
+
+        return $this->render('security/student/register.html.twig', [
+            'registrationForm' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/verify/email/{email}/{confirmationToken}", name="StudentVerifyEmail",methods={"GET"})
+     */
+    public function verifyStudentEmail($email,$confirmationToken): Response
+    {
+        $email=base64_decode(base64_decode(base64_decode(base64_decode($email))));
+        $confirmationToken=base64_decode(base64_decode(base64_decode(base64_decode($confirmationToken))));
+        $user=$this->manager->getRepository(User::class)->findOneBy([
+            'email'=>$email,
+            'confirmationToken'=>$confirmationToken
+        ]);
+        if($user){
+            if($user->isVerified()){
+                $this->addFlash('warning', 'Votre email a déjà vérifier.');
+                return $this->redirectToRoute('studentLogin');
+            }else{
+
+                $user->setIsVerified(true);
+                $this->manager->flush();
+
+                $this->addFlash('success', 'Votre email à été vérifié avec succès, vous pouvez connecté maintenant.');
+                return $this->redirectToRoute('studentLogin');
+            }
+        }
+        $this->addFlash('error', 'Utilisateur inexistant');
+
+        return $this->redirectToRoute('home');
+    }
 
     /**
      * @Route("/logout", name="studentLogout")
@@ -39,4 +140,6 @@ class SecurityController extends AbstractController
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
+
+
 }

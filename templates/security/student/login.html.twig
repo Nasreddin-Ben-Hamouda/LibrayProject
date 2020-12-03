@@ -1,6 +1,6 @@
 {% extends 'layouts/frontOffice/layout.html.twig' %}
 {% block header %}
-    {% include 'layouts/frontOffice/inc/login-register-header.html.twig' %}
+    {% include 'layouts/frontOffice/inc/login-register-header.html.twig' with {'title':'login'} %}
 {% endblock  %}
 
 {% block content %}
@@ -14,7 +14,7 @@
         <div class="fullwidth-page-inner">
             <div class="section-md text-center">
                 <div class="container">
-                    <h3>Login</h3>
+                    <h3>s'identifier</h3>
                     <div class="row row-fix justify-content-sm-center">
                         <div class="col-md-8 col-lg-6 col-xl-4">
 
@@ -31,8 +31,10 @@
                                 <div class="form-button">
                                     <button class="button button-block button-primary button-nina" type="submit">Se Connecter</button>
                                 </div>
-                            </form>
+                            </form><br><br>
+                            <div class="box-minimal-icon fa-sign-in"style="color: white"> <a href="{{ path('studentRegister') }}" style="color: white">S'inscrire</a> </div>
                         </div>
+
                     </div>
 
                 </div>
@@ -75,8 +77,6 @@
         }
         });
     });
-
-
     </script>
 {% endblock %}
 {% block footer %}

@@ -73,8 +73,8 @@ class StudentAuthenticator extends AbstractFormLoginAuthenticator implements Pas
             // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('L\'e-mail est introuvable.');
         }else{
-            if($user->getEmailStatus()==0){
-                throw new CustomUserMessageAuthenticationException('L\'e-mail reste invalide ');
+            if($user->isVerified()==false){
+                throw new CustomUserMessageAuthenticationException('Votre email n\'a pas été vérifié');
             }
         }
 
@@ -85,7 +85,7 @@ class StudentAuthenticator extends AbstractFormLoginAuthenticator implements Pas
     {
          $password=$this->passwordEncoder->isPasswordValid($user, $credentials['password']);
          if(!$password){
-             throw new CustomUserMessageAuthenticationException('Mot de passe invalide');
+             throw new CustomUserMessageAuthenticationException('Mot de passe icorrecte');
          }
          return $password;
     }

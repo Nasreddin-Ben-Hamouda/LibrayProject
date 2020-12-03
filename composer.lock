@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cb53248b8a638f638cf01257e4ad03dc",
+    "content-hash": "52b88ab04792f30731774d584778cc2f",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -5869,6 +5869,51 @@
             "time": "2020-11-28T10:57:20+00:00"
         },
         {
+            "name": "symfonycasts/verify-email-bundle",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SymfonyCasts/verify-email-bundle.git",
+                "reference": "501e503f6a8ae282ffb3fff167e0740dae56b1ae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SymfonyCasts/verify-email-bundle/zipball/501e503f6a8ae282ffb3fff167e0740dae56b1ae",
+                "reference": "501e503f6a8ae282ffb3fff167e0740dae56b1ae",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2.5",
+                "symfony/config": "^4.4 | ^5.0",
+                "symfony/dependency-injection": "^4.4 | ^5.0",
+                "symfony/http-kernel": "^4.4 | ^5.0",
+                "symfony/routing": "^4.4 | ^5.0"
+            },
+            "conflict": {
+                "symfony/framework-bundle": "<4.4"
+            },
+            "require-dev": {
+                "doctrine/orm": "^2.7",
+                "doctrine/persistence": "^1.3",
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "symfony/framework-bundle": "^4.4 | ^5.0",
+                "symfony/phpunit-bridge": "^5.0",
+                "vimeo/psalm": "^3.8"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "SymfonyCasts\\Bundle\\VerifyEmail\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Simple, stylish Email Verification for Symfony",
+            "time": "2020-05-24T11:04:34+00:00"
+        },
+        {
             "name": "twig/extra-bundle",
             "version": "v3.1.1",
             "source": {
@@ -6217,129 +6262,6 @@
                 "php"
             ],
             "time": "2020-09-26T10:30:38+00:00"
-        },
-        {
-            "name": "php-notify/notify",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-notify/notify.git",
-                "reference": "b59593e4ad11acd1287ec59e4dc9417342daa12f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-notify/notify/zipball/b59593e4ad11acd1287ec59e4dc9417342daa12f",
-                "reference": "b59593e4ad11acd1287ec59e4dc9417342daa12f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.8.36"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Notify\\": "src/"
-                },
-                "files": [
-                    "src/helpers.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Younes Khoubza",
-                    "email": "younes.khoubza@gmail.com",
-                    "homepage": "https://github.com/yoeunes",
-                    "role": "Developer"
-                }
-            ],
-            "description": "PHP notify library to display flash notification",
-            "homepage": "https://github.com/php-notify/notify",
-            "keywords": [
-                "alerts",
-                "laravel",
-                "lumen",
-                "messages",
-                "notifications",
-                "notify",
-                "php",
-                "pnotify",
-                "symfony",
-                "toastr"
-            ],
-            "time": "2020-11-26T20:18:10+00:00"
-        },
-        {
-            "name": "php-notify/notify-symfony",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-notify/notify-symfony.git",
-                "reference": "11f42eb3719c1255f5fb640420885a44bf840cd0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-notify/notify-symfony/zipball/11f42eb3719c1255f5fb640420885a44bf840cd0",
-                "reference": "11f42eb3719c1255f5fb640420885a44bf840cd0",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3",
-                "php-notify/notify": "^1.0",
-                "symfony/config": "^2.1|^3.0|^4.0|^5.0",
-                "symfony/dependency-injection": "^2.1|^3.0|^4.0|^5.0",
-                "symfony/http-kernel": "^2.1|^3.0|^4.0|^5.0",
-                "symfony/yaml": "^2.1|^3.0|^4.0|^5.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.8.36",
-                "twig/twig": "^1.34|^2.0|^3.0"
-            },
-            "suggest": {
-                "twig/twig": "Twig support for Htmlpresenter"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-4": {
-                    "Notify\\Symfony\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Younes Khoubza",
-                    "email": "younes.khoubza@gmail.com",
-                    "homepage": "https://github.com/yoeunes",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Symfony Notify Bundle for php-notify/notify",
-            "homepage": "https://github.com/php-notify/notify-symfony",
-            "keywords": [
-                "alerts",
-                "bundle",
-                "flex",
-                "laravel",
-                "lumen",
-                "messages",
-                "notifications",
-                "notify",
-                "php",
-                "pnotify",
-                "symfony",
-                "toastr",
-                "yoeunes"
-            ],
-            "time": "2020-11-27T23:58:20+00:00"
         },
         {
             "name": "symfony/browser-kit",
