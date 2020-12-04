@@ -17,10 +17,31 @@ class AdminController extends AbstractController
         $this->manager=$manager;
     }
     /**
-     * @Route("/admin/users", name="showUsers",methods={"GET"})
+     * @Route("/admin/dashboard", name="showAdminDashboard",methods={"GET"})
      */
-    public function showBooks()
+    public function showDashboard()
     {
-        return $this->render('admin/users.html.twig',[]);
+        return $this->render('admin/dashboard.html.twig',[]);
+    }
+    /**
+     * @Route("/admin/profile", name="showAdminProfile",methods={"GET"})
+     */
+    public function showProfile()
+    {
+        return $this->render('admin/profile.html.twig',[]);
+    }
+    /**
+     * @Route("/admin/students", name="showStudents",methods={"GET"})
+     */
+    public function showStudents()
+    {
+        return $this->render('admin/students.html.twig',[]);
+    }
+    /**
+     * @Route("/admin/librarians", name="showLibrarians",methods={"GET"})
+     */
+    public function showLibrarians()
+    {
+        return $this->render('admin/librarians.html.twig',[]);
     }
 }

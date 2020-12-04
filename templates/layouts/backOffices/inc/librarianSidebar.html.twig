@@ -2,16 +2,23 @@
     <div class="sidebar-left open" data-perfect-scrollbar data-suppress-scroll-x="true">
         <ul class="navigation-left">
             <li class="nav-item {% if current == 'dashboard' %} active {% endif %}">
-                <a class="nav-item-hold" href="#">
+                <a class="nav-item-hold" href="{{ path('showLibrarianDashboard') }}">
                     <i class="nav-icon i-Bar-Chart"></i>
                     <span class="nav-text">Tableau de bord</span>
                 </a>
                 <div class="triangle"></div>
             </li>
             <li class="nav-item {% if current=='books'%} active {% endif%} ">
-                <a class="nav-item-hold" href="#">
+                <a class="nav-item-hold" href="{{ path('showBooks') }}">
                     <i class="nav-icon i-Open-Book"></i>
-                    <span class="nav-text">Livres</span>
+                    <span class="nav-text">Tous les livres</span>
+                </a>
+                <div class="triangle"></div>
+            </li>
+            <li class="nav-item {% if current=='late'%} active {% endif%} ">
+                <a class="nav-item-hold" href="{{ path('showLateBooks') }}">
+                    <i class="nav-icon i-Bookmark"></i>
+                    <span class="nav-text">Les livres en retard</span>
                 </a>
                 <div class="triangle"></div>
             </li>
