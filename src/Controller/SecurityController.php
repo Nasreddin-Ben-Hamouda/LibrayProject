@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Service\validationErrorsHandler;
+use App\Service\ValidationErrorsHandler;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -48,8 +48,11 @@ class SecurityController extends AbstractController
     /**
      * @Route("/register", name="studentRegister")
      */
-    public function studentRegister(Request $request, UserPasswordEncoderInterface $passwordEncoder,MailerInterface $mailer,validationErrorsHandler $validationErrorsHandler): Response
+    public function studentRegister(Request $request, UserPasswordEncoderInterface $passwordEncoder,MailerInterface $mailer,ValidationErrorsHandler $validationErrorsHandler): Response
     {
+        if($this->getUser()){
+            return $this->redirectToRoute("home");
+        }
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -62,11 +65,6 @@ class SecurityController extends AbstractController
                }
                 $form->clearErrors(true);
             }else{
-                $userCheck = $this->manager->getRepository(User::class)->findOneBy(['email' =>$form->get('email')->getData()]);
-                if($userCheck){
-                    $this->addFlash('error',"L'email existe dèja");
-                    return $this->redirectToRoute('studentLogin');
-                }
                 $user->setPassword(
                     $passwordEncoder->encodePassword(
                         $user,
@@ -107,26 +105,32 @@ class SecurityController extends AbstractController
     /**
      * @Route("/verify/email/{email}/{confirmationToken}", name="StudentVerifyEmail",methods={"GET"})
      */
+
     public function verifyStudentEmail($email,$confirmationToken): Response
     {
         $email=base64_decode(base64_decode(base64_decode(base64_decode($email))));
         $confirmationToken=base64_decode(base64_decode(base64_decode(base64_decode($confirmationToken))));
         $user=$this->manager->getRepository(User::class)->findOneBy([
             'email'=>$email,
-            'confirmationToken'=>$confirmationToken
         ]);
         if($user){
-            if($user->isVerified()){
-                $this->addFlash('warning', 'Votre email a déjà vérifier.');
-                return $this->redirectToRoute('studentLogin');
+            if( $user->getConfirmationToken()==$confirmationToken){
+                if($user->isVerified()){
+                    $this->addFlash('warning', 'Votre email a déjà vérifier.');
+                    return $this->redirectToRoute('studentLogin');
+                }else{
+                    $user->setIsVerified(true);
+                    $user->setConfirmationToken('');
+                    $this->manager->flush();
+
+                    $this->addFlash('success', 'Votre email à été vérifié avec succès, vous pouvez connecté maintenant.');
+                    return $this->redirectToRoute('studentLogin');
+                }
             }else{
-
-                $user->setIsVerified(true);
-                $this->manager->flush();
-
-                $this->addFlash('success', 'Votre email à été vérifié avec succès, vous pouvez connecté maintenant.');
-                return $this->redirectToRoute('studentLogin');
+                $this->addFlash('warning', 'Ce lien n\'est pas valide');
+                return $this->redirectToRoute('home');
             }
+
         }
         $this->addFlash('error', 'Utilisateur inexistant');
 
@@ -134,9 +138,38 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/logout", name="studentLogout")
+     * @Route("/common/login", name="commonLogin")
      */
-    public function studentLogout()
+    public function CommonLogin(AuthenticationUtils $authenticationUtils): Response
+    {
+         if ($this->getUser()) {
+             if($this->isGranted("ROLE_ADMIN")){
+                 $this->addFlash('success',"Authentification réussie !");
+                 return $this->redirectToRoute('showUsers');
+             }elseif($this->isGranted("ROLE_LIBRARIAN")){
+                 $this->addFlash('success',"Authentification réussie !");
+                 return $this->redirectToRoute('showBooks');
+             }else{
+                 $this->addFlash('error','Vous n\'avez pas l\'autorisation d\'accéder a cet espace !');
+                 return $this->redirectToRoute('home');
+             }
+         }
+
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+        if($error){
+            $this->addFlash('error',$error->getMessageKey());
+        }
+
+        return $this->render('security/common/login.html.twig', ['last_username' => $lastUsername]);
+    }
+
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function logout()
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,12 +17,10 @@ class AdminController extends AbstractController
         $this->manager=$manager;
     }
     /**
-     * @Route("/admin", name="admin",methods={"GET","POST"})
+     * @Route("/admin/users", name="showUsers",methods={"GET"})
      */
-    public function index(): Response
+    public function showBooks()
     {
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
+        return $this->render('admin/users.html.twig',[]);
     }
 }

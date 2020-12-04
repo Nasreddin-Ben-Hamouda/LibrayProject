@@ -6,7 +6,7 @@ namespace App\Service;
 
 use Symfony\Component\Form\FormInterface;
 
-class validationErrorsHandler
+class ValidationErrorsHandler
 {
     public function getErrorsFromForm(FormInterface $form)
     {

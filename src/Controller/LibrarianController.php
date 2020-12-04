@@ -18,9 +18,6 @@ class LibrarianController extends AbstractController
     }
     /**
      * @Route("/librarian/books", name="showBooks",methods={"GET"})
-     * @IsGranted("IS_AUTHENTICATED_FULLY")
-     * @IsGranted("ROLE_LIBRARIAN")
-     *
      */
     public function showBooks()
     {

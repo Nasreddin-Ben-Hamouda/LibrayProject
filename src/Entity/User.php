@@ -11,7 +11,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="users")
- * @UniqueEntity("email")
+ * @UniqueEntity(
+ * fields={"email"},
+ * errorPath="email",
+ * message="L'email existe dèja"
+ * )
  */
 class User implements UserInterface
 {
@@ -282,6 +286,10 @@ class User implements UserInterface
             $this->loans->removeElement($loan);
         }
         return $this;
+    }
+    public function hasRole(string $role):bool
+    {
+        return in_array(strtoupper($role), $this->getRoles());
     }
 
 

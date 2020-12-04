@@ -76,6 +76,7 @@
                     },
                     "registration_form[password]": {
                         required: true,
+                        minlength:6
 
                     },
                     "registration_form[name]": {
@@ -106,7 +107,8 @@
                         email: "Veuillez entrer email valide"
                     },
                     "registration_form[password]": {
-                        required: "Veuillez entrer un mot de passe"
+                        required: "Veuillez entrer un mot de passe",
+                        minlength:"Le mot de passe doit être au moins 6 caractères"
                     },
                     "registration_form[name]": {
                         required: "Veuillez entrer votre nom et prénom",
