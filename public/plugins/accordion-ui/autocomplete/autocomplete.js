@@ -202,7 +202,7 @@
 
             this._initSource();
             this.menu = $( "<ul>" )
-                .addClass( "ui-autocomplete ui-front" )
+                .addClass( "ui-autocomplete ui-home" )
                 .appendTo( this._appendTo() )
                 .menu({
                     // disable ARIA support, the live region takes care of that
@@ -352,7 +352,7 @@
             }
 
             if ( !element || !element[ 0 ] ) {
-                element = this.element.closest( ".ui-front" );
+                element = this.element.closest( ".ui-home" );
             }
 
             if ( !element.length ) {

@@ -1,0 +1,374 @@
+{% extends 'layouts/frontOffice/layout.html.twig' %}
+{% block header %}
+    {% include 'layouts/frontOffice/inc/header.html.twig' %}
+{% endblock  %}
+
+{% block content %}
+
+    <!-- Breadcrumbs-->
+    <section class="breadcrumbs-custom custom-bg-image context-dark" style="background-image: url({{ asset('images/frontOffice/bg-fullwidth.jpg') }});">
+        <div class="container">
+            <p class="breadcrumbs-custom-subtitle">Who We Are</p>
+            <p class="heading-1 breadcrumbs-custom-title">About Us</p>
+            <ul class="breadcrumbs-custom-path">
+                <li><a href="#">Home</a></li>
+                <li class="active">About Us</li>
+            </ul>
+        </div>
+    </section>
+
+
+    <!-- hi, we are brave-->
+    <section class="section section-lg bg-default">
+        <div class="container container-bigger">
+            <div class="row row-50 justify-content-md-center align-items-lg-center justify-content-xl-between flex-lg-row-reverse">
+                <div class="col-md-10 col-lg-6 col-xl-5">
+                    <h3>hi, we are booker</h3>
+                    <div class="divider divider-default"></div>
+                    <p class="heading-5">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing</p>
+                    <p class="text-spacing-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit</p><a class="button button-default-outline button-nina" href="our-history.html">learn more</a>
+                </div>
+                <div class="col-md-10 col-lg-6"><img src="{{ asset('images/frontOffice/about-us-1-720x459.jp') }}g" alt="" width="720" height="459"/>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Small Features-->
+    <section class="section section-lg section-lg-alternative bg-gray-100 novi-background bg-cover">
+        <div class="container container-wide">
+            <div class="row row-50 justify-content-sm-center text-gray-light">
+                <div class="col-sm-10 col-md-6 col-xl-3">
+                    <article class="box-minimal">
+                        <div class="box-minimal-header">
+                            <div class="box-minimal-icon box-minimal-icon-lg novi-icon mdi mdi-pencil"></div>
+                            <h6 class="box-minimal-title">Highlighting</h6>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                    </article>
+                </div>
+                <div class="col-sm-10 col-md-6 col-xl-3">
+                    <article class="box-minimal">
+                        <div class="box-minimal-header">
+                            <div class="box-minimal-icon box-minimal-icon-lg novi-icon mdi mdi-calendar-clock"></div>
+                            <h6 class="box-minimal-title">Flexible Rental Periods</h6>
+                        </div>
+                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in</p>
+                    </article>
+                </div>
+                <div class="col-sm-10 col-md-6 col-xl-3">
+                    <article class="box-minimal">
+                        <div class="box-minimal-header">
+                            <div class="box-minimal-icon box-minimal-icon-lg novi-icon mdi mdi-headset"></div>
+                            <h6 class="box-minimal-title">Live Customer Support</h6>
+                        </div>
+                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur</p>
+                    </article>
+                </div>
+                <div class="col-sm-10 col-md-6 col-xl-3">
+                    <article class="box-minimal">
+                        <div class="box-minimal-header">
+                            <div class="box-minimal-icon box-minimal-icon-lg novi-icon mdi mdi-wallet"></div>
+                            <h6 class="box-minimal-title">Discount System</h6>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim</p>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- our team-->
+    <section class="section section-lg text-center novi-background bg-cover">
+        <div class="container container-wide">
+            <h3>our team</h3>
+            <div class="divider divider-default"></div>
+            <div class="row row-50 row-xxl-90 justify-content-sm-center offset-custom-2">
+                <div class="col-md-6 col-lg-3">
+                    <div class="team-classic team-classic-circle">
+                        <figure><img class="rounded-circle" src="{{ asset('images/frontOffice/team-01-300x300.jpg') }}" alt="" width="300" height="300"/>
+                        </figure>
+                        <div class="team-classic-caption">
+                            <h5><a class="team-classic-title" href="about-me.html">Sandra Ferguson</a></h5>
+                            <p class="team-classic-job-position">Founder, Director</p>
+                            <ul class="list-inline list-team">
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-facebook" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-twitter" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-instagram" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-google-plus" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-linkedin" href="#"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="team-classic team-classic-circle">
+                        <figure><img class="rounded-circle" src="{{ asset('images/frontOffice/team-02-300x300.jpg') }}" alt="" width="300" height="300"/>
+                        </figure>
+                        <div class="team-classic-caption">
+                            <h5><a class="team-classic-title" href="about-me.html">Ronald Chen</a></h5>
+                            <p class="team-classic-job-position">Rental Services Manager</p>
+                            <ul class="list-inline list-team">
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-facebook" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-twitter" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-instagram" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-google-plus" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-linkedin" href="#"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="team-classic team-classic-circle">
+                        <figure><img class="rounded-circle" src="{{ asset('images/frontOffice/team-03-300x300.jpg') }}" alt="" width="300" height="300"/>
+                        </figure>
+                        <div class="team-classic-caption">
+                            <h5><a class="team-classic-title" href="about-me.html">Frances Watson</a></h5>
+                            <p class="team-classic-job-position">Senior Support Operator</p>
+                            <ul class="list-inline list-team">
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-facebook" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-twitter" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-instagram" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-google-plus" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-linkedin" href="#"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="team-classic team-classic-circle">
+                        <figure><img class="rounded-circle" src="{{ asset('images/frontOffice/team-04-300x300.jpg') }}" alt="" width="300" height="300"/>
+                        </figure>
+                        <div class="team-classic-caption">
+                            <h5><a class="team-classic-title" href="about-me.html">Joe Myers</a></h5>
+                            <p class="team-classic-job-position">Marketing Manager</p>
+                            <ul class="list-inline list-team">
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-facebook" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-twitter" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-instagram" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-google-plus" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-linkedin" href="#"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="team-classic team-classic-circle">
+                        <figure><img class="rounded-circle" src="{{ asset('images/frontOffice/team-05-300x300.jpg') }}" alt="" width="300" height="300"/>
+                        </figure>
+                        <div class="team-classic-caption">
+                            <h5><a class="team-classic-title" href="#">Brenda Lopez</a></h5>
+                            <p class="team-classic-job-position">Textbook Rental Manager</p>
+                            <ul class="list-inline list-team">
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-facebook" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-twitter" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-instagram" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-google-plus" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-linkedin" href="#"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="team-classic team-classic-circle">
+                        <figure><img class="rounded-circle" src="{{ asset('images/frontOffice/team-06-300x300.jpg') }}" alt="" width="300" height="300"/>
+                        </figure>
+                        <div class="team-classic-caption">
+                            <h5><a class="team-classic-title" href="#">Deborah Stewart</a></h5>
+                            <p class="team-classic-job-position">Inventory Control Manager</p>
+                            <ul class="list-inline list-team">
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-facebook" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-twitter" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-instagram" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-google-plus" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-linkedin" href="#"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="team-classic team-classic-circle">
+                        <figure><img class="rounded-circle" src="{{ asset('images/frontOffice/team-07-300x300.jpg') }}" alt="" width="300" height="300"/>
+                        </figure>
+                        <div class="team-classic-caption">
+                            <h5><a class="team-classic-title" href="#">Patrick Douglas</a></h5>
+                            <p class="team-classic-job-position">Website Administrator</p>
+                            <ul class="list-inline list-team">
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-facebook" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-twitter" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-instagram" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-google-plus" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-linkedin" href="#"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="team-classic team-classic-circle">
+                        <figure><img class="rounded-circle" src="{{ asset('images/frontOffice/team-08-300x300.jpg') }}" alt="" width="300" height="300"/>
+                        </figure>
+                        <div class="team-classic-caption">
+                            <h5><a class="team-classic-title" href="#">Ruth Marshall</a></h5>
+                            <p class="team-classic-job-position">Office Manager</p>
+                            <ul class="list-inline list-team">
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-facebook" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-twitter" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-instagram" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-google-plus" href="#"></a></li>
+                                <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-linkedin" href="#"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our history-->
+    <section class="section section-lg bg-gray-darker novi-background bg-cover">
+        <div class="container container-bigger">
+            <div class="row row-fix row-50 justify-content-sm-center justify-content-xl-between">
+                <div class="col-sm-10 col-md-12 col-xl-7">
+                    <h3>our history</h3>
+                    <div class="divider divider-default"></div>
+                    <p class="text-gray-light">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    <div class="time-line-vertical inset-md">
+                        <div class="time-line-vertical-element">
+                            <div class="unit unit-sm flex-column flex-md-row unit-spacing-xxl">
+                                <div class="unit-left">
+                                    <div class="time-line-time">
+                                        <time class="wow fadeInLeft" data-wow-delay=".0s" datetime="2018">April, 2014</time>
+                                    </div>
+                                </div>
+                                <div class="unit-body">
+                                    <div class="time-line-content wow fadeInRight" data-wow-delay=".6s">
+                                        <h5>We established Booker with an idea of creating a global book rental service</h5>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="time-line-vertical-element">
+                            <div class="unit flex-column flex-md-row unit-spacing-xxl">
+                                <div class="unit-left">
+                                    <div class="time-line-time">
+                                        <time class="wow fadeInLeft" data-wow-delay=".1s" datetime="2018">September, 2016</time>
+                                    </div>
+                                </div>
+                                <div class="unit-body">
+                                    <div class="time-line-content wow fadeInRight" data-wow-delay=".7s">
+                                        <h5>Partnering with European publishing houses</h5>
+                                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="time-line-vertical-element">
+                            <div class="unit flex-column flex-md-row unit-spacing-xxl">
+                                <div class="unit-left">
+                                    <div class="time-line-time">
+                                        <time class="wow fadeInLeft" data-wow-delay=".2s" datetime="2018">March, 2018</time>
+                                    </div>
+                                </div>
+                                <div class="unit-body">
+                                    <div class="time-line-content wow fadeInRight" data-wow-delay=".8s">
+                                        <h5>Providing worldwide book rentals</h5>
+                                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-10 col-md-12 col-xl-4">
+                    <div class="row row-30">
+                        <div class="col-md-4 col-xl-12 wow fadeInUp" data-wow-delay=".1s"><img src="{{ asset('images/frontOffice/about-us-1-420x280.jpg') }}" alt="" width="420" height="280"/>
+                        </div>
+                        <div class="col-md-4 col-xl-12 wow fadeInUp" data-wow-delay=".2s"><img src="{{ asset('images/frontOffice/about-us-2-420x280.jpg') }}" alt="" width="420" height="280"/>
+                        </div>
+                        <div class="col-md-4 col-xl-12 wow fadeInUp" data-wow-delay=".3s"><img src="{{ asset('images/frontOffice/about-us-3-420x280.jpg') }}" alt="" width="420" height="280"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects-->
+    <section class="section section-lg bg-gray-100 text-center novi-background bg-cover">
+        <div class="container container-wide">
+            <div class="row row-fix row-50 justify-content-md-center">
+                <div class="col-sm-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+                    <h3>What We offer</h3>
+                    <div class="divider divider-default"></div>
+                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
+                </div>
+            </div>
+            <div class="row row-50" data-lightgallery="group">
+                <div class="col-sm-12 col-md-6 col-lg-4"><a class="gallery-item titled-gallery-item" href="{{ asset('images/frontOffice/project-1-1200x800-original.jpg') }}" data-lightgallery="item">
+                        <div class="gallery-item-image">
+                            <figure><img src="{{ asset('images/frontOffice/project-1-570x380.jpg') }}" alt="" width="570" height="380"/>
+                            </figure>
+                            <div class="caption">
+                            </div>
+                        </div></a>
+                    <div class="titled-gallery-caption"><a href="#">Instant Book Return</a></div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4"><a class="gallery-item titled-gallery-item" href="{{ asset('images/frontOffice/project-2-1200x800-original.jpg') }}" data-lightgallery="item">
+                        <div class="gallery-item-image">
+                            <figure><img src="{{ asset('images/frontOffice/project-2-570x380.jpg') }}" alt="" width="570" height="380"/>
+                            </figure>
+                            <div class="caption">
+                            </div>
+                        </div></a>
+                    <div class="titled-gallery-caption"><a href="#">Textbook Rentals</a></div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4"><a class="gallery-item titled-gallery-item" href="{{ asset('images/frontOffice/project-3-1200x800-original.jpg') }}" data-lightgallery="item">
+                        <div class="gallery-item-image">
+                            <figure><img src="{{ asset('images/frontOffice/project-3-570x380.jpg') }}" alt="" width="570" height="380"/>
+                            </figure>
+                            <div class="caption">
+                            </div>
+                        </div></a>
+                    <div class="titled-gallery-caption"><a href="#">eTextbooks</a></div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4"><a class="gallery-item titled-gallery-item" href="{{ asset('images/frontOffice/project-4-1200x800-original.jpg') }}" data-lightgallery="item">
+                        <div class="gallery-item-image">
+                            <figure><img src="{{ asset('images/frontOffice/project-4-570x380.jpg') }}" alt="" width="570" height="380"/>
+                            </figure>
+                            <div class="caption">
+                            </div>
+                        </div></a>
+                    <div class="titled-gallery-caption"><a href="#">Used Textbooks</a></div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4"><a class="gallery-item titled-gallery-item" href="{{ asset('images/frontOffice/project-5-1200x800-original.jpg') }}" data-lightgallery="item">
+                        <div class="gallery-item-image">
+                            <figure><img src="{{ asset('images/frontOffice/project-5-570x380.jpg') }}" alt="" width="570" height="380"/>
+                            </figure>
+                            <div class="caption">
+                            </div>
+                        </div></a>
+                    <div class="titled-gallery-caption"><a href="#">Cheap Textbooks</a></div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4"><a class="gallery-item titled-gallery-item" href="{{ asset('images/frontOffice/project-6-1200x800-original.jpg') }}" data-lightgallery="item">
+                        <div class="gallery-item-image">
+                            <figure><img src="{{ asset('images/frontOffice/project-6-570x380.jpg') }}" alt="" width="570" height="380"/>
+                            </figure>
+                            <div class="caption">
+                            </div>
+                        </div></a>
+                    <div class="titled-gallery-caption"><a href="#">New Textbooks</a></div>
+                </div>
+            </div>
+        </div><a class="button button-primary button-nina" href="#">view all Services</a>
+    </section>
+
+    <!-- CTA-->
+    <section class="section section-xs text-center bg-gray-700 novi-background bg-cover">
+        <div class="container container-wide">
+            <div class="box-cta-thin">
+                <p class="big"><span>Rent New and Used Textbooks and.&nbsp;</span><strong>Save Huge on Our Books.</strong>&nbsp;<a class="link-bold" href="#">Rent now!</a></p>
+            </div>
+        </div>
+    </section>
+{% endblock %}

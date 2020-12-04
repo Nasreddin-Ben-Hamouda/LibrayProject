@@ -29,7 +29,7 @@ class UserFixture extends Fixture
         $admin->setPassword($this->hash->encodePassword($admin,'admin123'));
         $admin->setAddress("Al alia bizerte");
         $admin->setPhone(54808062);
-        $admin->setEmailStatus(1);
+        $admin->setIsVerified(true);
         $admin->setRoles(array('ROLE_ADMIN'));
         $manager->persist($admin);
         $user=new User();
@@ -38,6 +38,7 @@ class UserFixture extends Fixture
         $user->setPassword($this->hash->encodePassword($user,'user123'));
         $user->setAddress("Al alia bizerte");
         $user->setPhone(54808062);
+        $user->setRoles(array('ROLE_STUDENT'));
         $manager->persist($user);
         $book=new Book();
         $book->setReference("HKKD255MLDNC5854");

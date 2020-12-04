@@ -321,7 +321,7 @@
     beforeClose: $.noop, // Before the instance attempts to close. Return false to cancel the close.
     afterClose: $.noop, // After instance has been closed
 
-    onActivate: $.noop, // When instance is brought to front
+    onActivate: $.noop, // When instance is brought to home
     onDeactivate: $.noop, // When other instance has been activated
 
     // Interaction
@@ -2695,7 +2695,7 @@
       }
     },
 
-    // Activates current instance - brings container to the front and enables keyboard,
+    // Activates current instance - brings container to the home and enables keyboard,
     // notifies other instances about deactivating
     // =================================================================================
 

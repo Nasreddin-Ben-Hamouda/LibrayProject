@@ -21,6 +21,16 @@ security:
             anonymous: true
             lazy: true
             provider: app_user_provider
+            guard:
+                authenticators:
+                    - App\Security\StudentAuthenticator
+                    - App\Security\CommonAuthenticator
+                entry_point: App\Security\StudentAuthenticator
+            logout:
+                path: logout
+            access_denied_handler: App\Security\AccessDeniedHandler
+                # where to redirect after logout
+                # target: app_any_route
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -31,5 +41,5 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+            - { path: ^/admin, roles: ROLE_ADMIN }
+            - { path: ^/librarian, roles: ROLE_LIBRARIAN  }

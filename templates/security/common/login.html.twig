@@ -1,0 +1,84 @@
+{% extends 'layouts/backOffices/layout.html.twig' %}
+{% block head %}
+    {% include 'layouts/backOffices/inc/head.html.twig' with {'title':'Espace Administratif'}%}
+{% endblock %}
+
+{% block content %}
+    <style>
+         .error{
+             color: #FD2121;
+             font-size: 13px;
+         }
+    </style>
+    <div class="auth-layout-wrap"  style="background-image: url({{asset('images/frontOffice/project-5-1200x800-original.jpg') }});background-repeat: no-repeat; background-size: cover;background-position: center top;">
+        <div class="auth-content">
+            <div class="card o-hidden">
+                <div class="row">
+
+                    <div class="col-md-6" >
+                        <div class="p-4">
+                            <div class="auth-logo text-center mb-4" >
+                                <img src="{{asset('images/frontOffice/logo-139x43.png') }}" style="height: 15%">
+                            </div>
+
+                            <h1 class="mb-3 text-18">Se connecter</h1>
+                            <form id="form" method="POST" >
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input id="email" name="email" value="{{ last_username }}" class="form-control form-control-rounded" type="email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Mot de passe</label>
+                                    <input id="password" name="password" class="form-control form-control-rounded" type="password">
+                                </div><br>
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                                <div class="form-button">
+                                <button type="submit" class="btn btn-rounded btn-primary btn-block mt-2">Connexion</button>
+                                </div><br><br>
+                            </form>
+                            <br>
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-center " style="background-size:cover;background-image: url('{{asset('images/frontOffice/services-2-960x660.jpg') }}')">
+                        <div class="pr-3 auth-right">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            $("#form").validate({
+                errorClass: "error",
+                validClass: "success is-valid",
+                rules: {
+                    "email": {
+                        required: true,
+                        email: true,
+                    },
+                    "password":{
+                        required:true,
+                    }
+                },
+                messages: {
+                    "email": {
+                        required: "L'email est obligatoire",
+                        email: "L'email est invalide",
+                    },
+                    "password":{
+                        required:"Le mot de passe est obligatoire"
+                    },
+                }
+            });
+        });
+    </script>
+    <script>
+        $(".sidenav-open.d-flex").attr("class","");
+    </script>
+{% endblock %}
+ {% block footer %}
+ {% endblock %}

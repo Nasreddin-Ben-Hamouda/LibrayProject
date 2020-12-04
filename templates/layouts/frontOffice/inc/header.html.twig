@@ -1,3 +1,4 @@
+
 <header class="section page-header">
     <!-- RD Navbar-->
     <div class="rd-navbar-wrap rd-navbar-shop-header">
@@ -6,18 +7,9 @@
                 <div class="rd-navbar-nav-wrap">
                     <!-- RD Navbar Nav-->
                     <ul class="rd-navbar-nav">
-                        <li class="active"><a href="#">Home</a>
+                        <li><a href="{{ path('home') }}">Accueil</a>
                         </li>
-                        <li><a href="#">About Us</a>
-                            <!-- RD Navbar Dropdown-->
-                            <ul class="rd-navbar-dropdown">
-                                <li><a href="#">About Us</a>
-                                </li>
-                                <li><a href="#">About Me</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Catalog</a>
+                        <li><a href="#">Catalogue</a>
                             <!-- RD Navbar Dropdown-->
                             <ul class="rd-navbar-dropdown">
                                 <li><a href="#">Shop 3 Columns Layout</a>
@@ -32,78 +24,9 @@
                                 </li>
                             </ul>
                         </li>
-                        <li><a href="#">Services</a>
-                            <!-- RD Navbar Dropdown-->
-                            <ul class="rd-navbar-dropdown">
-                                <li><a href="#">Services</a>
-                                </li>
-                                <li><a href="#">Services variant 2</a>
-                                </li>
-                            </ul>
+                        <li><a href="{{ path('about') }}">À propos de nous</a>
                         </li>
-                        <li><a href="#">Blog</a>
-                            <!-- RD Navbar Dropdown-->
-                            <ul class="rd-navbar-dropdown">
-                                <li><a href="#">Classic Blog</a>
-                                </li>
-                                <li><a href="#">Grid Blog</a>
-                                </li>
-                                <li><a href="#">Masonry Blog</a>
-                                </li>
-                                <li><a href="#">Modern Blog</a>
-                                </li>
-                                <li><a href="#">Audio Post</a>
-                                </li>
-                                <li><a href="#">Image Post</a>
-                                </li>
-                                <li><a href="#">Single Post</a>
-                                </li>
-                                <li><a href="#">Video Post</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Pages</a>
-                            <!-- RD Navbar Megamenu-->
-                            <ul class="rd-navbar-megamenu rd-navbar-megamenu-banner">
-                                <li><img src="{{ asset('images/frontOffice/megamenu-banner-301x510.jpg') }}" alt="" width="301" height="510"/>
-                                </li>
-                                <li>
-                                    <ul class="rd-megamenu-list">
-                                        <li><a href="#">404 Page</a></li>
-                                        <li><a href="#">503 Page</a></li>
-                                        <li><a href="#">Coming Soon</a></li>
-                                        <li><a href="#">Accordions</a></li>
-                                        <li><a href="#">Buttons</a></li>
-                                        <li><a href="#">Our History</a></li>
-                                        <li><a href="#">Forms</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <ul class="rd-megamenu-list">
-                                        <li><a href="#">Login Page</a></li>
-                                        <li><a href="#">Registration Page</a></li>
-                                        <li><a href="#">Search Results</a></li>
-                                        <li><a href="#">Under Construction</a></li>
-                                        <li><a href="#">Tables</a></li>
-                                        <li><a href="#">Tabs</a></li>
-                                        <li><a href="#">Typography</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <ul class="rd-megamenu-list">
-                                        <li><a href="#">Fullwidth Gallery Hover Title</a></li>
-                                        <li><a href="#">Fullwidth Gallery Inside Title</a></li>
-                                        <li><a href="#">Grid Gallery Hover Title</a></li>
-                                        <li><a href="#">Grid Gallery Inside Title</a></li>
-                                        <li><a href="#">Grid Gallery Outside Title</a></li>
-                                        <li><a href="#">Masonry Gallery Hover Title</a></li>
-                                        <li><a href="#">Masonry Gallery Inside Title</a></li>
-                                        <li><a href="#">Masonry Gallery Outside Title</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Contacts</a>
+                        <li><a href="{{ path('contacts') }}">Contacts</a>
                         </li>
                     </ul>
                 </div>
@@ -114,7 +37,7 @@
                     <!-- RD Navbar Toggle-->
                     <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
                     <!-- RD Navbar Brand-->
-                    <div class="rd-navbar-brand"><a class="brand-name" href="#"><img class="logo-default" src="{{ asset('images/frontOffice/logo-139x43.png') }}" alt="" width="139" height="43"/><img class="logo-inverse" src="{{ asset('images/frontOffice/logo-inverse-127x38.png') }}" alt="" width="127" height="38"/></a></div>
+                    <div class="rd-navbar-brand"><a class="brand-name" href="{{ path('home') }}"><img class="logo-default" src="{{ asset('images/frontOffice/logo-139x43.png') }}" alt="" width="139" height="43"/><img class="logo-inverse" src="{{ asset('images/frontOffice/logo-inverse-127x38.png') }}" alt="" width="127" height="38"/></a></div>
                 </div>
                 <div class="rd-navbar-aside-center">
                     <!-- RD Navbar Search-->
@@ -135,7 +58,26 @@
                     </div>
                 </div>
                 <div class="rd-navbar-aside-right">
-                    <div class="rd-navbar-shop rd-navbar-login"><a class="rd-navbar-shop-icon mdi mdi-login" href="#"><span class="d-none d-xl-inline">Login</span></a></div>
+                    {% if not app.user %}
+                        <div class="rd-navbar-shop rd-navbar-login"><a class="rd-navbar-shop-icon mdi mdi-login" href="{{ path('studentLogin') }}"><span class="d-none d-xl-inline">S'identifier</span></a></div>
+                    {% else %}
+                    <div class="rd-navbar-shop rd-navbar-login">
+                    <ul class="rd-navbar-nav">
+                        <li class="active">
+                            <a class="rd-navbar-shop-icon mdi mdi-account" href="#" style="color: black"><span class="d-none d-xl-inline"><div class="box-minimal-icon fl-bigmug-line-user143"> {{ app.user.name }}</div></span></a>
+                            <!-- RD Navbar Dropdown-->
+                            <ul class="rd-navbar-dropdown">
+                                <li><a href="{{ path('profile') }}">Profile</a>
+                                </li>
+                                <li><a href="{{ path('logout') }}">Se déconnecter</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    </div>
+
+
+                    {% endif %}
                 </div>
             </div>
         </nav>

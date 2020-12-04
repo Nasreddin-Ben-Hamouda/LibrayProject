@@ -1,0 +1,51 @@
+<header class="section page-header header-modern breadcrumbs-custom-wrap">
+    <!-- RD Navbar-->
+    <div class="rd-navbar-wrap rd-navbar-corporate">
+        <nav class="rd-navbar" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-xl-layout="rd-navbar-static" data-md-device-layout="rd-navbar-fixed" data-lg-device-layout="rd-navbar-fixed" data-xl-device-layout="rd-navbar-static" data-md-stick-up-offset="130px" data-lg-stick-up-offset="100px" data-stick-up="true" data-sm-stick-up="true" data-md-stick-up="true" data-lg-stick-up="true" data-xl-stick-up="true">
+            <div class="rd-navbar-inner">
+                <!-- RD Navbar Panel-->
+                <div class="rd-navbar-panel">
+                    <!-- RD Navbar Toggle-->
+                    <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                    <!-- RD Navbar Brand-->
+                    <div class="rd-navbar-brand"><a class="brand-name" href="{{ path('home') }}"><img class="logo-default" src="{{ asset('images/frontOffice/logo-139x43.png') }}" alt="" width="139" height="43"/><img class="logo-inverse" src="{{ asset('images/frontOffice/logo-inverse-127x38.png') }}" alt="" width="127" height="38"/></a></div>
+                </div>
+                <div class="rd-navbar-aside-center">
+                    <div class="rd-navbar-nav-wrap">
+                        <!-- RD Navbar Nav-->
+                        <ul class="rd-navbar-nav">
+                            <li><a href="{{ path('home') }}">Accueil</a>
+                            </li>
+                            <li><a href="#">Catalogue</a>
+                                <!-- RD Navbar Dropdown-->
+                                <ul class="rd-navbar-dropdown">
+                                    <li><a href="#">Shop 3 Columns Layout</a>
+                                    </li>
+                                    <li><a href="#">Shop 4 Columns Layout</a>
+                                    </li>
+                                    <li><a href="#">Checkout</a>
+                                    </li>
+                                    <li><a href="#">Product Page</a>
+                                    </li>
+                                    <li><a href="#">Shopping Cart</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="{{ path('about') }}">À propos de nous</a>
+                            </li>
+                            <li><a href="{{ path('contacts') }}">Contacts</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="rd-navbar-aside-right">
+                    {% if title=="login" %}
+                    <div class="rd-navbar-shop rd-navbar-login"><a class="rd-navbar-shop-icon mdi mdi-login" href="{{ path('studentRegister') }}"><span class="d-none d-xl-inline">S'inscrire</span></a></div>
+                    {% else %}
+                    <div class="rd-navbar-shop rd-navbar-login"><a class="rd-navbar-shop-icon mdi mdi-login" href="{{ path('studentLogin') }}"><span class="d-none d-xl-inline">S'identifier</span></a></div>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
