@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Service\ValidationErrorsHandler;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -14,6 +13,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 
 class SecurityController extends AbstractController
@@ -48,7 +48,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/register", name="studentRegister")
      */
-    public function studentRegister(Request $request, UserPasswordEncoderInterface $passwordEncoder,MailerInterface $mailer,ValidationErrorsHandler $validationErrorsHandler): Response
+    public function studentRegister(Request $request, UserPasswordEncoderInterface $passwordEncoder,MailerInterface $mailer,ValidatorInterface $validator): Response
     {
         if($this->getUser()){
             return $this->redirectToRoute("home");
@@ -59,11 +59,12 @@ class SecurityController extends AbstractController
 
         if ($form->isSubmitted()) {
             if( !$form->isValid()){
-                $errors = $validationErrorsHandler->getErrorsFromForm($form);
-               foreach ($errors as $error){
-                   $this->addFlash('error',$error[0]);
+                $errors=$validator->validate($form);
+                foreach ($errors as $error){
+                   $this->addFlash('error',$error->getMessage());
                }
-                $form->clearErrors(true);
+               $form->clearErrors(true);
+
             }else{
                 $user->setPassword(
                     $passwordEncoder->encodePassword(
@@ -145,10 +146,10 @@ class SecurityController extends AbstractController
          if ($this->getUser()) {
              if($this->isGranted("ROLE_ADMIN")){
                  $this->addFlash('success',"Authentification réussie !");
-                 return $this->redirectToRoute('showUsers');
+                 return $this->redirectToRoute('showAdminDashboard');
              }elseif($this->isGranted("ROLE_LIBRARIAN")){
                  $this->addFlash('success',"Authentification réussie !");
-                 return $this->redirectToRoute('showBooks');
+                 return $this->redirectToRoute('showLibrarianDashboard');
              }else{
                  $this->addFlash('error','Vous n\'avez pas l\'autorisation d\'accéder a cet espace !');
                  return $this->redirectToRoute('home');

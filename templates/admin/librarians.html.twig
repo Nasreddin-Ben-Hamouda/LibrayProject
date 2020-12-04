@@ -3,11 +3,11 @@
     {% include 'layouts/backOffices/inc/head.html.twig' with {'title':'Espace Administratif'}%}
 {% endblock %}
 {% block header %}
-    {% include 'layouts/backOffices/inc/header.html.twig' %}
+    {% include 'layouts/backOffices/inc/header.html.twig' with {'space':'admin'} %}
 {% endblock  %}
 {% block sidebar %}
-    {% include 'layouts/backOffices/inc/sidebar.html.twig' with {'current':'books'} %}
+    {% include 'layouts/backOffices/inc/adminSidebar.html.twig' with {'current':'librarians'} %}
 {% endblock %}
 {% block content %}
-    <h1>users</h1>
+    <h1>Librarian</h1>
 {% endblock %}

@@ -4,12 +4,6 @@
 {% endblock %}
 
 {% block content %}
-    <style>
-         .error{
-             color: #FD2121;
-             font-size: 13px;
-         }
-    </style>
     <div class="auth-layout-wrap"  style="background-image: url({{asset('images/frontOffice/project-5-1200x800-original.jpg') }});background-repeat: no-repeat; background-size: cover;background-position: center top;">
         <div class="auth-content">
             <div class="card o-hidden">
@@ -53,7 +47,7 @@
     <script>
         $(function () {
             $("#form").validate({
-                errorClass: "error",
+                errorClass: "danger is-invalid",
                 validClass: "success is-valid",
                 rules: {
                     "email": {

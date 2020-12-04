@@ -19,6 +19,10 @@
                         <div class="col-md-8 col-lg-6 col-xl-4">
                             <!-- RD Mailform-->
                             <form class="form-fix full-color" method="post" novalidate="novalidate" id="registerForm">
+                                <div class="form-wrap form-wrap-validation">
+                                    {{ form_row(registrationForm.name) }}
+                                    <label class="form-label" for="registration_form_name">Nom et Prénom</label>
+                                </div>
                                 <div class="form-wrap form-wrap-validation" >
                                     {{ form_row(registrationForm.email) }}
                                     <label class="form-label" for="registration_form_email">E-mail</label>
@@ -26,10 +30,6 @@
                                 <div class="form-wrap form-wrap-validation">
                                     {{ form_row(registrationForm.password) }}
                                     <label class="form-label" for="registration_form_password">Password</label>
-                                </div>
-                                <div class="form-wrap form-wrap-validation">
-                                    {{ form_row(registrationForm.name) }}
-                                    <label class="form-label" for="registration_form_name">Nom et Prénom</label>
                                 </div>
                                 <div class="form-wrap form-wrap-validation">
                                     {{ form_row(registrationForm.studentNumber) }}

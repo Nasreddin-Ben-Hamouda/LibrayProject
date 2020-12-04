@@ -1,0 +1,28 @@
+<div class="side-content-wrap">
+    <div class="sidebar-left open" data-perfect-scrollbar data-suppress-scroll-x="true">
+        <ul class="navigation-left">
+            <li class="nav-item {% if current == 'dashboard' %} active {% endif %}">
+                <a class="nav-item-hold" href="{{ path('showAdminDashboard') }}">
+                    <i class="nav-icon i-Bar-Chart"></i>
+                    <span class="nav-text">Tableau de bord</span>
+                </a>
+                <div class="triangle"></div>
+            </li>
+            <li class="nav-item {% if current=='students'%} active {% endif%} ">
+                <a class="nav-item-hold" href="{{ path('showStudents') }}">
+                    <i class="nav-icon i-Love-User"></i>
+                    <span class="nav-text">Étudiants</span>
+                </a>
+                <div class="triangle"></div>
+            </li>
+            <li class="nav-item {% if current=='librarians'%} active {% endif%} ">
+                <a class="nav-item-hold" href="{{ path('showLibrarians') }}">
+                    <i class="nav-icon i-Administrator"></i>
+                    <span class="nav-text">Bibliothécaires</span>
+                </a>
+                <div class="triangle"></div>
+            </li>
+
+        </ul>
+    </div>
+</div>
