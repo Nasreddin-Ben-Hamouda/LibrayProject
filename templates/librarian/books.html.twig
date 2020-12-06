@@ -9,5 +9,218 @@
     {% include 'layouts/backOffices/inc/librarianSidebar.html.twig' with {'current':'books'} %}
 {% endblock %}
 {% block content %}
-    <h1>books</h1>
+    <script src="{{ asset('plugins/datatable/datatable.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/datatable/datatable.css') }}">
+
+    <script>
+        $(document).ready(function () {
+            $('#datatable-responsive').DataTable({
+                responsive: true,
+                language: {
+                    url: "{{ asset('plugins/datatable/lang/french.json') }}"
+                },
+            });
+            $('.dataTables_filter input').attr("placeholder", "Rechercher...");
+        });
+    </script>
+
+    <div class="breadcrumb">
+        <h1>Synthèse des Livres</h1>
+
+    </div>
+    <div class="separator-breadcrumb border-top"></div>
+
+    <div class="row mb-4">
+        <div class="col-md-9 mt-2">
+            <div class="card text-left">
+                <div class="card-body">
+
+
+                    <h4 class="card-title mb-3"></h4>
+                    <p></p>
+                    <div class="table-responsive">
+                        <div id="zero_configuration_table_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+
+                                    <div class="col-sm-12 col-md-6">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="datatable-responsive" class="display table ds dataTable" style="width:100%" role="grid">
+                                        <thead>
+                                        <tr role="row" >
+                                            <th scope="col">#</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="zero_configuration_table" rowspan="1" colspan="1" aria-sort="ascending"
+                                                aria-label="Name: activate to sort column descending" style="width:200px;">Titre</th>
+                                            <th class="sorting" tabindex="0" aria-controls="zero_configuration_table" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending"
+                                                style="width:600px;">Infos</th>
+                                            <th class="sorting" tabindex="0" aria-controls="zero_configuration_table" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending">Image</th>
+                                            <th class="sorting" tabindex="0" aria-controls="zero_configuration_table" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending">Prêts</th>
+                                            <th class="sorting" tabindex="0" aria-controls="zero_configuration_table" rowspan="1" colspan="1" style="width: 100px;">Action</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tbody">
+                                        {% for book in books %}
+                                        <tr>
+                                            <th scope="row">{{ loop.index }}</th>
+                                            <td id="title{{book.hashid}}">{{book.title}}</td>
+                                            <td>
+                                                <small><b>Réfèrence :</b></small> <small id="reference{{book.hashid}}">{{book.reference}}</small><br>
+                                                <small><b>Auteur :</b></small> <small id="author{{book.hashid}}">{{book.author}} </small><br>
+                                                <small><b>Catégorie :</b></small> <small id="category{{book.hashid}}">{{book.category}} </small><br>
+                                                <small><b>Sujet :</b></small> <small id="subject{{book.hashid}}">{{book.subject}} </small><br>
+                                                <small><b>Status :</b></small>
+                                                <small>
+                                                    {% if book.status==0 %}
+                                                        <span class="badge badge-success">Disponible</span>
+                                                    {% else%}
+                                                        <span class="badge badge-danger">Emprunté</span>
+                                                    {% endif%}
+                                                </small>
+                                            </td>
+                                            <td > <img src="{% if book.medias is not empty %}{{ asset('storage/images/book') }}/{{ book.medias[0].path }} {% endif %}" style="width: 50px;height: 50px ;border-radius: 5px;"/></td>
+
+                                            <td><a href="#">Liste Prêts</a> </td>
+                                            <td ><a data-url="{{ path('handleDeleteBook',{id:book.hashid})}}" data-toggle="confirmation" data-title="Confirmer la suppression de ce livre ?" class="text-danger mr-2">
+                                                    <i class="nav-icon i-Close-Window  font-weight-bold"></i>
+                                                </a>
+                                                <a  data-id="{{ book.hashid }}" title="Modifier"   class="text-primary mr-2 edit">
+                                                    <i class="nav-icon i-Edit  font-weight-bold"></i>
+                                                </a>
+                                                {% if book.status==1 %}
+                                                    <a data-url="{{ path('handleChangeBookStatus',{id:book.hashid})}}" data-toggle="confirmation" data-title="Marquer ce livre comme rendu ?" class="text-success mr-2">
+                                                        <i class="nav-icon i-Pen-6  font-weight-bold"></i>
+                                                    </a>
+                                                {% endif %}
+
+
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                        <tfoot>
+                                        </tfoot>
+
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 mt-2" id="add">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <b id="form-header">Ajouter Un Livre</b>
+                    <form id="form-addBook" autocomplete="off"  enctype="multipart/form-data"  method="POST">
+                        <div class="row row-xs">
+                            <div class="col-md-12 mb-3">
+                                <br>
+                                <b style="color: red">*Obligatoire</b>
+                                <div class="col-form-label">*Titre</div>
+                                {{ form_row(bookForm.id) }}
+                                {{ form_row(bookForm.title) }}
+                                <div class="col-form-label">*Reference</div>
+                                {{ form_row(bookForm.reference) }}
+                                <div class="col-form-label">*Auteur</div>
+                                {{ form_row(bookForm.author) }}
+                                <div class="col-form-label">*Catégorie</div>
+                                {{ form_row(bookForm.category) }}
+                                <div class="col-form-label">Images</div>
+                                <div class="custom-file">
+                                    {{ form_row(bookForm.picture) }}
+                                    <label class="custom-file-label" for="inputGroupFile01">Images</label>
+                                </div>
+                                <div class="col-form-label" style="margin-top: 6px">Sujet</div>
+                                {{ form_row(bookForm.subject) }}
+                            </div>
+
+                        </div>
+                        <br>
+                        <button type="submit" class="btn add btn-primary m-1" id="btnadd" >Ajouter</button>
+                        <button type="reset"  class="btn btn-outline-secondary m-1 clear">Annuler</button>
+
+                </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            $('#tbody').confirmation({
+                selector:'[data-toggle="confirmation"]',
+                btnOkLabel:"OUI",
+                btnCancelLabel:"NON",
+                onConfirm:function() {
+                    location.href=$(this).data('url');
+                },
+            });
+            $("tbody").on('click','.edit' ,function () {
+                let id = $(this).data('id');
+                $('#form-header').text("Modification Rapide");
+                $('#btnadd').text("Sauvegarder");
+                $('#book_form_id').val(id);
+                $('#book_form_title').val($('#title'+id).text());
+                $('#book_form_reference').val($('#reference'+id).text());
+                $('#book_form_author').val($('#author'+id).text());
+                $('#book_form_category').val($('#category'+id).text());
+                $('#book_form_subject').val($('#subject'+id).text());
+
+            });
+            $("#form-addBook").on('click','.clear',function (){
+                $('#form-header').text("Ajouter Un Livre");
+                $('#book_form_id').val('');
+                $('#btnadd').text("Ajouter");
+            });
+            $("#form-addBook").validate({
+                errorClass: "danger is-invalid",
+                validClass: "success is-valid",
+                rules: {
+                    "book_form[title]": {
+                        required: true,
+                    },
+                    "book_form[reference]": {
+                        required: true,
+                    },
+                    "book_form[author]": {
+                        required: true,
+                    },
+                    "book_form[category]": {
+                        required: true,
+                    },
+                    "book_form[picture][]":{
+                        accept: "image/*",
+                        maxsize:2048000
+                    },
+                },
+                messages: {
+                    "book_form[title]": {
+                        required: "Veuillez entrer un titre",
+                    },
+                    "book_form[reference]": {
+                        required: "Veuillez entrer une réfèrence",
+                    },
+                    "book_form[author]": {
+                        required: "Veuillez entrer un auteur",
+                    },
+                    "book_form[category]":{
+                        required: "Veuillez entrer une catégorie",
+                    },
+                    "book_form[picture][]":{
+                        accept: "Choisir des images(jpg,jpeg,png,gif).",
+                        maxsize: "Choisir des images inférieur a 2M"
+                    },
+                }
+            });
+        });
+    </script>
 {% endblock %}
