@@ -4,7 +4,9 @@ namespace App\Entity;
 
 use App\Repository\BookRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Hashids\Hashids;
 
 /**
  * @ORM\Entity(repositoryClass=BookRepository::class)
@@ -69,6 +71,12 @@ class Book
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getHashid(): ?string
+    {
+        $hashids=new Hashids('',5);
+        return $hashids->encodeHex($this->id);
     }
 
     public function getReference(): ?string
@@ -142,26 +150,15 @@ class Book
 
         return $this;
     }
-    public function getMedias(): ArrayCollection
+    public function getMedias():Collection
     {
         return $this->medias;
     }
-    public function getLoans():ArrayCollection
+    public function getLoans():Collection
     {
         return $this->loans;
     }
 
-    public function setLoans(ArrayCollection $loans): self
-    {
-        $this->loans = $loans;
-        return $this;
-    }
-
-    public function setMedias(ArrayCollection $medias): self
-    {
-        $this->medias = $medias;
-        return $this;
-    }
 
     public function addLoan(Loan $loan): self
     {
@@ -191,6 +188,5 @@ class Book
         }
         return $this;
     }
-
 
 }

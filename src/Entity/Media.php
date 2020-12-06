@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\MediaRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Hashids\Hashids;
 
 /**
  * @ORM\Entity(repositoryClass=MediaRepository::class)
@@ -34,7 +35,11 @@ class Media
     {
         return $this->id;
     }
-
+    public function getHashid(): ?string
+    {
+        $hashids=new Hashids('',5);
+        return $hashids->encodeHex($this->id);
+    }
     public function getBook():Book
     {
         return $this->book;

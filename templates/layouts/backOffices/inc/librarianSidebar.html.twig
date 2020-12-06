@@ -15,6 +15,13 @@
                 </a>
                 <div class="triangle"></div>
             </li>
+            <li class="nav-item {% if current=='loans'%} active {% endif%} ">
+                <a class="nav-item-hold" href="{{ path('showBooks') }}">
+                    <i class="nav-icon i-Handshake"></i>
+                    <span class="nav-text">Tous les Prêts</span>
+                </a>
+                <div class="triangle"></div>
+            </li>
             <li class="nav-item {% if current=='late'%} active {% endif%} ">
                 <a class="nav-item-hold" href="{{ path('showLateBooks') }}">
                     <i class="nav-icon i-Bookmark"></i>

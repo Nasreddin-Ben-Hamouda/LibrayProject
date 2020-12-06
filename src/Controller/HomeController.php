@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Hashids\Hashids;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,10 +14,12 @@ class HomeController extends AbstractController
 {
 
     private $manager;
+    private $hashids;
 
     public function __construct(EntityManagerInterface $manager)
     {
         $this->manager=$manager;
+        $this->hashids=new Hashids('',5);
     }
     /**
      * @Route("/", name="home",methods={"GET"})

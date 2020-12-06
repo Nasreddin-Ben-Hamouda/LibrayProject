@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\LoanRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Hashids\Hashids;
 
 /**
  * @ORM\Entity(repositoryClass=LoanRepository::class)
@@ -47,6 +48,11 @@ class Loan
     public function getId(): ?int
     {
         return $this->id;
+    }
+    public function getHashid(): ?string
+    {
+        $hashids=new Hashids('',5);
+        return $hashids->encodeHex($this->id);
     }
 
     public function getUser()
