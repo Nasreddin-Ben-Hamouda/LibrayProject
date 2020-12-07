@@ -20,6 +20,20 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('plugins/toastr/toastr.css') }}">
     <script src="{{ asset('plugins/toastr/toastr.js') }}"></script>
     <script type="text/javascript" src="{{ asset('plugins/bootstrap/confirmation.js') }}"></script>
+    <script src="{{ asset('plugins/datatable/datatable.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/datatable/datatable.css') }}">
+
+    <script>
+        $(document).ready(function () {
+            $('#datatable-responsive').DataTable({
+                responsive: true,
+                language: {
+                    url: "{{ asset('plugins/datatable/lang/french.json') }}"
+                },
+            });
+            $('.dataTables_filter input').attr("placeholder", "Rechercher...");
+        });
+    </script>
 
 
 

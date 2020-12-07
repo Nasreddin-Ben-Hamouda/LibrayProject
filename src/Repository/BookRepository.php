@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Book;
+use App\Entity\Loan;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -23,6 +25,7 @@ class BookRepository extends ServiceEntityRepository
     //  * @return Book[] Returns an array of Book objects
     //  */
     /*
+     *
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('b')

@@ -9,20 +9,6 @@
     {% include 'layouts/backOffices/inc/librarianSidebar.html.twig' with {'current':'books'} %}
 {% endblock %}
 {% block content %}
-    <script src="{{ asset('plugins/datatable/datatable.js') }}"></script>
-    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/datatable/datatable.css') }}">
-
-    <script>
-        $(document).ready(function () {
-            $('#datatable-responsive').DataTable({
-                responsive: true,
-                language: {
-                    url: "{{ asset('plugins/datatable/lang/french.json') }}"
-                },
-            });
-            $('.dataTables_filter input').attr("placeholder", "Rechercher...");
-        });
-    </script>
 
     <div class="breadcrumb">
         <h1>Synthèse des Livres</h1>
@@ -84,7 +70,7 @@
                                             </td>
                                             <td > <img src="{% if book.medias is not empty %}{{ asset('storage/images/book') }}/{{ book.medias[0].path }} {% endif %}" style="width: 50px;height: 50px ;border-radius: 5px;"/></td>
 
-                                            <td><a href="#">Liste Prêts</a> </td>
+                                            <td><a href="{{ path('showLoans',{'bookId':book.hashid}) }}">Liste Prêts</a> </td>
                                             <td ><a data-url="{{ path('handleDeleteBook',{id:book.hashid})}}" data-toggle="confirmation" data-title="Confirmer la suppression de ce livre ?" class="text-danger mr-2">
                                                     <i class="nav-icon i-Close-Window  font-weight-bold"></i>
                                                 </a>
@@ -92,7 +78,7 @@
                                                     <i class="nav-icon i-Edit  font-weight-bold"></i>
                                                 </a>
                                                 {% if book.status==1 %}
-                                                    <a data-url="{{ path('handleChangeBookStatus',{id:book.hashid})}}" data-toggle="confirmation" data-title="Marquer ce livre comme rendu ?" class="text-success mr-2">
+                                                    <a data-url="{{ path('handleChangeBookStatus',{id:book.hashid})}}" data-toggle="confirmation" data-title="Marqué ce livre comme rendu ?" class="text-success mr-2">
                                                         <i class="nav-icon i-Pen-6  font-weight-bold"></i>
                                                     </a>
                                                 {% endif %}

@@ -1,0 +1,110 @@
+{% extends 'layouts/backOffices/layout.html.twig' %}
+{% block head %}
+    {% include 'layouts/backOffices/inc/head.html.twig' with {'title':'Espace Biblithécaire'}%}
+{% endblock %}
+{% block header %}
+    {% include 'layouts/backOffices/inc/header.html.twig' with {'space':''} %}
+{% endblock  %}
+{% block sidebar %}
+    {% include 'layouts/backOffices/inc/librarianSidebar.html.twig' with {'current':'loans'} %}
+{% endblock %}
+{% block content %}
+    <div class="breadcrumb">
+        <h1>Synthèse des Prêts</h1>
+
+    </div>
+    <div class="separator-breadcrumb border-top"></div>
+
+    <div class="row mb-4">
+        <div class="col-md-12 mt-2">
+            <div class="card text-left">
+                <div class="card-body">
+
+                    <h4 class="card-title mb-3"></h4>
+                    <p></p>
+                    <div class="table-responsive">
+                        <div id="zero_configuration_table_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+
+                                    <div class="col-sm-12 col-md-6">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="datatable-responsive" class="display table ds dataTable" style="width:100%" role="grid">
+                                        <thead>
+                                        <tr role="row" >
+                                            <th scope="col">#</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="zero_configuration_table" rowspan="1" colspan="1" aria-sort="ascending"
+                                                aria-label="Name: activate to sort column descending" style="width:200px;">Livre infos</th>
+                                            <th class="sorting" tabindex="0" aria-controls="zero_configuration_table" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending">Etudiant infos</th>
+                                            <th class="sorting" tabindex="0" aria-controls="zero_configuration_table" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending">Status</th>
+                                            <th class="sorting" tabindex="0" aria-controls="zero_configuration_table" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending">Date d'emprunt</th>
+                                            <th class="sorting" tabindex="0" aria-controls="zero_configuration_table" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending">Date de retour</th>
+                                            <th class="sorting" tabindex="0" aria-controls="zero_configuration_table" rowspan="1" colspan="1" style="width: 100px;">Action</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tbody">
+                                        {% for loan in loans %}
+                                            <tr>
+                                                <th scope="row">{{ loop.index }}</th>
+                                                <td>
+                                                    <small><b>Titre :</b></small> <small>{{loan.book.title}}</small><br>
+                                                    <small><b>Réfèrence :</b></small> <small>{{loan.book.reference}}</small><br>
+                                                    <small><b>Auteur :</b></small> <small>{{loan.book.author}} </small><br>
+                                                    <small><b>Catégorie :</b></small> <small>{{loan.book.category}} </small><br>
+                                                    <small><b>Sujet :</b></small> <small>{{loan.book.subject}} </small>
+                                                </td>
+                                                <td>
+                                                    <small><b>Nom et prénom :</b></small> <small>{{loan.user.name}}</small><br>
+                                                    <small><b>Email :</b></small> <small>{{loan.user.email}}</small><br>
+                                                    <small><b>Carte Etudiant :</b></small> <small>{{loan.user.studentNumber}} </small><br>
+                                                    <small><b>Adresse :</b></small> <small>{{loan.user.address}} </small><br>
+                                                    <small><b>Téléphone :</b></small> <small>{{loan.user.phone}} </small><br>
+                                                </td>
+                                                <td> {% if loan.returnedAt %} <span class="badge badge-success">Retournée</span> {% elseif loan.returnedAt==null and loan.checkExpiredDate %} <span class="badge badge-danger">Délai expiré</span> {% else %} <span class="badge badge-warning">Délai non expiré</span> {% endif %}</td>
+                                                <td>{{ loan.takenAt|date }}</td>
+                                                <td>{% if loan.returnedAt %}{{ loan.returnedAt|date }} {% else %} Pas encore {% endif %}</td>
+                                                <td ><a data-url="{{ path('handleDeleteLoan',{'id':loan.hashid}) }}" data-toggle="confirmation" data-title="Confirmer la suppression de cet emprunt ?" class="text-danger mr-2">
+                                                        <i class="nav-icon i-Close-Window  font-weight-bold"></i>
+                                                    </a>
+                                                    {% if not loan.returnedAt %}
+                                                        <a data-url="{{ path('handleChangeLoanStatus',{'id':loan.hashid}) }}" data-toggle="confirmation" data-title="Marqué cet emprunt comme rendu ?" class="text-success mr-2">
+                                                            <i class="nav-icon i-Pen-6  font-weight-bold"></i>
+                                                        </a>
+                                                    {% endif %}
+
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                        <tfoot>
+                                        </tfoot>
+
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            $('#tbody').confirmation({
+                selector: '[data-toggle="confirmation"]',
+                btnOkLabel: "OUI",
+                btnCancelLabel: "NON",
+                onConfirm: function () {
+                    location.href = $(this).data('url');
+                },
+            });
+        });
+    </script>
+{% endblock %}

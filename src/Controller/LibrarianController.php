@@ -35,7 +35,13 @@ class LibrarianController extends AbstractController
      */
     public function showDashboard()
     {
-        return $this->render('librarian/dashboard.html.twig',[]);
+        $countOfBooks=count($this->manager->getRepository(Book::class)->findAll());
+        $countOfLoans=count($this->manager->getRepository(Loan::class)->findAll());
+        $users=$this->manager->getRepository(User::class)->findAll();
+        $countOfStudent=count(array_filter($users,function ($user){
+            return !$user->hasRole("ROLE_ADMIN") and !$user->hasRole("ROLE_LIBRARIAN");
+        }));
+        return $this->render('librarian/dashboard.html.twig',['countOfBooks'=>$countOfBooks,'countOfLoans'=>$countOfLoans,'countOfStudent'=>$countOfStudent]);
     }
     /**
      * @Route("/librarian/profile", name="showLibrarianProfile",methods={"GET"})
@@ -43,6 +49,32 @@ class LibrarianController extends AbstractController
     public function showProfile()
     {
         return $this->render('librarian/profile.html.twig',[]);
+    }
+    /**
+     * @Route("/librarian/loans/{bookId}", name="showLoans",methods={"GET"},defaults={"bookId"=null})
+     */
+    public function showLoans($bookId=null)
+    {
+        $loans=null;
+        if($bookId!==null){
+            $book=$this->manager->getRepository(Book::class)->find($this->hashids->decodeHex($bookId));
+            if($book) {
+                $loans =$book->getLoans();
+            }else{
+                $this->addFlash('warning','Livre innéxistant');
+            }
+        }else{
+            $loans=$this->manager->getRepository(Loan::class)->findAll();
+        }
+
+        return $this->render('librarian/loans.html.twig',['loans'=>$loans]);
+    }
+    /**
+     * @Route("/librarian/lateBooks", name="showLateBooks",methods={"GET"})
+     */
+    public function showLateBooks()
+    {
+        return $this->render('librarian/lateBooks.html.twig',[]);
     }
     /**
      * @Route("/librarian/books", name="showBooks")
@@ -119,13 +151,7 @@ class LibrarianController extends AbstractController
             'books'=>$books
             ]);
     }
-    /**
-     * @Route("/librarian/lateBooks", name="showLateBooks",methods={"GET"})
-     */
-    public function showLateBooks()
-    {
-        return $this->render('librarian/lateBooks.html.twig',[]);
-    }
+
     /**
      * @Route("/librarian/books/{id}/delete", name="handleDeleteBook",methods={"GET"})
      */
@@ -166,6 +192,36 @@ class LibrarianController extends AbstractController
             $this->addFlash('error','Livre inéxistant');
         }
         return $this->redirectToRoute('showBooks');
+    }
+    /**
+     * @Route("/librarian/loans/{id}/delete", name="handleDeleteLoan",methods={"GET"})
+     */
+    public function handleDeleteLoan($id){
+        $loan=$this->manager->getRepository(Loan::class)->find($this->hashids->decodeHex($id));
+        if($loan){
+            $this->manager->remove($loan);
+            $this->manager->flush();
+            $this->addFlash('success','Emprunt supprimé avec succès');
+
+        }else{
+            $this->addFlash('error','Emprunt inéxistant');
+        }
+        return $this->redirectToRoute('showLoans');
+    }
+    /**
+     * @Route("/librarian/loans/{id}/changeLoanStatus", name="handleChangeLoanStatus",methods={"GET"})
+     */
+    public function handleChangeLoanStatus($id){
+        $loan=$this->manager->getRepository(Loan::class)->find($this->hashids->decodeHex($id));
+        if($loan){
+            $loan->setReturnedAt(new \DateTime());
+            $this->manager->flush();
+            $this->addFlash('success','Status modifié avec succès');
+
+        }else{
+            $this->addFlash('error','Emprunt inéxistant');
+        }
+        return $this->redirectToRoute('showLoans');
     }
 
 }
