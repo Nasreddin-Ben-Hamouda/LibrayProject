@@ -102,4 +102,12 @@ class Loan
 
         return $this;
     }
+    public function checkExpiredDate()
+    {
+        if(date_diff(new\DateTime(), $this->takenAt)->d >10)
+            return true;
+        else
+            return false;
+
+    }
 }
