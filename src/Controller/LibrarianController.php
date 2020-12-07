@@ -38,10 +38,21 @@ class LibrarianController extends AbstractController
         $countOfBooks=count($this->manager->getRepository(Book::class)->findAll());
         $countOfLoans=count($this->manager->getRepository(Loan::class)->findAll());
         $users=$this->manager->getRepository(User::class)->findAll();
-        $countOfStudent=count(array_filter($users,function ($user){
-            return !$user->hasRole("ROLE_ADMIN") and !$user->hasRole("ROLE_LIBRARIAN");
-        }));
-        return $this->render('librarian/dashboard.html.twig',['countOfBooks'=>$countOfBooks,'countOfLoans'=>$countOfLoans,'countOfStudent'=>$countOfStudent]);
+        $countOfStudent=count($this->manager->getRepository(User::class)->findUsersByRole('ROLE_STUDENT'));
+        $countOfLateBooks=count($this->manager->getRepository(Book::class)->findLateBooks());
+        $mostFiveBooks=$this->manager->getRepository(Book::class)->mostFiveBooks();
+        $mostFiveStudent=$this->manager->getRepository(User::class)->mostFiveStudents();
+
+
+        return $this->render('librarian/dashboard.html.twig',
+            [
+                'countOfBooks'=>$countOfBooks,
+                'countOfLoans'=>$countOfLoans,
+                'countOfStudent'=>$countOfStudent,
+                'countOfLateBooks'=>$countOfLateBooks,
+                'mostFiveBooks'=>$mostFiveBooks,
+                'mostFiveStudent'=>$mostFiveStudent
+            ]);
     }
     /**
      * @Route("/librarian/profile", name="showLibrarianProfile",methods={"GET"})

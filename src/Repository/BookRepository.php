@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Book;
 use App\Entity\Loan;
+use App\Entity\Media;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
@@ -50,4 +51,26 @@ class BookRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findLateBooks():?array
+    {
+        return $this->createQueryBuilder('book')
+            ->innerJoin('book.loans','loan')
+            ->andWhere('loan.returnedAt is null')
+            ->andWhere('DATE_DIFF(CURRENT_TIMESTAMP(),loan.takenAt)>10')
+            ->getQuery()
+            ->getResult();
+
+    }
+    public function mostFiveBooks():?array
+    {
+        return $this->createQueryBuilder('book')
+            ->select('book,count(loan.id) as loans')
+            ->leftJoin('book.loans','loan')
+            ->groupBy('book.id')
+            ->orderBy('loans','DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult();
+    }
+
 }

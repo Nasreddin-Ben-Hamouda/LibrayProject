@@ -64,6 +64,7 @@
                                                     <small><b>Carte Etudiant :</b></small> <small>{{loan.user.studentNumber}} </small><br>
                                                     <small><b>Adresse :</b></small> <small>{{loan.user.address}} </small><br>
                                                     <small><b>Téléphone :</b></small> <small>{{loan.user.phone}} </small><br>
+                                                    <small><b>Totale de prêts :</b></small> <small>{{ loan.userLoans}} </small><br>
                                                 </td>
                                                 <td> {% if loan.returnedAt %} <span class="badge badge-success">Retournée</span> {% elseif loan.returnedAt==null and loan.checkExpiredDate %} <span class="badge badge-danger">Délai expiré</span> {% else %} <span class="badge badge-warning">Délai non expiré</span> {% endif %}</td>
                                                 <td>{{ loan.takenAt|date }}</td>

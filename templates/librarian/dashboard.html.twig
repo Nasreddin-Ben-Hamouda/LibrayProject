@@ -56,7 +56,7 @@
                     <i class="i-Bookmark" style="color: #49bbff" ></i>
                     <div class="content">
                         <p class="text-muted text-17 mt-2 mb-0" >Retard</p>
-                        <p class="text-primary text-25 line-height-1 mb-2 text-nowrap">200000</p>
+                        <p class="text-primary text-25 line-height-1 mb-2 text-nowrap">{{ countOfLateBooks }}</p>
                     </div>
                 </div>
             </div>
@@ -68,52 +68,45 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="card-title">Les 5 livres les plus empruntés</div>
-                    <div class="d-flex flex-column flex-sm-row align-items-sm-center mb-3"><img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3"  src="" alt="">
+                    {% for book in mostFiveBooks %}
+                    <div class="d-flex flex-column flex-sm-row align-items-sm-center mb-3"><img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3"  src="{{ asset('storage/images/book/') }}{{ book[0].medias[0].path }}" alt="">
                         <div class="flex-grow-1">
-                            <h5 style="color:#0d95e8"></h5>
-                            <p class="m-0 text-small text-muted"></p>
-                            <p class="text-small text-danger m-0"></p>
+                            <h5 style="color:#0d95e8">{{ book[0].title }}</h5>
+                            <p class="m-0 text-small text-muted">Sujet : {{ book[0].subject }}</p>
+                            <p class="text-small text-muted m-0">Catégorie : {{ book[0].category }}</p>
                         </div>
                         <div>
                             <button class=" btn-outline-primary mt-3 mb-3 m-sm-0 btn-rounded btn-sm">
-
+                                {{ book['loans'] }}
                             </button>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-        <div class="col-lg-6 col-md-12" >
-            <div class="card o-hidden mb-4" >
-                <div class="card-header d-flex align-items-center border-0">
-                    <h3 class="w-50 float-left card-title m-0">Le top 5 étudiants</h3>
-                </div>
-                <div>
-                    <div class="table-responsive">
-                        <table class="table text-center" id="user_table">
-                            <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nom</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Solde</th>
-                                <th scope="col">Points</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <th scope="row"></th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+        <div class="col-lg-6 col-md-12">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="card-title">Les top 5 etudiants par la totale de prêts</div>
+                    {% for user in mostFiveStudent %}
+                        <div class="d-flex flex-column flex-sm-row align-items-sm-center mb-3"><img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3"  src="{% if user[0].photo %} {{ asset('storage/images/avatar/') }}{{ user[0].photo}}  {% else%} {{ asset('images/backOffices/user.png') }} {% endif %}" alt="">
+                            <div class="flex-grow-1">
+                                <h5 style="color:#0d95e8">{{ user[0].name }}</h5>
+                                <p class="m-0 text-small text-muted">{{ user[0].email }}</p>
+                                <p class="text-small text-muted m-0">{{ user[0].studentNumber }}</p>
+                            </div>
+                            <div>
+                                <button class=" btn-outline-primary mt-3 mb-3 m-sm-0 btn-rounded btn-sm">
+                                    {{ user['loans'] }}
+                                </button>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
+
     </div>
 
 {% endblock %}

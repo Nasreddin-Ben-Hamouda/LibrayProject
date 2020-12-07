@@ -21,7 +21,7 @@ class Loan
 
     /**
      * @var object
-     * Bidirectional - Many loans borrowed by one home
+     * Bidirectional - Many loans borrowed by one user
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="loans")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
@@ -109,5 +109,8 @@ class Loan
         else
             return false;
 
+    }
+    public function userLoans(){
+        return count($this->user->getLoans());
     }
 }
