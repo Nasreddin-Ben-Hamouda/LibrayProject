@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Book;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -62,16 +63,39 @@ class BookFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('category',TextType::class,[
+            ->add('category',ChoiceType::class,[
                 'label'=>false,
                 'attr'=>[
                     'class'=>'form-control',
                     'autocomplete'=>'off',
-                    'placeholder'=>'Catégorie'
+                ],
+                'choices'=>[
+                    'Technologie'=>'Technologie',
+                    'Sciences'=>'Sciences',
+                    'Informatique & Internet'=>'Informatique & Internet',
+                    'Sciences Politiques'=>'Sciences Politiques',
+                    'Sciences Sociales'=>'Sciences Sociales',
+                    'Mathématiques'=>'Mathématiques',
+                    'Médecine'=>'Médecine',
+                    'Langues & Linguistique'=>'Langues & Linguistique',
+                    'Sports'=>'Sports',
+                    'Voyages'=>'Voyages',
+                    'Histoire'=>'Histoire',
+                    'Economie & Affaires'=>'Economie & Affaires',
+                    'Droit'=>'Droit',
+                    'Biographie & Autobiographie'=>'Biographie & Autobiographie',
+                    'Bandes Dessinées'=>'Bandes Dessinées',
+                    'Arts du Spectacle'=>'Arts du Spectacle',
+                    'Art Dramatique'=>'Art Dramatique',
+                    'Arts'=>'Arts',
+                    'Architecture'=>'Architecture',
+                    'Philosophie'=>'Philosophie',
+                    'Spiritualité'=>'Spiritualité',
+                    'Etude de Langues Etrangeres'=>'Etude de Langues Etrangeres',
                 ],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Veuillez entrer une catégorie',
+                        'message' => 'Veuillez choisir une categorie',
                     ]),
                 ],
             ])

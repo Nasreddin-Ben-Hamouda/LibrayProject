@@ -43,7 +43,7 @@ class UserFixture extends Fixture
         $book=new Book();
         $book->setReference("HKKD255MLDNC5854");
         $book->setTitle("DEV WEB");
-        $book->setCategory("COMPUTER SCIENCE");
+        $book->setCategory("Informatique & Internet");
         $book->setAuthor("NASR EDDINE");
         $manager->persist($book);
         $loan=new Loan();

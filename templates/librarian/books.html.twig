@@ -74,7 +74,7 @@
                                             <td ><a data-url="{{ path('handleDeleteBook',{id:book.hashid})}}" data-toggle="confirmation" data-title="Confirmer la suppression de ce livre ?" class="text-danger mr-2">
                                                     <i class="nav-icon i-Close-Window  font-weight-bold"></i>
                                                 </a>
-                                                <a  data-id="{{ book.hashid }}" title="Modifier"   class="text-primary mr-2 edit">
+                                                <a  data-id="{{ book.hashid }}" data-category="{{ book.category }}" title="Modifier"   class="text-primary mr-2 edit">
                                                     <i class="nav-icon i-Edit  font-weight-bold"></i>
                                                 </a>
                                                 {% if book.status==1 %}
@@ -158,7 +158,7 @@
                 $('#book_form_title').val($('#title'+id).text());
                 $('#book_form_reference').val($('#reference'+id).text());
                 $('#book_form_author').val($('#author'+id).text());
-                $('#book_form_category').val($('#category'+id).text());
+                $('#book_form_category').val($(this).data('category'));
                 $('#book_form_subject').val($('#subject'+id).text());
 
             });
@@ -199,7 +199,7 @@
                         required: "Veuillez entrer un auteur",
                     },
                     "book_form[category]":{
-                        required: "Veuillez entrer une catégorie",
+                        required: "Veuillez choisir une catégorie",
                     },
                     "book_form[picture][]":{
                         accept: "Choisir des images(jpg,jpeg,png,gif).",

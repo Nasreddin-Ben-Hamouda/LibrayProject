@@ -47,4 +47,26 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findUsersByRole(string $role):?array
+    {
+     return $this->createQueryBuilder('user')
+            ->andWhere("user.roles LIKE :role")
+            ->setParameter('role','%'.$role.'%')
+            ->getQuery()
+            ->getResult();
+
+    }
+    public function mostFiveStudents():?array
+    {
+        return $this->createQueryBuilder('user')
+                ->select('user,count(user.id) as loans')
+                ->andWhere("user.roles LIKE :role")
+                ->setParameter('role','%ROLE_STUDENT%')
+                ->leftJoin('user.loans','loan')
+                ->groupBy('user.id')
+                ->orderBy('loans','DESC')
+                ->setMaxResults(5)
+                ->getQuery()
+                ->getResult();
+    }
 }
