@@ -306,5 +306,30 @@ class LibrarianController extends AbstractController
         return $this->redirect($backUrl);
 
     }
+    /**
+     * @Route("/librarian/sendEmailToLateComers", name="handleSendEmailToLateComers",methods={"POST"})
+     */
+    public function handleSendEmailToLateComers(Request $request,MailerInterface $mailer){
+        $backUrl=$request->headers->get('referer');
+        if($request->get('message')){
+            $lateComers=$this->manager->getRepository(User::class)->findLateComers();
+            foreach ($lateComers as $comer){
+                $email = (new TemplatedEmail())
+                    ->from('admin@library.com')
+                    ->to($comer->getEmail())
+                    ->subject('Livres non rendus')
+                    ->htmlTemplate('librarian/mail/latecomers_email.html.twig')
+                    ->context([
+                        'name' =>$comer->getName(),
+                        'message'=>$request->get('message')
+                    ]);
+                $mailer->send($email);
+            }
+            $this->addFlash('success','Emails envoyé avec succès');
+            return $this->redirect($backUrl);
+        }
+        $this->addFlash('warning','Veuillez ecrire un message');
+        return $this->redirect($backUrl);
+    }
 
 }
