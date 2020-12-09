@@ -30,10 +30,19 @@ class AdminController extends AbstractController
      */
     public function showDashboard()
     {
+        $countOfStudent=count($this->manager->getRepository(User::class)->findUsersByRole('ROLE_STUDENT'));
+        $countOfLibrarian=count($this->manager->getRepository(User::class)->findUsersByRole('ROLE_STUDENT'));
+        $mostFiveBooks=$this->manager->getRepository(Book::class)->mostFiveBooks();
+        $mostFiveStudent=$this->manager->getRepository(User::class)->mostFiveStudents();
 
 
-        return $this->render('admin/dashboard.html.twig',[]);
-
+        return $this->render('admin/dashboard.html.twig',
+            [
+                'countOfStudent'=>$countOfStudent,
+                'countOfLibrarian'=>$countOfLibrarian,
+                'mostFiveBooks'=>$mostFiveBooks,
+                'mostFiveStudent'=>$mostFiveStudent
+            ]);
     }
     /**
      * @Route("/admin/profile", name="showAdminProfile",methods={"GET"})
@@ -47,14 +56,35 @@ class AdminController extends AbstractController
      */
     public function showStudents()
     {
-        return $this->render('admin/students.html.twig',[]);
+        $students=$this->manager->getRepository(User::class)->findUsersByRole('ROLE_STUDENT');
+        return $this->render('admin/students.html.twig',['students'=>$students]);
     }
     /**
      * @Route("/admin/librarians", name="showLibrarians",methods={"GET"})
      */
     public function showLibrarians()
     {
-        return $this->render('admin/librarians.html.twig',[]);
+        $librarians=$this->manager->getRepository(User::class)->findUsersByRole('ROLE_LIBRARIAN');
+        return $this->render('admin/librarians.html.twig',['librarians'=>$librarians]);
     }
-
+    /**
+     * @Route("/admin/students/{id}/{role}/delete", name="handleDeleteUser",methods={"GET"})
+     */
+    public function handleDeleteUser($id,$role){
+        $user=$this->manager->getRepository(User::class)->find($this->hashids->decodeHex($id));
+        if($user){
+            if($user->getPhoto()){
+                $this->filesystem->remove($this->getParameter('storage').'/images/avatar/'.$user->getPhoto());
+            }
+            $this->manager->remove($user);
+            $this->manager->flush();
+            $this->addFlash('success','Etudiant supprimé avec succès');
+        }else{
+            $this->addFlash('error','Etudiant inexistant');
+        }
+        if($role=="librarian")
+            return $this->redirectToRoute('showLibrarians');
+        else
+            return $this->redirectToRoute('showStudents');
+    }
 }
