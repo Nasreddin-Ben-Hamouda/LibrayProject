@@ -9,5 +9,89 @@
     {% include 'layouts/backOffices/inc/adminSidebar.html.twig' with {'current':'students'} %}
 {% endblock %}
 {% block content %}
+    <div class="breadcrumb">
+        <h1>Synthèse des Etudiants</h1>
+
+    </div>
+    <div class="separator-breadcrumb border-top"></div>
+
+    <div class="row mb-4">
+        <div class="col-md-12 mt-2">
+            <div class="card text-left">
+                <div class="card-body">
+
+
+                    <h4 class="card-title mb-3"></h4>
+                    <p></p>
+                    <div class="table-responsive">
+                        <div id="zero_configuration_table_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+
+                                    <div class="col-sm-12 col-md-6">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="datatable-responsive" class="display table ds dataTable" style="width:100%" role="grid">
+                                        <thead>
+                                        <tr role="row" >
+                                            <th scope="col">#</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="zero_configuration_table" rowspan="1" colspan="1" aria-sort="ascending"
+                                                aria-label="Name: activate to sort column descending" style="width:200px;">Nom et Prénom</th>
+                                            <th class="sorting" tabindex="0" aria-controls="zero_configuration_table" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending">Email</th>
+                                            <th class="sorting" style="width:200px;" tabindex="0" aria-controls="zero_configuration_table" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending">Autres infos</th>
+                                            <th class="sorting" tabindex="0" aria-controls="zero_configuration_table" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending">Totale de prêts</th>
+                                            <th class="sorting" tabindex="0" aria-controls="zero_configuration_table" rowspan="1" colspan="1" style="width: 100px;">Action</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tbody">
+                                        {% for student in students %}
+                                            <tr>
+                                                <th scope="row">{{ loop.index }}</th>
+                                                <td>{{student.name}}</td>
+                                                <td>{{student.email}}</td>
+                                                <td>
+                                                    <small><b>Carte Etudiant:</b></small> <small>{{student.studentNumber}}</small><br>
+                                                    <small><b>Adresse :</b></small> <small>{{student.address}} </small><br>
+                                                    <small><b>Téléphone:</b></small> <small>{{student.phone}} </small><br>
+                                                </td>
+                                                <td>{{ student.loans|length }}</td>
+                                                <td >
+                                                    <a data-url="{{ path('handleDeleteUser',{'id':student.hashid,'role':'student'}) }}" data-toggle="confirmation" data-title="Confirmer la suppression de ce etudiant ?" class="text-danger mr-2">
+                                                        <i class="nav-icon i-Close-Window  font-weight-bold"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                        <tfoot>
+                                        </tfoot>
+
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            $('#tbody').confirmation({
+                selector: '[data-toggle="confirmation"]',
+                btnOkLabel: "OUI",
+                btnCancelLabel: "NON",
+                onConfirm: function () {
+                    location.href = $(this).data('url');
+                },
+            });
+        });
+    </script>
 
 {% endblock %}
