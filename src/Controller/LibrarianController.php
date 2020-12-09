@@ -88,7 +88,8 @@ class LibrarianController extends AbstractController
      */
     public function showLateBooks()
     {
-        return $this->render('librarian/lateBooks.html.twig',[]);
+        $lateBooks=$this->manager->getRepository(Book::class)->findLateBooks();
+        return $this->render('librarian/lateBooks.html.twig',['lateBooks'=>$lateBooks]);
     }
     /**
      * @Route("/librarian/books", name="showBooks")

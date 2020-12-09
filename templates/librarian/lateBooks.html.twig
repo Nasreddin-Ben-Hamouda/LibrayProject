@@ -9,5 +9,117 @@
     {% include 'layouts/backOffices/inc/librarianSidebar.html.twig' with {'current':'late'} %}
 {% endblock %}
 {% block content %}
+    <div class="breadcrumb">
+        <h1>Synthèse des Livres en retard</h1>
 
+    </div>
+    <div class="separator-breadcrumb border-top"></div>
+
+    <div class="row mb-4">
+        <div class="col-md-8 mt-2">
+            <div class="card text-left">
+                <div class="card-body">
+
+
+                    <h4 class="card-title mb-3"></h4>
+                    <p></p>
+                    <div class="table-responsive">
+                        <div id="zero_configuration_table_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+
+                                    <div class="col-sm-12 col-md-6">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="datatable-responsive" class="display table ds dataTable" style="width:100%" role="grid">
+                                        <thead>
+                                        <tr role="row" >
+                                            <th scope="col">#</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="zero_configuration_table" rowspan="1" colspan="1" aria-sort="ascending"
+                                                aria-label="Name: activate to sort column descending" style="width:200px;">Titre</th>
+                                            <th class="sorting" tabindex="0" aria-controls="zero_configuration_table" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending"
+                                                style="width:600px;">Infos</th>
+                                            <th class="sorting" tabindex="0" aria-controls="zero_configuration_table" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending">Image</th>
+                                            <th class="sorting" tabindex="0" aria-controls="zero_configuration_table" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending">Prêts</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tbody">
+                                        {% for book in lateBooks %}
+                                            <tr>
+                                                <th scope="row">{{ loop.index }}</th>
+                                                <td id="title{{book.hashid}}">{{book.title}}</td>
+                                                <td>
+                                                    <small><b>Réfèrence :</b></small> <small>{{book.reference}}</small><br>
+                                                    <small><b>Auteur :</b></small> <small>{{book.author}} </small><br>
+                                                    <small><b>Catégorie :</b></small> <small >{{book.category}} </small><br>
+                                                    <small><b>Sujet :</b></small> <small>{{book.subject}} </small><br>
+
+                                                </td>
+                                                <td > <img src="{% if book.medias is not empty %}{{ asset('storage/images/book') }}/{{ book.medias[0].path }} {% endif %}" style="width: 50px;height: 50px ;border-radius: 5px;"/></td>
+
+                                                <td><a href="{{ path('showLoans',{'bookId':book.hashid}) }}">Liste Prêts</a> </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                        <tfoot>
+                                        </tfoot>
+
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 mt-2" id="add">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <b id="form-header">Envoyer un email a tous les retardataires </b>
+                    <form id="form-addBook" autocomplete="off" action="{{ path('handleSendEmailToLateComers') }}"  method="POST">
+                        <div class="row row-xs">
+                            <div class="col-md-12 mb-5">
+                                <br><br>
+                                <div class="col-form-label">*Message</div>
+                                <textarea class="form-control" name="message" autocomplete="off" placeholder="Message" style="height: 80%"></textarea>
+                            </div>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn add btn-primary m-1" id="btnadd" >Envoyer</button>
+                        <button type="reset"  class="btn btn-outline-secondary m-1 clear">Annuler</button>
+
+                </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+
+            $("#form-addBook").on('click','.clear',function (){
+                $('#book_form_id').val('');
+            });
+            $("#form-addBook").validate({
+                errorClass: "danger is-invalid",
+                validClass: "success is-valid",
+                rules: {
+                    "message": {
+                        required: true,
+                    }
+                },
+                messages: {
+                    "message": {
+                        required: "Veuillez ecrire un message",
+                    }
+                }
+            });
+        });
+    </script>
 {% endblock %}
