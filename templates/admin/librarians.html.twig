@@ -9,6 +9,117 @@
     {% include 'layouts/backOffices/inc/adminSidebar.html.twig' with {'current':'librarians'} %}
 {% endblock %}
 {% block content %}
+    <div class="breadcrumb">
+        <h1>Synthèse des Bibliothécaires</h1>
 
+    </div>
+    <div class="separator-breadcrumb border-top"></div>
+
+    <div class="row mb-4">
+        <div class="col-md-9 mt-2">
+            <div class="card text-left">
+                <div class="card-body">
+
+
+                    <h4 class="card-title mb-3"></h4>
+                    <p></p>
+                    <div class="table-responsive">
+                        <div id="zero_configuration_table_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+
+                                    <div class="col-sm-12 col-md-6">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="datatable-responsive" class="display table ds dataTable" style="width:100%" role="grid">
+                                        <thead>
+                                        <tr role="row" >
+                                            <th scope="col">#</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="zero_configuration_table" rowspan="1" colspan="1" aria-sort="ascending"
+                                                aria-label="Name: activate to sort column descending" style="width:200px;">Nom et Prénom</th>
+                                            <th class="sorting" tabindex="0" aria-controls="zero_configuration_table" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending">Infos</th>
+                                            <th class="sorting" tabindex="0" aria-controls="zero_configuration_table" rowspan="1" colspan="1" style="width: 100px;">Action</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tbody">
+                                        {% for librarian in librarians %}
+                                            <tr>
+                                                <th scope="row">{{ loop.index }}</th>
+                                                <td id="name{{librarian.hashid}}">{{librarian.name}}</td>
+
+                                                <td>
+                                                    <small><b>Email</b> : </small><small id="email{{librarian.hashid}}">{{librarian.email}}</small><br>
+                                                    <small><b>Adresse</b> : </small><small id="address{{librarian.hashid}}">{{ librarian.address }}</small><br>
+                                                    <small><b>Téléphone</b> : </small><small id="phone{{librarian.hashid}}">{{ librarian.phone }}</small><br>
+                                                    <small><b>Salaire</b> : </small><small id="phone{{librarian.hashid}}">{{ librarian.salary }}</small><br>
+                                                </td>
+                                                <td >
+                                                    <a data-url="{{ path('handleDeleteUser',{'id':librarian.hashid,'role':'librarian'}) }}" data-toggle="confirmation" data-title="Confirmer la suppression de ce bibliothécaire ?" class="text-danger mr-2">
+                                                        <i class="nav-icon i-Close-Window  font-weight-bold"></i>
+                                                    </a>
+                                                    <a  data-id="{{ librarian.hashid }}"  title="Modifier"   class="text-primary mr-2 edit">
+                                                        <i class="nav-icon i-Edit  font-weight-bold"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                        <tfoot>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 mt-2" id="add">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <b id="form-header">Ajouter Un Livre</b>
+                    <form id="form-addBook" autocomplete="off"   method="POST">
+                        <div class="row row-xs">
+                            <div class="col-md-12 mb-3">
+                                <br>
+                                <b style="color: red">*Obligatoire</b>
+                                <div class="col-form-label">*Nom et prénom</div>
+                                <div class="col-form-label">*Email</div>
+                                <div class="col-form-label">*Mot de passe</div>
+                                <div class="col-form-label">Adresse</div>
+                                <div class="col-form-label">Téléphone</div>
+                                <div class="col-form-label">Salaire</div>
+                            </div>
+
+                        </div>
+                        <br>
+                        <button type="submit" class="btn add btn-primary m-1" id="btnadd" >Ajouter</button>
+                        <button type="reset"  class="btn btn-outline-secondary m-1 clear">Annuler</button>
+
+                </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            $('#tbody').confirmation({
+                selector: '[data-toggle="confirmation"]',
+                btnOkLabel: "OUI",
+                btnCancelLabel: "NON",
+                onConfirm: function () {
+                    location.href = $(this).data('url');
+                },
+            });
+        });
+    </script>
 
 {% endblock %}
