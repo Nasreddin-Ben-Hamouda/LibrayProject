@@ -9,5 +9,201 @@
     {% include 'layouts/backOffices/inc/librarianSidebar.html.twig' with {'current':'profile'} %}
 {% endblock %}
 {% block content %}
-    <h1>Profile</h1>
+    <style>
+        .image-upload > input
+        {
+            display: none;
+        }
+        .image-upload img
+        {
+            width: 80px;
+            cursor: pointer;
+        }
+    </style>
+    <div class="breadcrumb">
+        <h1>Mon Profile</h1>
+
+    </div>
+    <div class="separator-breadcrumb border-top"></div>
+    <div class="card user-profile o-hidden mb-4 " >
+        <div class="header-cover" style="background-image: url('{{asset('images/backOffices/bg1.jpg')}}')"></div>
+        <div class="user-info"><img class="profile-picture avatar-lg" id="media" src="{% if app.user.photo %} {{ asset('storage/images/avatar/') }}{{ app.user.photo}}  {% else%} {{ asset('images/backOffices/user.png') }} {% endif %}"  />
+            <div class="image-upload">
+                <label for="upload">
+                    <i class="text-dark i-Upload " style="font-size: 20px"></i>
+                </label>
+                <input id="upload" name="photo" type="file"/>
+            </div>
+
+            <p class="m-0 text-24">{{app.user.name}}</p>
+            <p class="text-muted m-0">
+                {% if is_granted('ROLE_ADMIN') %}
+                    Administrateur
+                {% else %}
+                    Bibliothécaire
+                {% endif %}</p>
+        </div>
+        <br><br><br>
+
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-7">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <form id="user-profil" method="post" action="{{ path('handleUpdateCredentials') }}">
+                                <div class="form-row">
+                                    <div class="col-md-12 mb-3">
+                                        <label >*Nom</label>
+                                        <input type="text" class="form-control" id="name" name="name" value="{{app.user.name}}">
+
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label >*Email</label>
+                                        <input type="email" class="form-control" id="email" required name="email" value="{{app.user.email}}">
+
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label for="validationCustom01">Téléphone</label>
+                                        <input type="tel" id="phone"  pattern="[0-9]{8,20}" value="{{app.user.phone}}" name="phone" class="form-control">
+
+                                    </div>
+                                    <div class="col-md-1 mb-3"><button class="btn btn-primary" type="submit">Sauvegarder</button></div>
+
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <form id="user-password"  method="post" action="{{ path('handleUpdatePassword') }}">
+                                <div class="form-row">
+                                    <div class="col-md-12 mb-3">
+                                        <label >*Ancien Mot de passe</label>
+                                        <input type="password" class="form-control" id="password" name="old_password"/>
+
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label >*Nouveau mot de passe</label>
+                                        <input type="password" class="form-control" id="passwordOne" name="new_password"/>
+
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label >*Mot de passe de confirmation</label>
+                                        <input type="password" class="form-control" id="passwordTwo" name="password_confirm"/>
+                                    </div>
+                                    <div class="col-md-1 mb-3"><button class="btn btn-primary" type="submit">Sauvegarder</button></div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        $(function () {
+            $("#user-profil").validate({
+                errorClass: "is-invalid",
+                ignore: ":hidden",
+                rules: {
+                    "name": {
+                        required: true,
+                    },
+                    "phone": {
+                        number:true,
+                        minlength:8,
+                        maxlength:8
+                    },
+                    "email": {
+                        required: true,
+                        email: true,
+                    }
+                },
+                messages: {
+                    "name": {
+                        required:"Le Nom est obligatoire",
+                    },
+                    "email":{
+                        required:"L\'Email est obligatoire",
+                        email:"L\'Email est invalide",
+                    },
+                    "phone": {
+                        number: "Le téléphone doit être numérique",
+                        minlength:"Le téléphone doit comporter 8 chiffres",
+                        maxlength:"Le téléphone doit comporter 8 chiffres"
+                    },
+                },
+            });
+            $("#user-password").validate({
+                errorClass: "is-invalid",
+                ignore: ":hidden",
+                rules: {
+                    "old_password":{
+                        required:true,
+                    },
+                    "new_password":{
+                        required:true,
+                        minlength:6
+                    },
+                    "password_confirm": {
+                        equalTo: "#passwordOne"
+                    },
+                },
+                messages: {
+                    "old_password": {
+                        required: "L'encien mot de passe est obligatoire",
+                        minlength: "Le mot de passe doit dépasser 6 caractères ",
+                    },
+                    "new_password": {
+                        required: "Le nouveau mot de passe est obligatoire",
+                        minlength: "Le mot de passe doit dépasser 6 caractères ",
+                    },
+                    "password_confirm": {
+                        equalTo: "Les mots de passe sont différents"
+                    },
+                },
+            });
+        });
+        $(document).ready(function() {
+            $('input[type="file"]').change(function(e){
+                const fsize = e.target.files[0].size;
+                const file = Math.round((fsize / 1024));
+                let ext = e.target.files[0]['name'].substring(e.target.files[0]['name'].lastIndexOf('.') + 1).toLowerCase();
+                if (e.target.files && file<= 2000 && e.target.files[0] && (ext == "png" || ext == "jpeg" || ext == "jpg")) {
+                    let url="{{ path('handleUpdatePhoto') }}";
+                    let form=new FormData();
+                    form.append('photo',e.target.files[0]);
+                    $.ajax({
+                        url : url,
+                        type: "POST",
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data : form,
+                        success: function(response){
+                            if(response['status']===200){
+                                toastr.success('Votre photo modifié avec succès', {
+                                    timeOut: 5000
+                                });
+                            }else{
+                                toastr.error('Choisir une photo svp', {
+                                    timeOut: 5000
+                                });
+                            }
+                        }
+                    });
+                    $('#media').attr('src', URL.createObjectURL(e.target.files[0]));
+                }else{
+                    toastr.warning("Choisir une image de taille inférieure à 2M ");
+                }
+            });
+        });
+    </script>
 {% endblock %}

@@ -69,4 +69,13 @@ class UserRepository extends ServiceEntityRepository
                 ->getQuery()
                 ->getResult();
     }
+    public function findLateComers():?array
+    {
+        return $this->createQueryBuilder('user')
+            ->innerJoin('user.loans','loan')
+            ->andWhere('loan.returnedAt is null')
+            ->andWhere('DATE_DIFF(CURRENT_TIMESTAMP(),loan.takenAt)>10')
+            ->getQuery()
+            ->getResult();
+    }
 }

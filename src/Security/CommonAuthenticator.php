@@ -83,7 +83,11 @@ class CommonAuthenticator extends AbstractFormLoginAuthenticator implements Pass
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+        $password=$this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+        if(!$password){
+            throw new CustomUserMessageAuthenticationException('Mot de passe icorrecte');
+        }
+        return $password;
     }
 
     /**

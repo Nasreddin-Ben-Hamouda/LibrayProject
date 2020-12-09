@@ -93,8 +93,9 @@
                         <div class="d-flex flex-column flex-sm-row align-items-sm-center mb-3"><img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3"  src="{% if user[0].photo %} {{ asset('storage/images/avatar/') }}{{ user[0].photo}}  {% else%} {{ asset('images/backOffices/user.png') }} {% endif %}" alt="">
                             <div class="flex-grow-1">
                                 <h5 style="color:#0d95e8">{{ user[0].name }}</h5>
-                                <p class="m-0 text-small text-muted">{{ user[0].email }}</p>
-                                <p class="text-small text-muted m-0">{{ user[0].studentNumber }}</p>
+                                <p class="m-0 text-small text-muted">Email : {{ user[0].email }}</p>
+                                <p class="text-small text-muted m-0">Carte Etudiant : {{ user[0].studentNumber }}</p>
+
                             </div>
                             <div>
                                 <button class=" btn-outline-primary mt-3 mb-3 m-sm-0 btn-rounded btn-sm">
