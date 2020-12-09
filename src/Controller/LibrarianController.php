@@ -11,11 +11,14 @@ use Doctrine\ORM\EntityManagerInterface;
 use Hashids\Hashids;
 use phpDocumentor\Reflection\File;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class LibrarianController extends AbstractController
@@ -37,8 +40,7 @@ class LibrarianController extends AbstractController
     {
         $countOfBooks=count($this->manager->getRepository(Book::class)->findAll());
         $countOfLoans=count($this->manager->getRepository(Loan::class)->findAll());
-        $users=$this->manager->getRepository(User::class)->findAll();
-        $countOfStudent=count($this->manager->getRepository(User::class)->findUsersByRole('ROLE_STUDENT'));
+        $countOfStudent=count($this->manager->getRepository(User::class)->findUsersByRole('ROLE_LIBRARIAN'));
         $countOfLateBooks=count($this->manager->getRepository(Book::class)->findLateBooks());
         $mostFiveBooks=$this->manager->getRepository(Book::class)->mostFiveBooks();
         $mostFiveStudent=$this->manager->getRepository(User::class)->mostFiveStudents();
@@ -49,6 +51,7 @@ class LibrarianController extends AbstractController
                 'countOfBooks'=>$countOfBooks,
                 'countOfLoans'=>$countOfLoans,
                 'countOfStudent'=>$countOfStudent,
+
                 'countOfLateBooks'=>$countOfLateBooks,
                 'mostFiveBooks'=>$mostFiveBooks,
                 'mostFiveStudent'=>$mostFiveStudent
@@ -171,7 +174,7 @@ class LibrarianController extends AbstractController
         if($book){
             foreach ($book->getMedias() as $media){
                     $this->filesystem->remove($this->getParameter('storage').'/images/book/'.$media->getPath());
-                    $this->manager->remove($media);
+                    //$this->manager->remove($media);
             }
             $this->manager->remove($book);
             $this->manager->flush();
@@ -233,6 +236,74 @@ class LibrarianController extends AbstractController
             $this->addFlash('error','Emprunt inéxistant');
         }
         return $this->redirectToRoute('showLoans');
+    }
+    /**
+     * @Route("/librarian/profile/changePhoto", name="handleUpdatePhoto",methods={"POST"})
+     */
+    public function handleUpdatePhoto(Request $request){
+
+        $photo =$request->files->get('photo');
+        if($photo){
+            $uploadedFile=$photo;
+            $newFileName = base64_encode(random_bytes(5)). '-' . time() . '.' . $uploadedFile->guessExtension();
+            $fullImagePath = $this->getParameter('storage') . '/images/avatar/';
+            $uploadedFile->move(
+                $fullImagePath,
+                $newFileName
+            );
+            $user=$this->getUser();
+            if($user->getPhoto()){
+                $this->filesystem->remove($this->getParameter('storage').'/images/avatar/'.$user->getPhoto());
+            }
+            $user->setPhoto($newFileName);
+            $this->manager->flush();
+            return  $this->json(['status'=>200]);
+        }else{
+            return $this->json(['status'=>403]);
+        }
+    }
+
+    /**
+     * @Route("/librarian/profile/updateCredentials", name="handleUpdateCredentials",methods={"POST"})
+     */
+    public function handleUpdateCredentials(Request $request){
+        $user=$this->getUser();
+        $backUrl=$request->headers->get('referer');
+        $userCheck=$this->manager->getRepository(User::class)->findOneBy([
+            'email'=>$request->get('email')
+        ]);
+        if ($userCheck and $user->getId()!=$userCheck->getId()){
+            $this->addFlash('warning','L\'émail entré est déja utilisé');
+            return $this->redirect($backUrl);
+        }
+        $user->setEmail($request->get('email'));
+        $user->setName($request->get('name'));
+        $user->setPhone($request->get('phone'));
+        $this->manager->flush();
+        $this->addFlash('success','Votre profile modifié avec succès');
+        return $this->redirect($backUrl);
+
+    }
+    /**
+     * @Route("/librarian/profile/updatePassword", name="handleUpdatePassword",methods={"POST"})
+     */
+    public function handleUpdatePassword(Request $request,UserPasswordEncoderInterface $passwordEncoder){
+        $user=$this->getUser();
+        $backUrl=$request->headers->get('referer');
+        if($passwordEncoder->isPasswordValid($user,$request->get('old_password'))){
+            if($request->get('new_password')==$request->get('password_confirm')){
+                $user->setPassword($passwordEncoder->encodePassword($user,$request->get('new_password')));
+                $this->manager->flush();
+                $this->addFlash('success','Votre mots de passe modifié avec succès');
+                return $this->redirect($backUrl);
+            }else{
+                $this->addFlash('warning','Les mots de passe sont différents');
+                return $this->redirect($backUrl);
+            }
+        }
+        $this->addFlash('error','L\'encien mot de passe est incorrecte');
+        return $this->redirect($backUrl);
+
     }
 
 }

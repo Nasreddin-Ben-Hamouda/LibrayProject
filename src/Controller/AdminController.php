@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Book;
+use App\Entity\Loan;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Hashids\Hashids;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -27,7 +30,10 @@ class AdminController extends AbstractController
      */
     public function showDashboard()
     {
+
+
         return $this->render('admin/dashboard.html.twig',[]);
+
     }
     /**
      * @Route("/admin/profile", name="showAdminProfile",methods={"GET"})
@@ -50,4 +56,5 @@ class AdminController extends AbstractController
     {
         return $this->render('admin/librarians.html.twig',[]);
     }
+
 }
