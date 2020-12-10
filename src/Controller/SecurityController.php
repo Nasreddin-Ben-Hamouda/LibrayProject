@@ -90,7 +90,6 @@ class SecurityController extends AbstractController
                     ]);
                 $mailer->send($email);
 
-                // do anything else you need here, like send an email
                 $this->addFlash('warning',"Inscription avec succès, SVP Confirmer votre email !");
 
                 return $this->redirectToRoute('studentLogin');

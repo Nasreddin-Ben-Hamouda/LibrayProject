@@ -5,13 +5,15 @@ namespace App\Controller;
 use App\Entity\Book;
 use App\Entity\Loan;
 use App\Entity\User;
+use App\Form\UserFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Hashids\Hashids;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AdminController extends AbstractController
 {
@@ -60,12 +62,65 @@ class AdminController extends AbstractController
         return $this->render('admin/students.html.twig',['students'=>$students]);
     }
     /**
-     * @Route("/admin/librarians", name="showLibrarians",methods={"GET"})
+     * @Route("/admin/librarians", name="showLibrarians")
      */
-    public function showLibrarians()
+    public function showLibrarians(Request $request,UserPasswordEncoderInterface $passwordEncoder,ValidatorInterface $validator)
     {
+        $librarian = new User();
+        $form = $this->createForm(UserFormType::class, $librarian);
+        $form->handleRequest($request);
         $librarians=$this->manager->getRepository(User::class)->findUsersByRole('ROLE_LIBRARIAN');
-        return $this->render('admin/librarians.html.twig',['librarians'=>$librarians]);
+        if ($form->isSubmitted()) {
+            if( !$form->isValid()){
+                $errors=$validator->validate($form);
+                foreach ($errors as $error){
+                    $this->addFlash('error',$error->getMessage());
+                }
+                $form->clearErrors(true);
+
+            }else{
+                $userCheck=$this->manager->getRepository(User::class)->findOneBy([
+                    'email'=>$form->get('email')->getData()
+                ]);
+                if($form->get('id')->getData()){
+
+                    $oldLibrarian=$this->manager->getRepository(User::class)->find($this->hashids->decodeHex($form->get('id')->getData()));
+                    if($userCheck and $oldLibrarian->getId()!=$userCheck->getId()){
+                        $this->addFlash('warning','L\'émail entré est déja utilisé');
+                    }else{
+                        $oldLibrarian->setName($librarian->getName());
+                        $oldLibrarian->setEmail($form->get('email')->getData());
+                        $oldLibrarian->setAddress($librarian->getAddress());
+                        $oldLibrarian->setPhone($librarian->getPhone());
+                        $oldLibrarian->setSalary($librarian->getSalary());
+                        $this->addFlash('success','Bibliothécaire modifié avec succès ');
+                    }
+                }else{
+                    if($userCheck){
+                        $this->addFlash('warning','L\'émail entré est déja utilisé');
+                    }else{
+                        $librarian->setPassword($passwordEncoder->encodePassword(
+                            $librarian,
+                            $form->get('password')->getData()
+                        ));
+                        $librarian->setEmail($form->get('email')->getData());
+                        $librarian->setRoles(array('ROLE_LIBRARIAN'));
+                        $librarian->setIsVerified(true);
+                        $this->manager->persist($librarian);
+                        $this->addFlash('success','Bibliothécaire ajouté avec succès ');
+                    }
+
+                }
+
+                $this->manager->flush();
+                return $this->redirectToRoute('showLibrarians');
+            }
+
+        }
+        return $this->render('admin/librarians.html.twig',[
+            'librarians'=>$librarians,
+            'userForm'=>$form->createView()
+        ]);
     }
     /**
      * @Route("/admin/students/{id}/{role}/delete", name="handleDeleteUser",methods={"GET"})

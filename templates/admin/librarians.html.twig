@@ -55,7 +55,7 @@
                                                     <small><b>Email</b> : </small><small id="email{{librarian.hashid}}">{{librarian.email}}</small><br>
                                                     <small><b>Adresse</b> : </small><small id="address{{librarian.hashid}}">{{ librarian.address }}</small><br>
                                                     <small><b>Téléphone</b> : </small><small id="phone{{librarian.hashid}}">{{ librarian.phone }}</small><br>
-                                                    <small><b>Salaire</b> : </small><small id="phone{{librarian.hashid}}">{{ librarian.salary }}</small><br>
+                                                    <small><b>Salaire</b> : </small><small id="salary{{librarian.hashid}}">{{ librarian.salary }}</small><br>
                                                 </td>
                                                 <td >
                                                     <a data-url="{{ path('handleDeleteUser',{'id':librarian.hashid,'role':'librarian'}) }}" data-toggle="confirmation" data-title="Confirmer la suppression de ce bibliothécaire ?" class="text-danger mr-2">
@@ -83,18 +83,27 @@
         <div class="col-lg-3 col-md-4 mt-2" id="add">
             <div class="card mb-3">
                 <div class="card-body">
-                    <b id="form-header">Ajouter Un Livre</b>
-                    <form id="form-addBook" autocomplete="off"   method="POST">
+                    <b id="form-header">Ajouter Un Bibliothécaire</b>
+                    <form id="form-addUser" autocomplete="off"   method="POST">
+                        {{ form_row(userForm.id) }}
                         <div class="row row-xs">
                             <div class="col-md-12 mb-3">
                                 <br>
                                 <b style="color: red">*Obligatoire</b>
                                 <div class="col-form-label">*Nom et prénom</div>
+                                    {{ form_row(userForm.name) }}
                                 <div class="col-form-label">*Email</div>
-                                <div class="col-form-label">*Mot de passe</div>
+                                    {{ form_row(userForm.email) }}
+                                <div id="pass">
+                                    <div class="col-form-label">*Mot de passe</div>
+                                        {{ form_row(userForm.password) }}
+                                </div>
                                 <div class="col-form-label">Adresse</div>
+                                    {{ form_row(userForm.address) }}
                                 <div class="col-form-label">Téléphone</div>
+                                    {{ form_row(userForm.phone) }}
                                 <div class="col-form-label">Salaire</div>
+                                    {{ form_row(userForm.salary) }}
                             </div>
 
                         </div>
@@ -119,6 +128,74 @@
                     location.href = $(this).data('url');
                 },
             });
+            $("tbody").on('click','.edit' ,function () {
+                let id = $(this).data('id');
+                $('#form-header').text("Modification Rapide");
+                $('#btnadd').text("Sauvegarder");
+                $('#user_form_id').val(id);
+                $('#user_form_name').val($('#name'+id).text());
+                $('#user_form_email').val($('#email'+id).text());
+                if($('#phone'+id).text()){
+                    $('#user_form_phone').val(parseFloat($('#phone'+id).text()));
+                }
+                $('#user_form_salary').val(parseFloat($('#salary'+id).text()));
+                $('#user_form_address').val($('#address'+id).text());
+                $( "#pass" ).hide();
+            });
+            $("#form-addUser").on('click','.clear',function (){
+                $('#form-header').text("Ajouter Un Bibliothécaire");
+                $('#user_form_id').val('');
+                $('#btnadd').text("Ajouter");
+                $( "#pass" ).show();
+            });
+            $("#form-addUser").validate({
+                errorClass: "danger is-invalid",
+                validClass: "success is-valid",
+                rules: {
+                    "user_form[name]": {
+                        required: true,
+                    },
+                    "user_form[email]": {
+                        required: true,
+                        email: true,
+                    },
+                    "user_form[phone]":{
+                        number:true,
+                        minlength:8,
+                        maxlength:8
+                    },
+                    "user_form[salary]":{
+                        number:true,
+                    },
+                },
+                messages: {
+                    "user_form[name]": {
+                        required: "Le Nom et prénom est obligatoire",
+                    },
+                    "user_form[email]":{
+                        required:"L'email est obligatoire",
+                        email:"L'email est invalide"
+                    },
+                    "user_form[phone]":{
+                        number: "Le numéro de téléphone doit être numérique",
+                        minlength:"Le numéro de téléphone doit être de 8 chiffres",
+                        maxlength:"Le numéro de téléphone doit être de 8 chiffres"
+                    },
+                    "user_form[salary]":{
+                        number: "Le salaire doit être numérique",
+                    }
+                }
+            });
+            if($('#user_form_password').is(':visible')){
+                $("#user_form_password").rules('add',{
+                    required:true,
+                    minlength:6,
+                    messages:{
+                        required:"Le mot de passe est obligatoire",
+                        minlength:"Le mot de passe doit être au moins 6 caractères"
+                    }
+                });
+            }
         });
     </script>
 

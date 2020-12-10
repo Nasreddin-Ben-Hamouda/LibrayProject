@@ -32,25 +32,6 @@ class UserFixture extends Fixture
         $admin->setIsVerified(true);
         $admin->setRoles(array('ROLE_ADMIN'));
         $manager->persist($admin);
-        $user=new User();
-        $user->setName("home");
-        $user->setEmail("home@library.com");
-        $user->setPassword($this->hash->encodePassword($user,'user123'));
-        $user->setAddress("Al alia bizerte");
-        $user->setPhone(54808062);
-        $user->setRoles(array('ROLE_STUDENT'));
-        $manager->persist($user);
-        $book=new Book();
-        $book->setReference("HKKD255MLDNC5854");
-        $book->setTitle("DEV WEB");
-        $book->setCategory("Informatique & Internet");
-        $book->setAuthor("NASR EDDINE");
-        $manager->persist($book);
-        $loan=new Loan();
-        $loan->setBook($book);
-        $loan->setUser($user);
-        $loan->setTakenAt(new \DateTime());
-        $manager->persist($loan);
         $manager->flush();
     }
 }
