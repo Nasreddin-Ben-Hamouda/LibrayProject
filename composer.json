@@ -87,11 +87,20 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "mkdir -p public/storage/images/avatar",
+            "mkdir -p public/storage/images/book",
+            "chmod -R 777 public/storage/images/avatar",
+            "chmod -R 777 public/storage/images/book"
         ],
         "post-update-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "mkdir -p public/storage/images/avatar",
+            "mkdir -p public/storage/images/book",
+            "chmod -R 777 public/storage/images/avatar",
+            "chmod -R 777 public/storage/images/book"
         ]
+
     },
     "conflict": {
         "symfony/symfony": "*"
