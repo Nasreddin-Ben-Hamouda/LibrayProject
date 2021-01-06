@@ -24,95 +24,57 @@
             <div class="row row-fix row-50 justify-content-xl-between">
                 <div class="col-xl-4">
                     <div class="row row-fix row-70 align-items-md-center">
-                        <div class="col-md-6 col-xl-12"><img src="{{ asset('images/frontOffice/ronald-chen-1-420x420.jpg') }}" alt="" width="420" height="420"/>
-                        </div>
-                        <div class="col-md-6 col-xl-12 text-md-left">
-                            <h6>Get in Touch</h6>
-                            <!-- RD Mailform-->
-                            <form class="rd-mailform" data-form-output="form-output-global" data-form-type="contact" method="post" action="../../external.html?link=https://livedemo00.template-help.com/wt_prod-19592/bat/rd-mailform.php">
-                                <div class="row row-20 row-fix">
-                                    <div class="col-md-12">
-                                        <div class="form-wrap form-wrap-validation">
-                                            <label class="form-label-outside" for="form-1-name">First name</label>
-                                            <input class="form-input" id="form-1-name" type="text" name="name" data-constraints="@Required">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-wrap form-wrap-validation">
-                                            <label class="form-label-outside" for="form-1-email">E-mail</label>
-                                            <input class="form-input" id="form-1-email" type="email" name="email" data-constraints="@Email @Required">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-wrap form-wrap-validation">
-                                            <label class="form-label-outside" for="form-1-message">Message</label>
-                                            <textarea class="form-input" id="form-1-message" name="message" data-constraints="@Required"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 offset-custom-1">
-                                        <div class="form-button">
-                                            <button class="button button-primary button-nina" type="submit">send message</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                        <div class="col-md-6 col-xl-12"><img src="{% if app.user.photo %}{{ asset('storage/images/avatar/') }}{{ app.user.photo }}{% else %}{{ asset('images/frontOffice/ronald-chen-1-420x420.jpg') }} {% endif %}" alt="" width="420" height="420"/>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-7">
                     <div class="row row-fix row-30 row-xl-120">
                         <div class="col-sm-12">
-                            <div class="heading-5">Marketing Manager</div>
-                            <h3>Joe Myers</h3>
-                            <div class="divider divider-default"></div>
-                            <p class="text-spacing-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercita</p>
+                            <div class="heading-decorated-diamonds">{% if is_granted('ROLE_ADMIN') %} Administrator {% elseif is_granted('ROLE_LIBRARIAN') %} Librarian {% else %} Student {% endif %}</div>
+                            <br><br><br>
+                            <h3>{{ app.user.name }}</h3>
+                            <div class="divider divider-secondary"></div>
                             <div class="row text-center row-lg row-30 row-xxs-center">
                                 <div class="cell-xxs-6 col-sm-4">
-                                    <div class="progress-bar-circle" data-value="0.75" data-gradient="#fff586" data-empty-fill="rgb(242,243,249)" data-size="140" data-thickness="6"><span class="radial">5</span></div>
-                                    <div class="heading-5">Marketing</div>
+
                                 </div>
                                 <div class="cell-xxs-6 col-sm-4">
-                                    <div class="progress-bar-circle" data-value="0.50" data-gradient="#fff586" data-empty-fill="rgb(242,243,249)" data-size="140" data-thickness="6"><span class="radial">5</span></div>
-                                    <div class="heading-5">Strategy</div>
+                                    <div class="progress-bar-circle" data-value="{{ app.user.loans|length/100 }}" data-gradient="#fff586" data-empty-fill="rgb(242,243,249)" data-size="200" data-thickness="6"><span class="radial">5</span></div>
+                                    <div class="heading-5">Percentage of loans</div>
                                 </div>
                                 <div class="cell-xxs-6 col-sm-4">
-                                    <div class="progress-bar-circle" data-value="0.25" data-gradient="#fff586" data-empty-fill="rgb(242,243,249)" data-size="140" data-thickness="6"><span class="radial">5</span></div>
-                                    <div class="heading-5">Promotion</div>
+
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="row row-70">
                                 <div class="col-md-6">
-                                    <h6>skills</h6>
-                                    <p>Ut enim ad minim veniam, quis nostrud exer<br class="d-none d-xxl-block"> citation ullamco laboris nisi ut
-                                    </p>
-                                </div>
-                                <div class="col-md-6">
-                                    <h6>awards</h6>
+                                    <h6>Loans ({{ app.user.loans|length }})</h6>
                                     <ul class="list list-xxs text-spacing-sm">
-                                        <li>2018 — The Best Marketer</li>
-                                        <li>2016 — The Best Employer of the Year</li>
-                                        <li>2015 — The Best PR Expert</li>
+                                        {% for loan in app.user.loans %}
+                                            <li>{{loan.takenAt|date}} — {{ loan.book.title }}</li>
+                                        {% endfor %}
                                     </ul>
                                 </div>
                                 <div class="col-md-6">
-                                    <h6>certificates</h6>
-                                    <ul class="list list-xxs text-spacing-sm">
-                                        <li>2018 — New Ways of Sales</li>
-                                        <li>2016 — Modern Methods of Promotion</li>
-                                        <li>2015 — Public Relations in Business</li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-6">
-                                    <h6>contact information</h6>
+                                    <h6>My information</h6>
                                     <ul class="list-xs">
+                                        <li class="box-inline box-inline-gray"><span class="icon novi-icon icon-md-smaller icon-primary mdi mdi-account"></span>
+                                            <div><a href="#">{{ app.user.email }}</a></div>
+                                        </li>
+                                        {% if app.user.studentNumber %}
+                                        <li class="box-inline box-inline-gray"><span class="icon novi-icon icon-md-smaller icon-primary mdi mdi-numeric-0-box-multiple-outline"></span>
+                                            <div><a href="#">{{ app.user.studentNumber }}</a></div>
+                                        </li>
+                                        {% endif %}
                                         <li class="box-inline box-inline-gray"><span class="icon novi-icon icon-md-smaller icon-primary mdi mdi-map-marker"></span>
-                                            <div><a href="#">2130 Fulton Street, San Diego, CA<br>94117-1080 USA</a></div>
+                                            <div><a href="#">{{ app.user.address }}</a></div>
                                         </li>
                                         <li class="box-inline box-inline-gray"><span class="icon novi-icon icon-md-smaller icon-primary mdi mdi-phone"></span>
                                             <ul class="list-comma">
-                                                <li><a href="tel:#">1-800-1234-567</a></li>
+                                                <li><a href="#">{{ app.user.phone }}</a></li>
                                             </ul>
                                         </li>
                                         <li>
@@ -135,115 +97,6 @@
     </section>
 
     <!-- Projects-->
-    <section class="section section-lg text-center bg-gray-darker novi-background bg-cover">
-        <div class="container container-wide">
-            <div class="row row-fix row-50 justify-content-md-center">
-                <div class="col-sm-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
-                    <h3>What Booker offers</h3>
-                    <div class="divider divider-default"></div>
-                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
-                </div>
-            </div>
-            <div class="row row-50" data-lightgallery="group">
-                <div class="col-sm-12 col-md-6 col-lg-4"><a class="gallery-item titled-gallery-item" href="images/project-1-1200x800-original.jpg" data-lightgallery="item">
-                        <div class="gallery-item-image">
-                            <figure><img src="images/project-1-570x380.jpg" alt="" width="570" height="380"/>
-                            </figure>
-                            <div class="caption">
-                            </div>
-                        </div></a>
-                    <div class="titled-gallery-caption"><a href="#">Instant Book Return</a></div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-4"><a class="gallery-item titled-gallery-item" href="images/project-2-1200x800-original.jpg" data-lightgallery="item">
-                        <div class="gallery-item-image">
-                            <figure><img src="images/project-2-570x380.jpg" alt="" width="570" height="380"/>
-                            </figure>
-                            <div class="caption">
-                            </div>
-                        </div></a>
-                    <div class="titled-gallery-caption"><a href="#">Textbook Rentals</a></div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-4"><a class="gallery-item titled-gallery-item" href="images/project-3-1200x800-original.jpg" data-lightgallery="item">
-                        <div class="gallery-item-image">
-                            <figure><img src="images/project-3-570x380.jpg" alt="" width="570" height="380"/>
-                            </figure>
-                            <div class="caption">
-                            </div>
-                        </div></a>
-                    <div class="titled-gallery-caption"><a href="#">eTextbooks</a></div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-4"><a class="gallery-item titled-gallery-item" href="images/project-4-1200x800-original.jpg" data-lightgallery="item">
-                        <div class="gallery-item-image">
-                            <figure><img src="images/project-4-570x380.jpg" alt="" width="570" height="380"/>
-                            </figure>
-                            <div class="caption">
-                            </div>
-                        </div></a>
-                    <div class="titled-gallery-caption"><a href="#">Used Textbooks</a></div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-4"><a class="gallery-item titled-gallery-item" href="images/project-5-1200x800-original.jpg" data-lightgallery="item">
-                        <div class="gallery-item-image">
-                            <figure><img src="images/project-5-570x380.jpg" alt="" width="570" height="380"/>
-                            </figure>
-                            <div class="caption">
-                            </div>
-                        </div></a>
-                    <div class="titled-gallery-caption"><a href="#">Cheap Textbooks</a></div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-4"><a class="gallery-item titled-gallery-item" href="images/project-6-1200x800-original.jpg" data-lightgallery="item">
-                        <div class="gallery-item-image">
-                            <figure><img src="images/project-6-570x380.jpg" alt="" width="570" height="380"/>
-                            </figure>
-                            <div class="caption">
-                            </div>
-                        </div></a>
-                    <div class="titled-gallery-caption"><a href="#">New Textbooks</a></div>
-                </div>
-            </div>
-        </div><a class="button button-primary button-nina" href="fullwidth-gallery-hover-title.html">view all projects</a>
-    </section>
-
-    <!-- Testimonials-->
-    <section class="section section-lg text-center bg-gray-100 novi-background bg-cover">
-        <div class="container container-wide">
-            <div class="row row-fix row-50 justify-content-md-center">
-                <div class="col-md-11 col-lg-10 col-xxl-7 cell-xxl-6">
-                    <h3>testimonials</h3>
-                    <div class="divider divider-default"></div>
-                    <!-- Owl Carousel-->
-                    <div class="owl-carousel owl-layout-2" data-items="1" data-dots="true" data-nav="false" data-stage-padding="0" data-loop="true" data-margin="30" data-mouse-drag="false" data-autoplay="true">
-                        <article class="quote-vertical"><img class="quote-vertical-image" src="images/quote-user-1-210x210.jpg" alt="" width="210" height="210"/>
-                            <div class="quote-vertical-text">
-                                <p>The books I rent here always arrive on time, which is of primary importance to me as I like to read a lot. I am especially interested in books about business and science and you have a diverse collection of them. Thank you for your service!</p>
-                            </div>
-                            <div class="quote-vertical-meta">
-                                <p class="quote-vertical-cite">James Smith</p>
-                                <p class="quote-vertical-small">Regular Customer</p>
-                            </div>
-                        </article>
-                        <article class="quote-vertical"><img class="quote-vertical-image" src="images/quote-user-2-210x210.jpg" alt="" width="210" height="210"/>
-                            <div class="quote-vertical-text">
-                                <p>As an avid reader and web developer, I always use your website to find and rent new books. Sometimes I even rent exclusives that are not available at bookstores. I especially like your collection of JavaScript and PHP guides, they are very helpful.</p>
-                            </div>
-                            <div class="quote-vertical-meta">
-                                <p class="quote-vertical-cite">Mary McMillan</p>
-                                <p class="quote-vertical-small">Regular Customer</p>
-                            </div>
-                        </article>
-                        <article class="quote-vertical"><img class="quote-vertical-image" src="images/quote-user-3-210x210.jpg" alt="" width="210" height="210"/>
-                            <div class="quote-vertical-text">
-                                <p>Thanks to Booker, I saved over $140 just on one book! The customer service was top-notch and everyone there was very friendly. I will be back for next semester and I will definitely tell my friends about your website. Thanks a lot for your great customer service!</p>
-                            </div>
-                            <div class="quote-vertical-meta">
-                                <p class="quote-vertical-cite">Samuel Contreras</p>
-                                <p class="quote-vertical-small">Regular Customer</p>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- CTA-->
     <section class="section section-md text-center text-md-left bg-gray-700 novi-background bg-cover">

@@ -16,7 +16,7 @@
                                 <div class="col-md-8 col-lg-7 col-xl-6 col-xxl-5 offset-xl-1">
                                     <p class="big">Welcome to Booker</p>
                                     <h3>Rent New and Used Textbooks</h3>
-                                    <p class="big">We provide huge discounts on all kinds of textbooks. On our website you can find lots of books for study and self-development.</p><a class="button button-primary button-nina" href="shop-4-columns-layout.html">View catalog</a>
+                                    <p class="big">We provide huge discounts on all kinds of textbooks. On our website you can find lots of books for study and self-development.</p><a class="button button-primary button-nina" href="#">View catalog</a>
                                 </div>
                             </div>
                         </div>
@@ -74,9 +74,9 @@
                             <button class="isotope-filters-toggle button button-xs button-primary" data-custom-toggle="#isotope-filters-list-1" data-custom-toggle-hide-on-blur="true">Filter<span class="caret"></span></button>
                             <ul class="isotope-filters-list isotope-filters-list-buttons" id="isotope-filters-list-1">
                                 <li><a class="button-xs active" data-isotope-filter="*" data-isotope-group="movies" href="#">All Categories</a></li>
-                                <li><a class="button-xs" data-isotope-filter="type 1" data-isotope-group="movies" href="#">Business & Economics</a></li>
-                                <li><a class="button-xs" data-isotope-filter="type 2" data-isotope-group="movies" href="#">Web Design</a></li>
-                                <li><a class="button-xs" data-isotope-filter="type 3" data-isotope-group="movies" href="#">Marketing</a></li>
+                                {% for category in categories %}
+                                    <li><a class="button-xs" data-isotope-filter="{{ category }}" data-isotope-group="movies" href="#">{{ category }}</a></li>
+                                {% endfor %}
                             </ul>
                         </li>
                     </ul>
@@ -84,108 +84,37 @@
                 <!-- Isotope Content-->
                 <div class="col-xl-12">
                     <div class="isotope isotope-md row row-30" data-isotope-layout="fitRows" data-isotope-group="movies" data-lightgallery="group">
-                        <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="type 3">
-                            <div class="product">
-                                <div class="product-image"><a href="product-page.html"><img src="images/book-01-188x246.jpg" alt="" width="188" height="246"/></a></div>
-                                <div class="product-title">
-                                    <h5><a href="product-page.html">Immutable Laws<br class="d-none d-xxl-block">&nbsp;of Marketing</a></h5>
+                        {% for book in books %}
+                            <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="{{ book.category }}">
+                                <div class="product" style="height:38em;">
+                                    <div class="product-image"><a href="#"><img src="/storage/images/book/{{ book.medias|first.path }}" alt="" width="188" height="246"/></a></div>
+                                    <div class="product-title">
+                                        <h5><a href="#">{{ book.title }}</a></h5>
+                                    </div>
+                                    <div class="product-price">
+                                        <h6>{{ book.subject }}</h6>
+                                    </div>
+                                    {% if app.user %}
+                                        {% if book.loans is empty %}
+                                            <div class="product-button"><a class="button button-primary button-nina" href="{{ path('loanBook', {'id': book.id}) }}">Loan</a></div>
+                                        {% else %}
+                                            {% for loan in book.loans %}
+                                                <div class="product-button">Loaned by {% if app.user.id== loan.user.id%} you {% else %} {{ loan.user.name }} {% endif %}</div>
+                                                {% if app.user.id== loan.user.id %}
+                                                    <a class="button button-primary button-nina" href="{{ path('returnbook', {'id': loan.id}) }}">Return Book</a>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+
+                                    {% endif %}
                                 </div>
-                                <div class="product-price">
-                                    <h6>$27.00</h6>
-                                </div>
-                                <div class="product-button"><a class="button button-primary button-nina" href="shopping-cart.html">add to cart</a></div>
                             </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="type 2">
-                            <div class="product">
-                                <div class="product-image"><a href="product-page.html"><img src="images/book-02-188x246.jpg" alt="" width="188" height="246"/></a></div>
-                                <div class="product-title">
-                                    <h5><a href="product-page.html">The Art of<br class="d-none d-xxl-block">&nbsp;Leadership</a></h5>
-                                </div>
-                                <div class="product-price">
-                                    <h6>$25.00</h6>
-                                </div>
-                                <div class="product-button"><a class="button button-primary button-nina" href="shopping-cart.html">add to cart</a></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="type 1">
-                            <div class="product">
-                                <div class="product-image"><a href="product-page.html"><img src="images/book-03-188x246.jpg" alt="" width="188" height="246"/></a></div>
-                                <div class="product-title">
-                                    <h5><a href="product-page.html">The Basics of<br class="d-none d-xxl-block">&nbsp;Web Design</a></h5>
-                                </div>
-                                <div class="product-price">
-                                    <h6>$21.00</h6>
-                                </div>
-                                <div class="product-button"><a class="button button-primary button-nina" href="shopping-cart.html">add to cart</a></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="type 3">
-                            <div class="product">
-                                <div class="product-image"><a href="product-page.html"><img src="images/book-04-188x246.jpg" alt="" width="188" height="246"/></a></div>
-                                <div class="product-title">
-                                    <h5><a href="product-page.html">Grid Systems in<br class="d-none d-xxl-block">&nbsp;Web Design</a></h5>
-                                </div>
-                                <div class="product-price">
-                                    <h6>$29.00</h6>
-                                </div>
-                                <div class="product-button"><a class="button button-primary button-nina" href="shopping-cart.html">add to cart</a></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="type 2">
-                            <div class="product">
-                                <div class="product-image"><a href="product-page.html"><img src="images/book-05-188x246.jpg" alt="" width="188" height="246"/></a></div>
-                                <div class="product-title">
-                                    <h5><a href="product-page.html">Tools That Reveal Why Your Users Abandon Your Website</a></h5>
-                                </div>
-                                <div class="product-price">
-                                    <h6>$25.00</h6>
-                                </div>
-                                <div class="product-button"><a class="button button-primary button-nina" href="shopping-cart.html">add to cart</a></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="type 1">
-                            <div class="product">
-                                <div class="product-image"><a href="product-page.html"><img src="images/book-06-188x246.jpg" alt="" width="188" height="246"/></a></div>
-                                <div class="product-title">
-                                    <h5><a href="product-page.html">Dangerous Side Effects<br class="d-none d-xxl-block">&nbsp;
-                                            of Bad Customer Service</a></h5>
-                                </div>
-                                <div class="product-price">
-                                    <h6>$21.00</h6>
-                                </div>
-                                <div class="product-button"><a class="button button-primary button-nina" href="shopping-cart.html">add to cart</a></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="type 3">
-                            <div class="product">
-                                <div class="product-image"><a href="product-page.html"><img src="images/book-07-188x246.jpg" alt="" width="188" height="246"/></a></div>
-                                <div class="product-title">
-                                    <h5><a href="product-page.html">Intro Guide to UX Reviews<br class="d-none d-xxl-block">&nbsp;
-                                            for Web Designers</a></h5>
-                                </div>
-                                <div class="product-price">
-                                    <h6>$29.00</h6>
-                                </div>
-                                <div class="product-button"><a class="button button-primary button-nina" href="shopping-cart.html">add to cart</a></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="type 2">
-                            <div class="product">
-                                <div class="product-image"><a href="product-page.html"><img src="images/book-08-188x246.jpg" alt="" width="188" height="246"/></a></div>
-                                <div class="product-title">
-                                    <h5><a href="product-page.html">How to Create a Web Design<br class="d-none d-xxl-block">&nbsp;
-                                            Style Guide</a></h5>
-                                </div>
-                                <div class="product-price">
-                                    <h6>$29.00</h6>
-                                </div>
-                                <div class="product-button"><a class="button button-primary button-nina" href="shopping-cart.html">add to cart</a></div>
-                            </div>
-                        </div>
+                        {% endfor %}
+
+
                     </div>
                 </div>
-            </div><a class="button button-primary button-nina" href="shop-3-columns-layout.html">view more books</a>
+            </div><a class="button button-primary button-nina" >view more books</a>
         </div>
     </section>
 
@@ -285,105 +214,6 @@
         </div>
     </section>
 
-    <!-- Icon carousel-->
-    <section class="section bg-default novi-background novi-section">
-        <div class="container-custom">
-            <div class="row justify-content-md-center justify-content-xl-start row-0">
-                <div class="col-md-10 col-lg-6">
-                    <div class="section-variant-2">
-                        <div class="container-custom-inner">
-                            <h3>What people say</h3>
-                            <hr class="divider divider-default">
-                            <!-- Slick Carousel-->
-                            <div class="slider-widget">
-                                <!-- Owl Carousel-->
-                                <div class="owl-carousel-widget owl-carousel" data-custom-nav="true" data-items="1" data-dots="false" data-nav="false" data-stage-padding="15" data-loop="true" data-margin="0" data-mouse-drag="false">
-                                    <div class="item">
-                                        <article class="quote-classic">
-                                            <div class="quote-classic-header"><img class="quote-classic-image" src="images/quote-user-1-210x210.jpg" alt="" width="210" height="210"/>
-                                                <div class="quote-classic-meta">
-                                                    <p class="quote-classic-cite">James Smith</p>
-                                                    <p class="quote-classic-small">Regular Client</p>
-                                                </div>
-                                            </div>
-                                            <div class="quote-classic-text">
-                                                <p>The books I rent here always arrive on time, which is of primary importance to me as I like to read a lot. I am especially interested in books about business and science and you have a diverse collection of them. Thank you for your service!</p>
-                                            </div>
-                                        </article>
-                                    </div>
-                                    <div class="item">
-                                        <article class="quote-classic">
-                                            <div class="quote-classic-header"><img class="quote-classic-image" src="images/quote-user-2-210x210.jpg" alt="" width="210" height="210"/>
-                                                <div class="quote-classic-meta">
-                                                    <p class="quote-classic-cite">Mary McMillan</p>
-                                                    <p class="quote-classic-small">Regular Client</p>
-                                                </div>
-                                            </div>
-                                            <div class="quote-classic-text">
-                                                <p>As an avid reader and web developer, I always use your website to find and rent new books. Sometimes I even rent exclusives that are not available at bookstores. I especially like your collection of JavaScript and PHP guides, they are very helpful.</p>
-                                            </div>
-                                        </article>
-                                    </div>
-                                    <div class="item">
-                                        <article class="quote-classic">
-                                            <div class="quote-classic-header"><img class="quote-classic-image" src="{{ asset('images/frontOffice/quote-user-3-210x210.jpg') }}" alt="" width="210" height="210"/>
-                                                <div class="quote-classic-meta">
-                                                    <p class="quote-classic-cite">Samuel Contreras</p>
-                                                    <p class="quote-classic-small">Regular Client</p>
-                                                </div>
-                                            </div>
-                                            <div class="quote-classic-text">
-                                                <p>Thanks to Booker, I saved over $140 just on one book! The customer service was top-notch and everyone there was very friendly. I will be back for next semester and I will definitely tell my friends about your website. Thanks a lot for your great customer service!</p>
-                                            </div>
-                                        </article>
-                                    </div>
-                                </div>
-                                <div class="slider-widget-aside">
-                                    <div class="icon icon-lg-smaller mdi mdi-format-quote"></div>
-                                    <div class="owl-carousel-widget-nav">
-                                        <button class="slick-prev mdi mdi-arrow-left-bold-circle" type="button" data-slick="slick-1"></button>
-                                        <button class="slick-next mdi mdi-arrow-right-bold-circle" type="button" data-slick="slick-1"></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 bg-image custom-bg-image" style="background-image: url(images/landing-maritime-8-1132x832.jpg);">
-                    <div class="section-lg">
-                        <div class="container-custom-inner container-custom-inner-1 text-center">
-                            <div class="row row-50 row-xl-120">
-                                <div class="col-sm-6 col-md-3 col-lg-6">
-                                    <div class="counter-wrap"><span class="icon novi-icon icon-secondary mdi mdi-television-guide"></span>
-                                        <div class="heading-3"><span class="counter" data-speed="2500">62000</span><span class="counter-preffix">+</span></div>
-                                        <p>Textbooks</p>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-3 col-lg-6">
-                                    <div class="counter-wrap"><span class="icon novi-icon icon-secondary mdi mdi-account-multiple-outline"></span>
-                                        <div class="heading-3"><span class="counter" data-step="2500">2466</span></div>
-                                        <p>Active Readers</p>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-3 col-lg-6">
-                                    <div class="counter-wrap"><span class="icon novi-icon icon-secondary mdi mdi-clock"></span>
-                                        <div class="heading-3"><span class="counter" data-speed="2500">12</span><span class="counter-preffix">+</span></div>
-                                        <p>Awards</p>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-3 col-lg-6">
-                                    <div class="counter-wrap"><span class="icon novi-icon icon-secondary mdi mdi-code-tags"></span>
-                                        <div class="heading-3"><span class="counter" data-step="2500">520</span></div>
-                                        <p>Authors</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- CTA-->
     <section class="section section-xs text-center bg-gray-700 novi-background bg-cover">
