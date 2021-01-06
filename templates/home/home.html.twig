@@ -16,7 +16,7 @@
                                 <div class="col-md-8 col-lg-7 col-xl-6 col-xxl-5 offset-xl-1">
                                     <p class="big">Welcome to Booker</p>
                                     <h3>Rent New and Used Textbooks</h3>
-                                    <p class="big">We provide huge discounts on all kinds of textbooks. On our website you can find lots of books for study and self-development.</p><a class="button button-primary button-nina" href="shop-4-columns-layout.html">View catalog</a>
+                                    <p class="big">We provide huge discounts on all kinds of textbooks. On our website you can find lots of books for study and self-development.</p><a class="button button-primary button-nina" href="#">View catalog</a>
                                 </div>
                             </div>
                         </div>
@@ -74,9 +74,9 @@
                             <button class="isotope-filters-toggle button button-xs button-primary" data-custom-toggle="#isotope-filters-list-1" data-custom-toggle-hide-on-blur="true">Filter<span class="caret"></span></button>
                             <ul class="isotope-filters-list isotope-filters-list-buttons" id="isotope-filters-list-1">
                                 <li><a class="button-xs active" data-isotope-filter="*" data-isotope-group="movies" href="#">All Categories</a></li>
-                                <li><a class="button-xs" data-isotope-filter="type 1" data-isotope-group="movies" href="#">Business & Economics</a></li>
-                                <li><a class="button-xs" data-isotope-filter="type 2" data-isotope-group="movies" href="#">Web Design</a></li>
-                                <li><a class="button-xs" data-isotope-filter="type 3" data-isotope-group="movies" href="#">Marketing</a></li>
+                                {% for category in categories %}
+                                    <li><a class="button-xs" data-isotope-filter="{{ category }}" data-isotope-group="movies" href="#">{{ category }}</a></li>
+                                {% endfor %}
                             </ul>
                         </li>
                     </ul>
@@ -84,108 +84,37 @@
                 <!-- Isotope Content-->
                 <div class="col-xl-12">
                     <div class="isotope isotope-md row row-30" data-isotope-layout="fitRows" data-isotope-group="movies" data-lightgallery="group">
-                        <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="type 3">
-                            <div class="product">
-                                <div class="product-image"><a href="product-page.html"><img src="images/book-01-188x246.jpg" alt="" width="188" height="246"/></a></div>
-                                <div class="product-title">
-                                    <h5><a href="product-page.html">Immutable Laws<br class="d-none d-xxl-block">&nbsp;of Marketing</a></h5>
+                        {% for book in books %}
+                            <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="{{ book.category }}">
+                                <div class="product" style="height:38em;">
+                                    <div class="product-image"><a href="#"><img src="/storage/images/book/{{ book.medias|first.path }}" alt="" width="188" height="246"/></a></div>
+                                    <div class="product-title">
+                                        <h5><a href="#">{{ book.title }}</a></h5>
+                                    </div>
+                                    <div class="product-price">
+                                        <h6>{{ book.subject }}</h6>
+                                    </div>
+                                    {% if app.user %}
+                                        {% if book.loans is empty %}
+                                            <div class="product-button"><a class="button button-primary button-nina" href="{{ path('loanBook', {'id': book.id}) }}">Loan</a></div>
+                                        {% else %}
+                                            {% for loan in book.loans %}
+                                                <div class="product-button">Loaned by {% if app.user.id== loan.user.id%} you {% else %} {{ loan.user.name }} {% endif %}</div>
+                                                {% if app.user.id== loan.user.id %}
+                                                    <a class="button button-primary button-nina" href="{{ path('returnbook', {'id': loan.id}) }}">Return Book</a>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+
+                                    {% endif %}
                                 </div>
-                                <div class="product-price">
-                                    <h6>$27.00</h6>
-                                </div>
-                                <div class="product-button"><a class="button button-primary button-nina" href="shopping-cart.html">add to cart</a></div>
                             </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="type 2">
-                            <div class="product">
-                                <div class="product-image"><a href="product-page.html"><img src="images/book-02-188x246.jpg" alt="" width="188" height="246"/></a></div>
-                                <div class="product-title">
-                                    <h5><a href="product-page.html">The Art of<br class="d-none d-xxl-block">&nbsp;Leadership</a></h5>
-                                </div>
-                                <div class="product-price">
-                                    <h6>$25.00</h6>
-                                </div>
-                                <div class="product-button"><a class="button button-primary button-nina" href="shopping-cart.html">add to cart</a></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="type 1">
-                            <div class="product">
-                                <div class="product-image"><a href="product-page.html"><img src="images/book-03-188x246.jpg" alt="" width="188" height="246"/></a></div>
-                                <div class="product-title">
-                                    <h5><a href="product-page.html">The Basics of<br class="d-none d-xxl-block">&nbsp;Web Design</a></h5>
-                                </div>
-                                <div class="product-price">
-                                    <h6>$21.00</h6>
-                                </div>
-                                <div class="product-button"><a class="button button-primary button-nina" href="shopping-cart.html">add to cart</a></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="type 3">
-                            <div class="product">
-                                <div class="product-image"><a href="product-page.html"><img src="images/book-04-188x246.jpg" alt="" width="188" height="246"/></a></div>
-                                <div class="product-title">
-                                    <h5><a href="product-page.html">Grid Systems in<br class="d-none d-xxl-block">&nbsp;Web Design</a></h5>
-                                </div>
-                                <div class="product-price">
-                                    <h6>$29.00</h6>
-                                </div>
-                                <div class="product-button"><a class="button button-primary button-nina" href="shopping-cart.html">add to cart</a></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="type 2">
-                            <div class="product">
-                                <div class="product-image"><a href="product-page.html"><img src="images/book-05-188x246.jpg" alt="" width="188" height="246"/></a></div>
-                                <div class="product-title">
-                                    <h5><a href="product-page.html">Tools That Reveal Why Your Users Abandon Your Website</a></h5>
-                                </div>
-                                <div class="product-price">
-                                    <h6>$25.00</h6>
-                                </div>
-                                <div class="product-button"><a class="button button-primary button-nina" href="shopping-cart.html">add to cart</a></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="type 1">
-                            <div class="product">
-                                <div class="product-image"><a href="product-page.html"><img src="images/book-06-188x246.jpg" alt="" width="188" height="246"/></a></div>
-                                <div class="product-title">
-                                    <h5><a href="product-page.html">Dangerous Side Effects<br class="d-none d-xxl-block">&nbsp;
-                                            of Bad Customer Service</a></h5>
-                                </div>
-                                <div class="product-price">
-                                    <h6>$21.00</h6>
-                                </div>
-                                <div class="product-button"><a class="button button-primary button-nina" href="shopping-cart.html">add to cart</a></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="type 3">
-                            <div class="product">
-                                <div class="product-image"><a href="product-page.html"><img src="images/book-07-188x246.jpg" alt="" width="188" height="246"/></a></div>
-                                <div class="product-title">
-                                    <h5><a href="product-page.html">Intro Guide to UX Reviews<br class="d-none d-xxl-block">&nbsp;
-                                            for Web Designers</a></h5>
-                                </div>
-                                <div class="product-price">
-                                    <h6>$29.00</h6>
-                                </div>
-                                <div class="product-button"><a class="button button-primary button-nina" href="shopping-cart.html">add to cart</a></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="type 2">
-                            <div class="product">
-                                <div class="product-image"><a href="product-page.html"><img src="images/book-08-188x246.jpg" alt="" width="188" height="246"/></a></div>
-                                <div class="product-title">
-                                    <h5><a href="product-page.html">How to Create a Web Design<br class="d-none d-xxl-block">&nbsp;
-                                            Style Guide</a></h5>
-                                </div>
-                                <div class="product-price">
-                                    <h6>$29.00</h6>
-                                </div>
-                                <div class="product-button"><a class="button button-primary button-nina" href="shopping-cart.html">add to cart</a></div>
-                            </div>
-                        </div>
+                        {% endfor %}
+
+
                     </div>
                 </div>
-            </div><a class="button button-primary button-nina" href="shop-3-columns-layout.html">view more books</a>
+            </div><a class="button button-primary button-nina" >view more books</a>
         </div>
     </section>
 
