@@ -78,4 +78,15 @@ class UserRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+    public function checkLoansNotReturned(User $user):?array
+    {
+        return $this->createQueryBuilder('user')
+            ->innerJoin('user.loans','loan')
+            ->andWhere('loan.returnedAt is null')
+            //->andWhere('DATE_DIFF(CURRENT_TIMESTAMP(),loan.takenAt)>10')
+            ->andWhere('loan.user =:val')
+            ->setParameter('val', $user)
+            ->getQuery()
+            ->getResult();
+    }
 }

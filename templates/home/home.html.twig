@@ -87,26 +87,18 @@
                         {% for book in books %}
                             <div class="col-md-6 col-lg-4 col-xl-3 col-xxl-3 isotope-item" data-filter="{{ book.category }}">
                                 <div class="product" style="height:38em;">
-                                    <div class="product-image"><a href="#"><img src="/storage/images/book/{{ book.medias|first.path }}" alt="" width="188" height="246"/></a></div>
+                                    <div class="product-image" ><a href="#"><img src="/storage/images/book/{{ book.medias|first.path }}" alt="" style="height: 20em; width: 80em;"/></a></div>
                                     <div class="product-title">
                                         <h5><a href="#">{{ book.title }}</a></h5>
                                     </div>
                                     <div class="product-price">
                                         <h6>{{ book.subject }}</h6>
                                     </div>
-                                    {% if app.user %}
-                                        {% if book.loans is empty %}
-                                            <div class="product-button"><a class="button button-primary button-nina" href="{{ path('loanBook', {'id': book.id}) }}">Loan</a></div>
-                                        {% else %}
-                                            {% for loan in book.loans %}
-                                                <div class="product-button">Loaned by {% if app.user.id== loan.user.id%} you {% else %} {{ loan.user.name }} {% endif %}</div>
-                                                {% if app.user.id== loan.user.id %}
-                                                    <a class="button button-primary button-nina" href="{{ path('returnbook', {'id': loan.id}) }}">Return Book</a>
-                                                {% endif %}
-                                            {% endfor %}
-                                        {% endif %}
-
-                                    {% endif %}
+                                                 {% if book.checkLoanNotReturned %}
+                                                     <div class="product-button" disabled=""> <a class="button button-primary button-nina">Loaned</a></div>
+                                                 {% else%}
+                                                     <div class="product-button"><a class="button button-primary button-nina" href="{{ path('loanBook', {'id': book.id}) }}">Loan</a></div>
+                                                {% endif%}
                                 </div>
                             </div>
                         {% endfor %}

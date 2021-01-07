@@ -188,5 +188,14 @@ class Book
         }
         return $this;
     }
+    public function checkLoanNotReturned():bool
+    {
+        foreach ($this->loans as $loan){
+            if(!$loan->getReturnedAt()){
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

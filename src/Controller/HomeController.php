@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Book;
 use App\Entity\Loan;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Hashids\Hashids;
 use PhpParser\Node\Expr\Array_;
@@ -37,22 +38,13 @@ class HomeController extends AbstractController
     public function showHome(Request $request)
     {
         $categories=[];
-        $books=$this->getDoctrine()->getRepository(Book::class)->findAll();
+        $books=$this->manager->getRepository(Book::class)->findAll();
         if ($request->query->getAlnum('s')) {
-            $books=$this->getDoctrine()->getRepository(Book::class)->searchbytitle('%'.$request->query->getAlnum('s').'%');
+            $books=$this->manager->getRepository(Book::class)->searchbytitle('%'.$request->query->getAlnum('s').'%');
         }
         foreach ($books as $book){
             if(!in_array($book->getCategory(), $categories)){
                 array_push($categories,$book->getCategory());
-            }
-        }
-        if($this->getUser()){
-            if(sizeof($this->getUser()->getLoans())>0){
-                $last15days  = new \DateTime();
-                $last15days->setTimestamp(mktime(0, 0, 0, date("m"), date("d")-15,   date("Y")));
-                if($this->getUser()->getLoans()[0]->getTakenAt() < $last15days){
-                    $this->addFlash('warning',"you have exceeded 15 days without returning " . $this->getUser()->getLoans()[0]->getBook()->getTitle() );
-                }
             }
         }
 
@@ -60,10 +52,12 @@ class HomeController extends AbstractController
     }
     /**
      * @Route("/loanBook/{id}", name="loanBook")
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function loanBook($id)
     {
-        if(sizeof($this->getUser()->getLoans())>0){
+
+        if(count($this->manager->getRepository(User::class)->checkLoansNotReturned($this->getUser()))>=1){
             $this->addFlash('warning', 'You can t loan two books at the same time');
             return $this->redirectToRoute('home');
         }
@@ -72,15 +66,15 @@ class HomeController extends AbstractController
         $loan->setBook($this->getDoctrine()->getRepository(Book::class)->find($id));
         $loan->setTakenAt(new \DateTime('now'));
         $loan->setUser($this->getUser());
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($loan);
-        $entityManager->flush();
+        $this->manager->persist($loan);
+        $this->manager->flush();
         $this->addFlash('success', 'Book successfully loan');
         return $this->redirectToRoute('home');
     }
-    /**
+    /*/**
      * @Route("/returnBook/{id}", name="returnbook")
      */
+    /*
     public function returnBook($id)
     {
         $entityManager = $this->getDoctrine()->getManager();
@@ -89,7 +83,7 @@ class HomeController extends AbstractController
         $entityManager->flush();
         $this->addFlash('success', 'Book successfully returned');
         return $this->redirectToRoute('home');
-    }
+    }*/
     /**
      * @Route("/contacts", name="contacts",methods={"GET"})
      */

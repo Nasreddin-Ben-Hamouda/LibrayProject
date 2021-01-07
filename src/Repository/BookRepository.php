@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Book;
 use App\Entity\Loan;
 use App\Entity\Media;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
@@ -82,4 +83,15 @@ class BookRepository extends ServiceEntityRepository
             ->getResult();
 
     }
+    /*public function findLateBooksByUser(User $user):?array
+    {
+        return $this->createQueryBuilder('book')
+            ->innerJoin('book.loans','loan')
+            ->andWhere('loan.returnedAt is null')
+            //->andWhere('DATE_DIFF(CURRENT_TIMESTAMP(),loan.takenAt)>10')
+            ->andWhere('loan.user =:val')
+            ->setParameter('val', $user)
+            ->getQuery()
+            ->getResult();
+    }*/
 }
