@@ -14,7 +14,7 @@
         <div class="fullwidth-page-inner">
             <div class="section-md text-center">
                 <div class="container">
-                    <h3>s'identifier</h3>
+                    <h3>Authenticate</h3>
                     <div class="row row-fix justify-content-sm-center">
                         <div class="col-md-8 col-lg-6 col-xl-4">
 
@@ -25,14 +25,14 @@
                                 </div>
                                 <div class="form-wrap form-wrap-validation">
                                     <input class="form-input" type="password" id="inputPassword"  name="password" >
-                                    <label class="form-label" for="inputPassword">Mot de passe</label>
+                                    <label class="form-label" for="inputPassword">Password</label>
                                 </div>
                                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                                 <div class="form-button">
-                                    <button class="button button-block button-primary button-nina" type="submit">Se Connecter</button>
+                                    <button class="button button-block button-primary button-nina" type="submit">Login</button>
                                 </div>
                             </form><br><br>
-                            <div class="box-minimal-icon fa-sign-in"style="color: white"> <a href="{{ path('studentRegister') }}" style="color: white">S'inscrire</a> </div>
+                            <div class="box-minimal-icon fa-sign-in"style="color: white"> <a href="{{ path('studentRegister') }}" style="color: white">Register</a> </div>
                         </div>
 
                     </div>
@@ -42,9 +42,9 @@
 
             <div class="section-xs page-footer text-center">
                 <div class="container">
-                    <p class="right">&#169; <span class="copyright-year"></span> Tous les droits sont réservés
-                        &nbsp;<a href="#">Conditions d'utilisation</a>&nbsp;<span>and</span>&nbsp;<a href="#">
-                            Politique de confidentialité</a>
+                    <p class="right">&#169; <span class="copyright-year"></span> All rights reserved
+                        &nbsp;<a href="#">Terms of use</a>&nbsp;<span>and</span>&nbsp;<a href="#">
+                            privacy policy</a>
                     </p>
                 </div>
             </div>
@@ -68,11 +68,11 @@
         messages: {
 
             "email": {
-                required: "L'email est obligatoire",
-                email: "L'email n'est pas valide"
+                required: "Please enter your email",
+                email: "Please enter valid email"
             },
             "password": {
-               required: "Le Mot de passe est obligatoire"
+               required: "Please enter a password"
             }
         }
         });

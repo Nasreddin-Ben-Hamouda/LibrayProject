@@ -31,7 +31,7 @@ class RegistrationFormType extends AbstractType
                 'label'=>false,
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Veuillez entrer votre email',
+                        'message' => 'Please enter your email',
                     ]),
                 ],
                 'attr' => [
@@ -43,13 +43,13 @@ class RegistrationFormType extends AbstractType
                 'label'=>false,
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Veuillez entrer un mot de passe',
+                        'message' => 'Please enter a password',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Votre mot de passe doit être au moins {{ limit }} caractères',
+                        'minMessage' => 'Your password must be at least {{limit}} digits',
                         'max' => 4096,
-                        'maxMessage' =>'Votre mot de passe est depasse {{ limit }} caractères'
+                        'maxMessage' =>'Your password is longer than {{limit}} digits'
                     ]),
                 ],
                 'attr' => [
@@ -61,7 +61,7 @@ class RegistrationFormType extends AbstractType
                 'label'=>false,
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Veuillez entrer votre nom et prénom',
+                        'message' => 'Please enter your first and last name',
                     ]),
                 ],
                 'attr' => [
@@ -76,10 +76,10 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('studentNumber',NumberType::class,[
                 'label'=>false,
-                'invalid_message'=>'Le numéro de la carte d\'étudiant doit être numérique',
+                'invalid_message'=>'The student card number must be numeric',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Veuillez entrer le numéro de la carte etudiant',
+                        'message' => 'Please enter the student card number',
                     ]),
                 ],
                 'attr' => [
@@ -88,13 +88,13 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('phone',NumberType::class,[
                 'label'=>false,
-                'invalid_message'=>'Le numéro de téléphone doit être numérique',
+                'invalid_message'=>'Phone number must be numeric',
                 'constraints' => [
                     new Length([
                         'min' => 8,
-                        'minMessage' => 'Le numéro de téléphone doit être de 8 chiffres',
+                        'minMessage' => 'Phone number must be 8 digits',
                         'max' =>8,
-                        'maxMessage' =>'Le numéro de téléphone doit être de 8 chiffres'
+                        'maxMessage' =>'Phone number must be 8 digits'
                     ]),
 
                 ],

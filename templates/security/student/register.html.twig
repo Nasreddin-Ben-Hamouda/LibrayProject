@@ -21,7 +21,7 @@
                             <form class="form-fix full-color" method="post" novalidate="novalidate" id="registerForm">
                                 <div class="form-wrap form-wrap-validation">
                                     {{ form_row(registrationForm.name) }}
-                                    <label class="form-label" for="registration_form_name">Nom et Prénom</label>
+                                    <label class="form-label" for="registration_form_name">Complete name</label>
                                 </div>
                                 <div class="form-wrap form-wrap-validation" >
                                     {{ form_row(registrationForm.email) }}
@@ -33,21 +33,21 @@
                                 </div>
                                 <div class="form-wrap form-wrap-validation">
                                     {{ form_row(registrationForm.studentNumber) }}
-                                    <label class="form-label" for="registration_form_studentNumber">Numéro carte étudiant</label>
+                                    <label class="form-label" for="registration_form_studentNumber">Student card number</label>
                                 </div>
                                 <div class="form-wrap form-wrap-validation">
                                     {{ form_row(registrationForm.address) }}
-                                    <label class="form-label" for="registration_form_address">Adresse</label>
+                                    <label class="form-label" for="registration_form_address">Address</label>
                                 </div>
                                 <div class="form-wrap form-wrap-validation">
                                     {{ form_row(registrationForm.phone) }}
-                                    <label class="form-label" for="registration_form_phone">Numéro de téléphone</label>
+                                    <label class="form-label" for="registration_form_phone">Phone</label>
                                 </div>
                                 <div class="form-button">
-                                    <button class="button button-block button-primary button-nina" type="submit">S'inscrire</button>
+                                    <button class="button button-block button-primary button-nina" type="submit">Register</button>
                                 </div>
                             </form><br><br>
-                            <div class="box-minimal-icon fa-sign-in"style="color: white"> <a href="{{ path('studentLogin') }}" style="color: white">S'identifier</a> </div>
+                            <div class="box-minimal-icon fa-sign-in"style="color: white"> <a href="{{ path('studentLogin') }}" style="color: white">Login</a> </div>
 
                         </div>
                     </div>
@@ -56,9 +56,9 @@
 
             <div class="section-xs page-footer text-center">
                 <div class="container">
-                    <p class="right">&#169; <span class="copyright-year"></span> Tous les droits sont réservés
-                        &nbsp;<a href="#">Conditions d'utilisation</a>&nbsp;<span>and</span>&nbsp;<a href="#">
-                            Politique de confidentialité</a>
+                    <p class="right">&#169; <span class="copyright-year"></span> All rights reserved
+                        &nbsp;<a href="#">Terms of use</a>&nbsp;<span>and</span>&nbsp;<a href="#">
+                            privacy policy</a>
                     </p>
                 </div>
             </div>
@@ -103,24 +103,24 @@
                 messages: {
 
                     "registration_form[email]": {
-                        required: "Veuillez entrer votre email",
-                        email: "Veuillez entrer email valide"
+                        required: "Please enter your email",
+                        email: "Please enter valid email"
                     },
                     "registration_form[password]": {
-                        required: "Veuillez entrer un mot de passe",
-                        minlength:"Le mot de passe doit être au moins 6 caractères"
+                        required: "Please enter a password",
+                        minlength:"Password must be at least 6 characters"
                     },
                     "registration_form[name]": {
-                        required: "Veuillez entrer votre nom et prénom",
+                        required: "Please enter your first and last name",
                     },
                     "registration_form[phone]": {
-                        number: "Le numéro de téléphone doit être numérique",
-                        maxlength: "Le numéro de téléphone doit être de 8 chiffres",
-                        minlength: "Le numéro de téléphone doit être de 8 chiffres"
+                        number: "Phone number must be numeric",
+                        maxlength: "Phone number must be 8 digits",
+                        minlength: "Phone number must be 8 digits"
                     },
                     "registration_form[studentNumber]": {
-                        required:"Veuillez entrer le numéro de la carte etudiant",
-                        number: "Le numéro de téléphone doit être numérique",
+                        required:"Please enter the student card number",
+                        number: "Phone number must be numeric",
                     },
                 }
             });

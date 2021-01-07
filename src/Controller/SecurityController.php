@@ -31,7 +31,7 @@ class SecurityController extends AbstractController
     public function studentLogin(AuthenticationUtils $authenticationUtils): Response
     {
          if ($this->getUser()) {
-             $this->addFlash('success',"Authentification réussie !");
+             $this->addFlash('success',"Successful authentication !");
              return $this->redirectToRoute('home');
          }
 
@@ -91,7 +91,7 @@ class SecurityController extends AbstractController
                     ]);
                 $mailer->send($email);
 
-                $this->addFlash('warning',"Inscription avec succès, SVP Confirmer votre email !");
+                $this->addFlash('warning',"Registration successfully, Please Confirm your email!");
 
                 return $this->redirectToRoute('studentLogin');
             }
@@ -124,16 +124,16 @@ class SecurityController extends AbstractController
                     $user->setConfirmationToken('');
                     $this->manager->flush();
 
-                    $this->addFlash('success', 'Votre email à été vérifié avec succès, vous pouvez connecté maintenant.');
+                    $this->addFlash('success', 'Your email has been verified successfully, you can connect now.');
                     return $this->redirectToRoute('studentLogin');
                 }
             }else{
-                $this->addFlash('warning', 'Ce lien n\'est pas valide');
+                $this->addFlash('warning', 'This link is not valid');
                 return $this->redirectToRoute('home');
             }
 
         }
-        $this->addFlash('error', 'Utilisateur inexistant');
+        $this->addFlash('error', 'User not found');
 
         return $this->redirectToRoute('home');
     }
