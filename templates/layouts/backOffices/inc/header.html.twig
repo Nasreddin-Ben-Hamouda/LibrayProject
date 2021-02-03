@@ -38,7 +38,7 @@
                             Bibliothécaire
                         {% endif %}
                     </div>
-                    <a class="dropdown-item" href="{% if is_granted('ROLE_ADMIN') %} {{ path('showAdminProfile') }} {% else %} {{ path('showLibrarianProfile') }} {% endif %} "><i class="i-Checked-User"></i>Profile</a>
+                    <a class="dropdown-item" href="{{ path('showLibrarianProfile') }}"><i class="i-Checked-User"></i>Profile</a>
                     <a class="dropdown-item" href="{{ path('logout') }}"><i class="i-Lock"></i>Déconnexion</a>
                 </div>
             </div>

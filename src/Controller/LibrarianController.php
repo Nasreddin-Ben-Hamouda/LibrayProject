@@ -227,41 +227,46 @@ class LibrarianController extends AbstractController
      * @Route("/librarian/loans/{id}/changeLoanStatus", name="handleChangeLoanStatus",methods={"GET"})
      */
     public function handleChangeLoanStatus($id){
-        $loan=$this->manager->getRepository(Loan::class)->find($this->hashids->decodeHex($id));
-        if($loan){
-            $loan->setReturnedAt(new \DateTime());
-            $this->manager->flush();
-            $this->addFlash('success','Status modifié avec succès');
+            $loan = $this->manager->getRepository(Loan::class)->find($this->hashids->decodeHex($id));
+            if ($loan) {
+                $loan->setReturnedAt(new \DateTime());
+                $this->manager->flush();
+                $this->addFlash('success', 'Status modifié avec succès');
 
-        }else{
-            $this->addFlash('error','Emprunt inéxistant');
-        }
-        return $this->redirectToRoute('showLoans');
+            } else {
+                $this->addFlash('error', 'Emprunt inéxistant');
+            }
+            return $this->redirectToRoute('showLoans');
+
     }
     /**
      * @Route("/librarian/profile/changePhoto", name="handleUpdatePhoto",methods={"POST"})
      */
     public function handleUpdatePhoto(Request $request){
-
-        $photo =$request->files->get('photo');
-        if($photo){
-            $uploadedFile=$photo;
-            $newFileName = base64_encode(random_bytes(5)). '-' . time() . '.' . $uploadedFile->guessExtension();
-            $fullImagePath = $this->getParameter('storage') . '/images/avatar/';
-            $uploadedFile->move(
-                $fullImagePath,
-                $newFileName
-            );
-            $user=$this->getUser();
-            if($user->getPhoto()){
-                $this->filesystem->remove($this->getParameter('storage').'/images/avatar/'.$user->getPhoto());
+       if($this->isCsrfTokenValid('ajax-item',$request->headers->get('X-CSRF-TOKEN'))){
+            $photo =$request->files->get('photo');
+            if($photo){
+                $uploadedFile=$photo;
+                $newFileName = base64_encode(random_bytes(5)). '-' . time() . '.' . $uploadedFile->guessExtension();
+                $fullImagePath = $this->getParameter('storage') . '/images/avatar/';
+                $uploadedFile->move(
+                    $fullImagePath,
+                    $newFileName
+                );
+                $user=$this->getUser();
+                if($user->getPhoto()){
+                    $this->filesystem->remove($this->getParameter('storage').'/images/avatar/'.$user->getPhoto());
+                }
+                $user->setPhoto($newFileName);
+                $this->manager->flush();
+                return  $this->json(Response::HTTP_OK);
+            }else{
+                return $this->json(Response::HTTP_FORBIDDEN);
             }
-            $user->setPhoto($newFileName);
-            $this->manager->flush();
-            return  $this->json(['status'=>200]);
-        }else{
-            return $this->json(['status'=>403]);
-        }
+       }else{
+           return $this->json(Response::HTTP_BAD_REQUEST);
+           //return $this->json(400);
+       }
     }
 
     /**

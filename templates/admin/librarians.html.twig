@@ -85,6 +85,7 @@
                 <div class="card-body">
                     <b id="form-header">Ajouter Un Bibliothécaire</b>
                     <form id="form-addUser" autocomplete="off"   method="POST">
+                        {{ form_row(userForm._token) }}
                         {{ form_row(userForm.id) }}
                         <div class="row row-xs">
                             <div class="col-md-12 mb-3">

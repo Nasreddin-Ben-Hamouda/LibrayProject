@@ -107,7 +107,6 @@
     </div>
 
     <script>
-
         $(function () {
             $("#user-profil").validate({
                 errorClass: "is-invalid",
@@ -173,6 +172,7 @@
         });
         $(document).ready(function() {
             $('input[type="file"]').change(function(e){
+
                 const fsize = e.target.files[0].size;
                 const file = Math.round((fsize / 1024));
                 let ext = e.target.files[0]['name'].substring(e.target.files[0]['name'].lastIndexOf('.') + 1).toLowerCase();
@@ -187,12 +187,14 @@
                         contentType: false,
                         processData: false,
                         data : form,
-                        success: function(response){
-                            if(response['status']===200){
+                        success: function(data,textStatus,xhr){
+                            if(xhr.status==200){
+                                //console.log(xhr.status);
                                 toastr.success('Votre photo modifié avec succès', {
                                     timeOut: 5000
                                 });
                             }else{
+                                //console.log(response);
                                 toastr.error('Choisir une photo svp', {
                                     timeOut: 5000
                                 });

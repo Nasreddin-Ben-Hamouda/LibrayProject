@@ -126,7 +126,9 @@ class BookFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Book::class,
-            'csrf_protection' => false,
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',
+            'csrf_token_id'   => 'book_item',
         ]);
     }
 }
