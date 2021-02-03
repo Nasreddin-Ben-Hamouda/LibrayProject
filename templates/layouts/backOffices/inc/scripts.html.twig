@@ -8,11 +8,7 @@
 <script src="{{ asset('js/backOffices/es5.js') }}"></script>
 
 <script>
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+
     {% for message in app.flashes('error') %}
         toastr.error('{{ message }}');
     {% endfor %}
