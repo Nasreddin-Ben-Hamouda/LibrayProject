@@ -259,14 +259,15 @@ class LibrarianController extends AbstractController
                 }
                 $user->setPhoto($newFileName);
                 $this->manager->flush();
-                return  $this->json(Response::HTTP_OK);
+                return  $this->json([],Response::HTTP_OK);
             }else{
-                return $this->json(Response::HTTP_FORBIDDEN);
+                return $this->json([],Response::HTTP_BAD_REQUEST);
             }
        }else{
-           return $this->json(Response::HTTP_BAD_REQUEST);
-           //return $this->json(400);
+           return $this->json([],Response::HTTP_FORBIDDEN);
+           //return $this->json(403);
        }
+
     }
 
     /**

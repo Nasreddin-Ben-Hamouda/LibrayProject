@@ -187,18 +187,23 @@
                         contentType: false,
                         processData: false,
                         data : form,
-                        success: function(data,textStatus,xhr){
-                            if(xhr.status==200){
-                                //console.log(xhr.status);
-                                toastr.success('Votre photo modifié avec succès', {
-                                    timeOut: 5000
-                                });
-                            }else{
-                                //console.log(response);
+                        success: function(){
+
+                            toastr.success('Votre photo modifié avec succès', {
+                                timeOut: 5000
+                            });
+                        },
+                        error:function (response) {
+                            if (response.status === 400){
                                 toastr.error('Choisir une photo svp', {
                                     timeOut: 5000
                                 });
+                            }else{
+                                toastr.error('Vous pouvez pas accéder a cet lien', {
+                                    timeOut: 5000
+                                });
                             }
+
                         }
                     });
                     $('#media').attr('src', URL.createObjectURL(e.target.files[0]));
