@@ -88,6 +88,7 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
+
             "@auto-scripts",
             "mkdir -p public/storage/images/avatar",
             "mkdir -p public/storage/images/book",

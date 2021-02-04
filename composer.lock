@@ -7,6 +7,7 @@
     "content-hash": "d8eced12ffd2ca7f9d97f65cdf358989",
     "packages": [
         {
+
             "name": "composer/package-versions-deprecated",
             "version": "1.11.99.1",
             "source": {
