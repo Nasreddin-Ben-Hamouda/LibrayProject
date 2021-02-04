@@ -206,11 +206,13 @@
 
                         }
                     });
+
                     $('#media').attr('src', URL.createObjectURL(e.target.files[0]));
                 }else{
                     toastr.warning("Choisir une image de taille inférieure à 2M ");
                 }
             });
         });
+
     </script>
 {% endblock %}

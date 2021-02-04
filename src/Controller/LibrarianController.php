@@ -243,6 +243,7 @@ class LibrarianController extends AbstractController
      * @Route("/librarian/profile/changePhoto", name="handleUpdatePhoto",methods={"POST"})
      */
     public function handleUpdatePhoto(Request $request){
+
        if($this->isCsrfTokenValid('ajax-item',$request->headers->get('X-CSRF-TOKEN'))){
             $photo =$request->files->get('photo');
             if($photo){
