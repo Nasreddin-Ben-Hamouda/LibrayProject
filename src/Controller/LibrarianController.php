@@ -40,7 +40,7 @@ class LibrarianController extends AbstractController
     {
         $countOfBooks=count($this->manager->getRepository(Book::class)->findAll());
         $countOfLoans=count($this->manager->getRepository(Loan::class)->findAll());
-        $countOfStudent=count($this->manager->getRepository(User::class)->findUsersByRole('ROLE_LIBRARIAN'));
+        $countOfStudent=count($this->manager->getRepository(User::class)->findUsersByRole('ROLE_STUDENT'));
         $countOfLateBooks=count($this->manager->getRepository(Book::class)->findLateBooks());
         $mostFiveBooks=$this->manager->getRepository(Book::class)->mostFiveBooks();
         $mostFiveStudent=$this->manager->getRepository(User::class)->mostFiveStudents();

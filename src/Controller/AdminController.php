@@ -33,7 +33,7 @@ class AdminController extends AbstractController
     public function showDashboard()
     {
         $countOfStudent=count($this->manager->getRepository(User::class)->findUsersByRole('ROLE_STUDENT'));
-        $countOfLibrarian=count($this->manager->getRepository(User::class)->findUsersByRole('ROLE_STUDENT'));
+        $countOfLibrarian=count($this->manager->getRepository(User::class)->findUsersByRole('ROLE_LIBRARIAN'));
         $mostFiveBooks=$this->manager->getRepository(Book::class)->mostFiveBooks();
         $mostFiveStudent=$this->manager->getRepository(User::class)->mostFiveStudents();
 
